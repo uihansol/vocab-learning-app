@@ -122,12 +122,12 @@ function deleteWord(category, word) {
 // 화면 전환 함수
 function showScreen(screenId) {
   // 모든 화면 숨기기
-  document.querySelector(".main-menu").classList.add("hidden");
-  document.getElementById("quiz-screen").classList.add("hidden");
-  document.getElementById("manage-screen").classList.add("hidden");
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.add('hidden');
+  });
 
   // 선택한 화면 표시
-  document.getElementById(screenId).classList.remove("hidden");
+  document.getElementById(screenId).classList.remove('hidden');
 }
 
 // 퀴즈 시작

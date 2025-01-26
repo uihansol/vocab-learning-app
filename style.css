@@ -28,10 +28,6 @@
   padding-top: 20px;
 }
 
-#quiz-screen .main-menu {
-  display: none; /* 문제 풀이 화면에서 메인 메뉴 숨기기 */
-}
-
 #word-display {
   font-size: 36px;
   font-weight: bold;
@@ -147,4 +143,13 @@
 
 #word-list li button:hover {
   background-color: #c82333;
+}
+
+/* 화면 전환을 위한 스타일 */
+.screen {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }

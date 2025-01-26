@@ -18,19 +18,21 @@
     </div>
 
     <!-- 메인 메뉴 -->
-    <div class="main-menu">
-      <button onclick="startQuiz('verb')">동사</button>
-      <button onclick="startQuiz('noun')">명사</button>
-      <button onclick="startQuiz('adjective')">형용사</button>
-      <button onclick="startQuiz('adverb')">부사</button>
-      <button onclick="startQuiz('phrase')">구문</button>
-      <button onclick="startQuiz('mixed')">혼합</button>
-      <button onclick="showManageScreen()">어휘 관리</button>
-      <button onclick="loadVocabFile()">Vocab.csv 로드</button>
+    <div id="main-menu" class="screen">
+      <div class="main-menu">
+        <button onclick="startQuiz('verb')">동사</button>
+        <button onclick="startQuiz('noun')">명사</button>
+        <button onclick="startQuiz('adjective')">형용사</button>
+        <button onclick="startQuiz('adverb')">부사</button>
+        <button onclick="startQuiz('phrase')">구문</button>
+        <button onclick="startQuiz('mixed')">혼합</button>
+        <button onclick="showManageScreen()">어휘 관리</button>
+        <button onclick="loadVocabFile()">Vocab.csv 로드</button>
+      </div>
     </div>
 
     <!-- 퀴즈 화면 -->
-    <div id="quiz-screen" class="hidden">
+    <div id="quiz-screen" class="screen hidden">
       <button id="back-to-main" onclick="goBack()">메인 화면으로 돌아가기</button>
       <h3 id="word-display"></h3>
       <div id="options"></div>
@@ -38,7 +40,7 @@
     </div>
 
     <!-- 어휘 관리 화면 -->
-    <div id="manage-screen" class="hidden">
+    <div id="manage-screen" class="screen hidden">
       <h2>어휘 관리</h2>
 
       <!-- 현재 어휘 목록 -->
