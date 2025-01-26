@@ -65,6 +65,10 @@
   transform: scale(0.98);
 }
 
+.quiz-option.correct {
+  background-color: #ccffcc !important;
+}
+
 .quiz-option.wrong {
   animation: shake 0.5s, fadeOut 1s;
   background-color: #ffcccc !important;

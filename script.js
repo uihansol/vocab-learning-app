@@ -141,10 +141,16 @@ function checkAnswer(selected) {
   stopTimer();
   
   if (selected === correctAnswer) {
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      if (opt.textContent === selected) {
+        opt.classList.add('correct');
+      }
+    });
+    alert("정답입니다!");
     masteredCount++;
     remainingQuestions--;
     updateProgress();
-    showNextWord();
+    setTimeout(() => showNextWord(), 1000); // 1초 후 다음 문제로 넘어감
   } else {
     document.querySelectorAll('.quiz-option').forEach(opt => {
       if (opt.textContent === selected) {
@@ -152,7 +158,7 @@ function checkAnswer(selected) {
         setTimeout(() => opt.remove(), 1000);
       }
     });
-    alert("틀렸습니다! 다른 선택지를 고르세요.");
+    alert("틀렸습니다!");
   }
   updateProgress();
 }
