@@ -1,6 +1,6 @@
-/* 기본 폰트 크기 및 박스 모델 설정 */
+/* 기본 폰트 설정 */
 body {
-  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+  font-family: 'Nanum Myeongjo', serif; /* 수능 시험지와 유사한 글꼴 */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -196,4 +196,32 @@ body {
 
 #word-list li button:hover {
   background-color: #c82333;
+}
+
+/* 탭 버튼 스타일 */
+#toggle-menu {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+#toggle-menu:hover {
+  background-color: #0056b3;
+}
+
+/* 숨길 메뉴 스타일 */
+#quiz-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#quiz-menu.hidden {
+  display: none; /* 숨김 상태 */
 }

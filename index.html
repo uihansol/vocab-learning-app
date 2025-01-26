@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>영어 단어 학습</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap">
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/compromise"></script>
 </head>
@@ -31,6 +32,15 @@
     <!-- 퀴즈 화면 -->
     <div id="quiz-screen" class="hidden">
       <button id="back-to-main" onclick="goBack()">메인 화면으로 돌아가기</button>
+      <button id="toggle-menu" onclick="toggleMenu()">메뉴 보기</button> <!-- 탭 버튼 추가 -->
+      <div id="quiz-menu" class="hidden"> <!-- 숨길 메뉴 -->
+        <button onclick="startQuiz('verb')">동사</button>
+        <button onclick="startQuiz('noun')">명사</button>
+        <button onclick="startQuiz('adjective')">형용사</button>
+        <button onclick="startQuiz('adverb')">부사</button>
+        <button onclick="startQuiz('phrase')">구문</button>
+        <button onclick="startQuiz('mixed')">혼합</button>
+      </div>
       <h3 id="word-display"></h3>
       <div id="options"></div>
       <p id="timer">시간: 0초</p>
