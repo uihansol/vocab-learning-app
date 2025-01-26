@@ -91,6 +91,11 @@ async function selectDifficulty(difficulty) {
 }
 
 function startQuiz(category) {
+  if (wordData[category].length === 0) {
+    alert(`선택된 카테고리(${category})에 단어가 없습니다.`);
+    return;
+  }
+
   totalQuestions = parseInt(document.getElementById("question-count").value);
   remainingQuestions = totalQuestions;
   masteredCount = 0;
@@ -169,6 +174,15 @@ async function loadVocabFile(filename) {
     }
   });
   updateTotalWords();
+}
+
+function showManageScreen() {
+  showScreen("manage-screen");
+  updateWordList();
+}
+
+function goBack() {
+  showScreen("main-menu");
 }
 
 window.onload = () => {
