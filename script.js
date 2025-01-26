@@ -147,6 +147,26 @@ function startQuiz(category) {
   showNextWord();
 }
 
+// 퀴즈 시작 시 카테고리 제목 업데이트
+function startQuiz(category) {
+  if (wordData[category].length === 0) {
+    alert(`선택된 카테고리(${category})에 단어가 없습니다.`);
+    return;
+  }
+  currentCategory = category;
+  wordStats = wordData[category].map(word => ({
+    ...word,
+    frequency: 1,
+    correctCount: 0,
+    totalTime: 0,
+    wrongCount: 0,
+  }));
+  document.getElementById("category-title").innerText = `${category.toUpperCase()} 학습`;
+  document.querySelector(".main-menu").classList.add("hidden");
+  document.getElementById("quiz-screen").classList.remove("hidden");
+  showNextWord();
+}
+
 // 타이머 시작
 function startTimer() {
   startTime = Date.now();
