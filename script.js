@@ -124,6 +124,7 @@ function goBack() {
   document.getElementById("manage-screen").classList.add("hidden");
   document.getElementById("quiz-screen").classList.add("hidden");
   document.querySelector(".main-menu").classList.remove("hidden");
+  document.getElementById("category-title").innerText = "";
 }
 
 // 퀴즈 시작
@@ -212,13 +213,26 @@ function checkAnswer(selectedAnswer) {
 
   if (selectedAnswer === correctAnswer) {
     currentWord.correctCount += 1;
-    currentWord.frequency = Math.max(1, currentWord.frequency - 1);
+
+    // 시간이 짧게 걸린 경우 출제 빈도를 낮춤
+    if (elapsedTime < 5) { // 예: 5초 이내로 맞춘 경우
+      currentWord.frequency = Math.max(1, currentWord.frequency - 2); // 빈도 감소
+    } else {
+      currentWord.frequency = Math.max(1, currentWord.frequency - 1); // 기본 감소
+    }
+
     currentWord.wrongCount = Math.max(0, currentWord.wrongCount - 1); // 맞추면 틀린 횟수 감소
     alert("정답입니다!");
     showNextWord(); // 다음 문제로 넘어가기
   } else {
-    currentWord.frequency += 2;
-    currentWord.wrongCount += 1; // 틀리면 틀린 횟수 증가
+    currentWord.frequency += 2; // 틀리면 빈도 증가
+    currentWord.wrongCount += 1; // 틀린 횟수 증가
+
+    // 시간이 오래 걸리고 오답률이 높은 경우 출제 빈도를 더 높임
+    if (elapsedTime > 10 && currentWord.wrongCount > 2) { // 예: 10초 이상 걸리고 틀린 횟수가 2회 이상
+      currentWord.frequency += 3; // 빈도 더 증가
+    }
+
     alert("틀렸습니다. 다시 시도해보세요."); // 정답을 알려주지 않음
     removeIncorrectOption(selectedAnswer); // 오답인 선지 삭제
   }
@@ -238,6 +252,7 @@ function removeIncorrectOption(selectedAnswer) {
 // 어휘 관리 화면 표시
 function showManageScreen() {
   document.querySelector(".main-menu").classList.add("hidden");
+  document.getElementById("quiz-screen").classList.add("hidden");
   document.getElementById("manage-screen").classList.remove("hidden");
   updateWordList();
 }
