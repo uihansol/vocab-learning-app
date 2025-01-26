@@ -309,6 +309,7 @@ async function loadVocabFile(filePath = 'vocab1.csv') {
       throw new Error(`파일을 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
     }
     const text = await response.text();
+    console.log("파일 내용:", text); // 파일 내용을 콘솔에 출력하여 확인
     const lines = text.split("\n");
 
     // 기존 단어 데이터 초기화
@@ -332,6 +333,7 @@ async function loadVocabFile(filePath = 'vocab1.csv') {
       }
     });
 
+    console.log("로드된 단어 데이터:", wordData); // 로드된 데이터를 콘솔에 출력하여 확인
     updateWordList();
     updateTotalWords();
     console.log("단어 데이터가 성공적으로 로드되었습니다.");
