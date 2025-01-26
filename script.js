@@ -129,3 +129,87 @@ function updateProgress() {
   document.getElementById('progress').textContent = 
     `✅ ${currentSession.mastered}개 / 📝 ${currentSession.remaining}개`;
 }
+
+// 단어 추가 기능
+function addNewWord() {
+  const word = document.getElementById('new-word').value.trim();
+  const meaning = document.getElementById('new-meaning').value.trim();
+  const category = document.getElementById('new-category').value;
+
+  if (!word || !meaning) {
+    alert('❗ 단어와 의미를 모두 입력해주세요!');
+    return;
+  }
+
+  // 중복 검사
+  const isDuplicate = wordData[category].some(item => 
+    item.word === word && item.meaning === meaning
+  );
+  
+  if (isDuplicate) {
+    alert('⚠️ 이미 존재하는 단어입니다!');
+    return;
+  }
+
+  // 데이터 추가
+  wordData[category].push({ word, meaning });
+  wordData.mixed.push({ word, meaning });
+  updateTotalCount();
+  renderWordList();
+  
+  // 입력 필드 초기화
+  document.getElementById('new-word').value = '';
+  document.getElementById('new-meaning').value = '';
+}
+
+// 단어 삭제 기능
+function deleteWord(category, index) {
+  if (confirm('정말 삭제하시겠습니까?')) {
+    const deleted = wordData[category].splice(index, 1)[0];
+    wordData.mixed = wordData.mixed.filter(item => 
+      item.word !== deleted.word || item.meaning !== deleted.meaning
+    );
+    updateTotalCount();
+    renderWordList();
+  }
+}
+
+// 단어 목록 렌더링
+function renderWordList() {
+  const container = document.getElementById('word-list-items');
+  container.innerHTML = '';
+
+  Object.keys(wordData).forEach(category => {
+    if (category === 'mixed') return;
+    
+    wordData[category].forEach((wordObj, index) => {
+      const item = document.createElement('div');
+      item.className = 'list-item';
+      item.innerHTML = `
+        <span>${wordObj.word}</span>
+        <span>${wordObj.meaning}</span>
+        <span>${getCategoryLabel(category)}</span>
+        <button onclick="deleteWord('${category}', ${index})">❌</button>
+      `;
+      container.appendChild(item);
+    });
+  });
+}
+
+// 품사 라벨 변환
+function getCategoryLabel(category) {
+  const labels = {
+    verb: '동사 🏃',
+    noun: '명사 🏛️',
+    adjective: '형용사 🌈',
+    adverb: '부사 ⚡',
+    phrase: '구문 🔗'
+  };
+  return labels[category] || category;
+}
+
+// 관리 화면 표시
+function showManageScreen() {
+  renderWordList();
+  showScreen('manage-screen');
+}

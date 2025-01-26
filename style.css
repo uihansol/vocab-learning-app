@@ -105,6 +105,75 @@
   background-color: #f9f9f9;
 }
 
+/* 어휘 관리 화면 스타일 */
+.manage-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.manage-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 150px 80px;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.manage-form input, 
+.manage-form select {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.add-btn {
+  background-color: #27ae60 !important;
+}
+
+.word-list {
+  border: 2px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.list-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 120px 60px;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  font-weight: bold;
+  border-bottom: 2px solid #eee;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 120px 60px;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.list-item:hover {
+  background-color: #f8f9fa;
+}
+
+.list-item button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.list-item button:hover {
+  transform: scale(1.1);
+}
+
 /* 화면 전환 애니메이션 */
 .screen {
   transition: opacity 0.3s ease;
