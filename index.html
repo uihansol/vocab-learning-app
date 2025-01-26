@@ -9,8 +9,11 @@
 </head>
 <body>
   <div class="container">
-    <h1>영어 단어 학습</h1>
-    <p id="total-words">전체 단어: 0개</p> <!-- 전체 단어 수 표시 -->
+    <div class="header-text">
+      <h1>영어 단어 학습</h1>
+      <p id="total-words">전체 단어: 0개</p>
+      <h2 id="category-title"></h2>
+    </div>
     <div class="main-menu">
       <button onclick="startQuiz('verb')">동사</button>
       <button onclick="startQuiz('noun')">명사</button>
@@ -19,9 +22,10 @@
       <button onclick="startQuiz('phrase')">구문</button>
       <button onclick="startQuiz('mixed')">혼합</button>
       <button onclick="showManageScreen()">어휘 관리</button>
+      <button onclick="loadVocabFile()">Vocab.csv 로드</button>
     </div>
     <div id="quiz-screen" class="hidden">
-      <h2 id="category-title"></h2>
+      <button id="back-to-main" onclick="goBack()">메인 화면으로 돌아가기</button>
       <h3 id="word-display"></h3>
       <div id="options"></div>
       <p id="timer">시간: 0초</p>
@@ -31,6 +35,13 @@
       <div>
         <input type="text" id="new-word" placeholder="새 단어">
         <input type="text" id="new-meaning" placeholder="의미">
+        <select id="new-category">
+          <option value="verb">동사</option>
+          <option value="noun">명사</option>
+          <option value="adjective">형용사</option>
+          <option value="adverb">부사</option>
+          <option value="phrase">구문</option>
+        </select>
         <button onclick="addWord()">추가</button>
       </div>
       <div>

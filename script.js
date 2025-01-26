@@ -25,36 +25,28 @@ function updateTotalWords() {
   document.getElementById("total-words").innerText = `전체 단어: ${total}개`;
 }
 
-// Compromise.js를 사용하여 품사 분류
-function classifyPartOfSpeech(word) {
-  const doc = window.nlp(word);
-  const tags = doc.out("tags");
-  if (tags.includes("Verb")) {
-    return "verb";
-  } else if (tags.includes("Noun")) {
-    return "noun";
-  } else if (tags.includes("Adjective")) {
-    return "adjective";
-  } else if (tags.includes("Adverb")) {
-    return "adverb";
-  } else {
-    return "mixed"; // 기본값
-  }
-}
-
 // 새로운 단어 추가
 function addWord() {
   const word = document.getElementById("new-word").value;
   const meaning = document.getElementById("new-meaning").value;
-  if (word && meaning) {
-    const category = classifyPartOfSpeech(word); // 품사 분류
-    wordData[category].push({ word, meaning });
-    document.getElementById("new-word").value = "";
-    document.getElementById("new-meaning").value = "";
-    updateWordList();
-    updateTotalWords(); // 전체 단어 수 업데이트
+  const category = document.getElementById("new-category").value; // 품사 선택
+  if (word && meaning && category) {
+    const trimmedWord = word.trim();
+    const trimmedMeaning = meaning.trim();
+
+    // 중복 단어인지 확인
+    if (!isWordDuplicate(trimmedWord)) {
+      wordData[category].push({ word: trimmedWord, meaning: trimmedMeaning });
+      wordData["mixed"].push({ word: trimmedWord, meaning: trimmedMeaning }); // "혼합" 항목에도 추가
+      document.getElementById("new-word").value = "";
+      document.getElementById("new-meaning").value = "";
+      updateWordList();
+      updateTotalWords(); // 전체 단어 수 업데이트
+    } else {
+      alert("이미 존재하는 단어입니다.");
+    }
   } else {
-    alert("단어와 의미를 모두 입력하세요.");
+    alert("단어, 의미, 품사를 모두 입력하세요.");
   }
 }
 
@@ -67,13 +59,23 @@ function uploadFile() {
     reader.onload = function (e) {
       const text = e.target.result;
       const lines = text.split("\n");
-      lines.forEach(line => {
-        const [word, meaning] = line.split(",");
-        if (word && meaning) {
-          const category = classifyPartOfSpeech(word.trim()); // 품사 분류
-          wordData[category].push({ word: word.trim(), meaning: meaning.trim() });
+
+      lines.forEach((line, index) => {
+        if (index === 0) return; // 첫 번째 줄(헤더)은 건너뜀
+        const [word, meaning, category] = line.split(",");
+        if (word && meaning && category) {
+          const trimmedWord = word.trim();
+          const trimmedMeaning = meaning.trim();
+          const trimmedCategory = category.trim();
+
+          // 중복 단어인지 확인
+          if (!isWordDuplicate(trimmedWord)) {
+            wordData[trimmedCategory].push({ word: trimmedWord, meaning: trimmedMeaning });
+            wordData["mixed"].push({ word: trimmedWord, meaning: trimmedMeaning }); // "혼합" 항목에도 추가
+          }
         }
       });
+
       updateWordList();
       updateTotalWords(); // 전체 단어 수 업데이트
     };
@@ -83,21 +85,31 @@ function uploadFile() {
   }
 }
 
+// 중복 단어 확인
+function isWordDuplicate(word) {
+  for (const category in wordData) {
+    if (wordData[category].some(item => item.word === word)) {
+      return true; // 중복 단어가 존재함
+    }
+  }
+  return false; // 중복 단어가 없음
+}
+
 // 어휘 목록 업데이트
 function updateWordList() {
   const wordList = document.getElementById("word-list");
   wordList.innerHTML = "";
-  for (const category in wordData) {
-    wordData[category].forEach(word => {
-      const li = document.createElement("li");
-      li.innerText = `${word.word} (${category}): ${word.meaning}`;
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "삭제";
-      deleteButton.onclick = () => deleteWord(category, word.word);
-      li.appendChild(deleteButton);
-      wordList.appendChild(li);
-    });
-  }
+
+  // 모든 단어를 "mixed" 항목에서만 표시
+  wordData["mixed"].forEach(word => {
+    const li = document.createElement("li");
+    li.innerText = `${word.word}: ${word.meaning}`;
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "삭제";
+    deleteButton.onclick = () => deleteWord("mixed", word.word);
+    li.appendChild(deleteButton);
+    wordList.appendChild(li);
+  });
 }
 
 // 어휘 삭제
@@ -116,12 +128,17 @@ function goBack() {
 
 // 퀴즈 시작
 function startQuiz(category) {
+  if (wordData[category].length === 0) {
+    alert(`선택된 카테고리(${category})에 단어가 없습니다.`);
+    return;
+  }
   currentCategory = category;
   wordStats = wordData[category].map(word => ({
     ...word,
     frequency: 1,
     correctCount: 0,
     totalTime: 0,
+    wrongCount: 0, // 틀린 횟수 추가
   }));
   document.getElementById("category-title").innerText = `${category.toUpperCase()} 학습`;
   document.querySelector(".main-menu").classList.add("hidden");
@@ -174,6 +191,12 @@ function showNextWord() {
     const optionButton = document.createElement("div");
     optionButton.className = "quiz-option";
     optionButton.innerText = option;
+
+    // 틀린 횟수에 따라 배경 색상 조정
+    const wrongCount = currentWord.wrongCount || 0;
+    const redIntensity = Math.min(255, wrongCount * 50); // 틀린 횟수에 따라 붉은색 강도 조정
+    optionButton.style.backgroundColor = `rgba(255, ${255 - redIntensity}, ${255 - redIntensity}, 0.8)`;
+
     optionButton.onclick = () => checkAnswer(option);
     optionsContainer.appendChild(optionButton);
   });
@@ -182,21 +205,34 @@ function showNextWord() {
   startTimer();
 }
 
-// 정답 확인
+// 정답 확인 및 오답 처리
 function checkAnswer(selectedAnswer) {
   const elapsedTime = stopTimer();
   currentWord.totalTime += elapsedTime;
-  currentWord.correctCount += selectedAnswer === correctAnswer ? 1 : 0;
 
   if (selectedAnswer === correctAnswer) {
+    currentWord.correctCount += 1;
     currentWord.frequency = Math.max(1, currentWord.frequency - 1);
+    currentWord.wrongCount = Math.max(0, currentWord.wrongCount - 1); // 맞추면 틀린 횟수 감소
     alert("정답입니다!");
+    showNextWord(); // 다음 문제로 넘어가기
   } else {
     currentWord.frequency += 2;
-    alert(`틀렸습니다. 정답은 "${correctAnswer}"입니다.`);
+    currentWord.wrongCount += 1; // 틀리면 틀린 횟수 증가
+    alert("틀렸습니다. 다시 시도해보세요."); // 정답을 알려주지 않음
+    removeIncorrectOption(selectedAnswer); // 오답인 선지 삭제
   }
+}
 
-  showNextWord();
+// 오답인 선지 삭제
+function removeIncorrectOption(selectedAnswer) {
+  const optionsContainer = document.getElementById("options");
+  const options = optionsContainer.querySelectorAll(".quiz-option");
+  options.forEach(option => {
+    if (option.innerText === selectedAnswer) {
+      option.remove(); // 오답인 선지 삭제
+    }
+  });
 }
 
 // 어휘 관리 화면 표시
@@ -207,20 +243,34 @@ function showManageScreen() {
 }
 
 // vocab.csv 파일을 읽어와 데이터 초기화
-async function loadDefaultVocab() {
+async function loadVocabFile() {
   try {
-    const response = await fetch('vocab.csv'); // GitHub Pages에 업로드된 파일 경로
+    const response = await fetch('vocab.csv'); // 파일 경로 확인
+    if (!response.ok) {
+      throw new Error("파일을 불러오는 데 실패했습니다.");
+    }
     const text = await response.text();
     const lines = text.split("\n");
-    lines.forEach(line => {
-      const [word, meaning] = line.split(",");
-      if (word && meaning) {
-        const category = classifyPartOfSpeech(word.trim()); // 품사 분류
-        wordData[category].push({ word: word.trim(), meaning: meaning.trim() });
+
+    lines.forEach((line, index) => {
+      if (index === 0) return; // 첫 번째 줄(헤더)은 건너뜀
+      const [word, meaning, category] = line.split(",");
+      if (word && meaning && category) {
+        const trimmedWord = word.trim();
+        const trimmedMeaning = meaning.trim();
+        const trimmedCategory = category.trim();
+
+        // 중복 단어인지 확인
+        if (!isWordDuplicate(trimmedWord)) {
+          wordData[trimmedCategory].push({ word: trimmedWord, meaning: trimmedMeaning });
+          wordData["mixed"].push({ word: trimmedWord, meaning: trimmedMeaning }); // "혼합" 항목에도 추가
+        }
       }
     });
+
     updateWordList();
     updateTotalWords();
+    console.log("단어 데이터가 성공적으로 로드되었습니다.");
   } catch (error) {
     console.error("vocab.csv 파일을 읽는 중 오류가 발생했습니다:", error);
   }
@@ -228,5 +278,5 @@ async function loadDefaultVocab() {
 
 // 페이지 로드 시 초기화
 window.onload = function () {
-  loadDefaultVocab(); // 기본 단어 데이터 로드
+  loadVocabFile(); // 기본 단어 데이터 로드
 };
