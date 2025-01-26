@@ -309,6 +309,11 @@ function goBack() {
 // vocab.csv 파일을 읽어와 데이터 초기화
 async function loadVocabFile(filePath = 'vocab1.csv') {
   try {
+    // 기존 단어 데이터 초기화
+    for (const category in wordData) {
+      wordData[category] = []; // 모든 카테고리의 단어 목록을 빈 배열로 초기화
+    }
+
     const response = await fetch(filePath); // 파일 경로 확인
     if (!response.ok) {
       throw new Error(`파일을 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
@@ -316,11 +321,6 @@ async function loadVocabFile(filePath = 'vocab1.csv') {
     const text = await response.text();
     console.log("파일 내용:", text); // 파일 내용을 콘솔에 출력하여 확인
     const lines = text.split("\n");
-
-    // 기존 단어 데이터 초기화
-    for (const category in wordData) {
-      wordData[category] = [];
-    }
 
     lines.forEach((line, index) => {
       if (index === 0) return; // 첫 번째 줄(헤더)은 건너뜀
