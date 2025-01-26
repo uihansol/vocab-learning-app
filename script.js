@@ -1,4 +1,13 @@
-let wordData = { verb: [], noun: [], adjective: [], adverb: [], phrase: [], mixed: [] };
+let wordData = { 
+  verb: [], 
+  noun: [], 
+  adjective: [], 
+  adverb: [], 
+  phrase: [], 
+  mixed: [],
+  stats: {} // 단어별 통계 저장 객체 추가
+};
+
 let wordStats = [];
 let currentCategory = null;
 let currentWord = null;
@@ -75,13 +84,19 @@ function deleteWord(targetWord) {
   Object.keys(wordData).forEach(cat => {
     wordData[cat] = wordData[cat].filter(w => w.word !== targetWord);
   });
+  delete wordData.stats[targetWord]; // 통계 데이터도 삭제
   updateWordList();
   updateTotalWords();
 }
 
 function showScreen(screenId) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(screenId).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+    s.style.display = 'none';
+  });
+  const target = document.getElementById(screenId);
+  target.classList.add('active');
+  target.style.display = 'block';
 }
 
 async function selectDifficulty(difficulty) {
@@ -91,8 +106,18 @@ async function selectDifficulty(difficulty) {
 }
 
 function startQuiz(category) {
-  if (wordData[category].length === 0) {
-    alert(`선택된 카테고리(${category})에 단어가 없습니다.`);
+  // 마스터 단어 필터링 (1주일 이내)
+  const filteredWords = wordData[category].filter(wordObj => {
+    const stat = wordData.stats[wordObj.word] || {};
+    if(stat.lastMastered) {
+      const daysDiff = (Date.now() - stat.lastMastered) / (1000*60*60*24);
+      return daysDiff > 7; // 1주일 지난 경우만 포함
+    }
+    return true;
+  });
+
+  if (filteredWords.length === 0) {
+    alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
     return;
   }
 
@@ -101,7 +126,7 @@ function startQuiz(category) {
   masteredCount = 0;
   currentCategory = category;
   
-  const pool = [...wordData[category]];
+  const pool = [...filteredWords];
   wordStats = Array.from({length: Math.min(totalQuestions, pool.length)}, () => {
     const idx = Math.floor(Math.random() * pool.length);
     return pool.splice(idx, 1)[0];
@@ -117,8 +142,30 @@ function showNextWord() {
     alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
     return goBack();
   }
-  
-  currentWord = wordStats.shift();
+
+  // 응답 시간 가중치 적용 선택 알고리즘
+  const weightedPool = wordStats.map(wordObj => {
+    const stat = wordData.stats[wordObj.word] || {};
+    const timeWeight = stat.avgTime ? Math.log(stat.avgTime/1000 + 1) : 1;
+    const errorWeight = stat.errorCount ? stat.errorCount * 2 : 1;
+    return { ...wordObj, weight: timeWeight * errorWeight };
+  });
+
+  // 가중치 기반 랜덤 선택
+  const totalWeight = weightedPool.reduce((sum, w) => sum + w.weight, 0);
+  let random = Math.random() * totalWeight;
+  let selectedWord;
+  for(const w of weightedPool) {
+    random -= w.weight;
+    if(random < 0) {
+      selectedWord = w;
+      break;
+    }
+  }
+
+  currentWord = selectedWord;
+  wordStats = wordStats.filter(w => w.word !== selectedWord.word); // 선택된 단어 제거
+
   correctAnswer = currentWord.meaning;
   
   const options = [correctAnswer];
@@ -129,9 +176,13 @@ function showNextWord() {
   options.sort(() => Math.random() - 0.5);
 
   const optionsContainer = document.getElementById("options");
-  optionsContainer.innerHTML = options.map(opt => `
-    <div class="quiz-option" onclick="checkAnswer('${opt}')">${opt}</div>
-  `).join('');
+  optionsContainer.innerHTML = options
+    .map(opt => `<div class="quiz-option">${opt}</div>`)
+    .join('');
+
+  optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => checkAnswer(opt.textContent));
+  });
   
   document.getElementById("word-display").textContent = currentWord.word;
   startTimer();
@@ -139,27 +190,51 @@ function showNextWord() {
 
 function checkAnswer(selected) {
   stopTimer();
-  
+  const responseTime = Date.now() - startTime;
+  const stat = wordData.stats[currentWord.word] || {
+    correctStreak: 0,
+    errorCount: 0,
+    totalTime: 0,
+    answerCount: 0
+  };
+
   if (selected === correctAnswer) {
+    stat.correctStreak++;
+    stat.totalTime += responseTime;
+    stat.answerCount++;
+    
+    if(stat.correctStreak >= 3) { // 3회 연속 정답시 마스터 처리
+      stat.lastMastered = Date.now();
+      masteredCount++;
+    }
+
+    // 정답자 옵션만 색상 변경
     document.querySelectorAll('.quiz-option').forEach(opt => {
       if (opt.textContent === selected) {
         opt.classList.add('correct');
+        opt.style.pointerEvents = 'none'; // 비활성화
       }
     });
-    alert("정답입니다!");
-    masteredCount++;
-    remainingQuestions--;
-    updateProgress();
-    setTimeout(() => showNextWord(), 1000); // 1초 후 다음 문제로 넘어감
+
+    setTimeout(() => {
+      showNextWord();
+    }, 1000);
   } else {
+    stat.correctStreak = 0;
+    stat.errorCount++;
+    
+    // 오답 옵션만 비활성화
     document.querySelectorAll('.quiz-option').forEach(opt => {
       if (opt.textContent === selected) {
         opt.classList.add('wrong');
-        setTimeout(() => opt.remove(), 1000);
+        opt.style.pointerEvents = 'none';
       }
     });
-    alert("틀렸습니다!");
   }
+
+  // 통계 업데이트
+  stat.avgTime = stat.totalTime / stat.answerCount;
+  wordData.stats[currentWord.word] = stat;
   updateProgress();
 }
 
@@ -180,6 +255,7 @@ async function loadVocabFile(filename) {
     }
   });
   updateTotalWords();
+  updateWordList();
 }
 
 function showManageScreen() {
@@ -191,7 +267,20 @@ function goBack() {
   showScreen("main-menu");
 }
 
+// 타이머 관련 함수
+function startTimer() {
+  startTime = Date.now();
+  timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    document.getElementById("timer").textContent = `시간: ${elapsed}초`;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
 window.onload = () => {
-  loadVocabFile('vocab1.csv');
+  loadVocabFile('vocab2.csv');
   showScreen("main-menu");
 };

@@ -70,8 +70,9 @@
 }
 
 .quiz-option.wrong {
-  animation: shake 0.5s, fadeOut 1s;
+  animation: shake 0.5s;
   background-color: #ffcccc !important;
+  opacity: 0.5;
 }
 
 @keyframes shake {
@@ -80,9 +81,10 @@
   75% { transform: translateX(8px); }
 }
 
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+/* 옵션 비활성화 스타일 */
+.quiz-option[disabled], .quiz-option.disabled {
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 /* 화면 전환 */
