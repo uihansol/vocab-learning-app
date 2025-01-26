@@ -1,21 +1,26 @@
 /* 기본 폰트 크기 및 박스 모델 설정 */
 body {
-  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif; /* 동글동글한 폰트 */
+  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f5f5f5; /* 배경색 추가 */
+  background-color: #f5f5f5;
 }
 
 /* 컨테이너 스타일 */
 .container {
   width: 100%;
-  max-width: 600px; /* 모바일에서 너무 넓어지지 않도록 최대 너비 설정 */
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: white; /* 배경색 추가 */
-  border-radius: 15px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 화면 전환을 위한 hidden 클래스 */
+.hidden {
+  display: none;
 }
 
 /* 헤더 텍스트 스타일 */
@@ -23,33 +28,33 @@ body {
   font-size: 18px;
   color: #555;
   margin-bottom: 20px;
-  text-align: center; /* 가운데 정렬 */
-  padding-top: 10px; /* 상단 패딩 추가 */
+  text-align: center;
+  padding-top: 10px;
 }
 
 .header-text h1 {
-  margin: 0; /* 기본 마진 제거 */
-  font-size: 24px; /* 제목 크기 조정 */
-  color: #333; /* 제목 색상 조정 */
+  margin: 0;
+  font-size: 24px;
+  color: #333;
 }
 
 #total-words {
-  margin: 5px 0; /* 전체 단어 수 텍스트 간격 조정 */
+  margin: 5px 0;
   font-size: 16px;
-  color: #666; /* 텍스트 색상 조정 */
+  color: #666;
 }
 
 #category-title {
   font-size: 18px;
   color: #333;
-  margin-bottom: 20px; /* 카테고리 제목과 퀴즈 화면 간격 추가 */
-  text-align: center; /* 가운데 정렬 */
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 /* 메인 메뉴 버튼 스타일 */
 .main-menu {
   display: flex;
-  flex-direction: column; /* 모바일에서 세로로 정렬 */
+  flex-direction: column;
   gap: 10px;
   margin-top: 20px;
 }
@@ -58,7 +63,7 @@ body {
   padding: 15px;
   font-size: 16px;
   border: none;
-  border-radius: 12px; /* 버튼 모서리 둥글게 */
+  border-radius: 12px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
@@ -77,7 +82,7 @@ body {
 }
 
 #word-display {
-  font-size: 36px; /* 모바일에서 더 큰 폰트 */
+  font-size: 36px;
   font-weight: bold;
   margin: 20px 0;
   text-align: center;
@@ -86,16 +91,16 @@ body {
 
 #options {
   display: flex;
-  flex-direction: column; /* 모바일에서 세로로 정렬 */
+  flex-direction: column;
   gap: 10px;
-  margin-top: 20px; /* 옵션 버튼과 단어 간격 추가 */
+  margin-top: 20px;
 }
 
 .quiz-option {
   padding: 15px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 12px; /* 버튼 모서리 둥글게 */
+  border-radius: 12px;
   background-color: #f9f9f9;
   cursor: pointer;
   text-align: center;
@@ -111,7 +116,7 @@ body {
   font-size: 16px;
   text-align: center;
   margin-top: 20px;
-  color: #666; /* 타이머 텍스트 색상 조정 */
+  color: #666;
 }
 
 /* 어휘 관리 화면 스타일 */
@@ -120,8 +125,8 @@ body {
 }
 
 #manage-screen h3 {
-  margin-top: 20px; /* 각 섹션 간 간격 추가 */
-  color: #333; /* 제목 색상 조정 */
+  margin-top: 20px;
+  color: #333;
 }
 
 #manage-screen input,
@@ -130,8 +135,8 @@ body {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
-  border-radius: 12px; /* 입력 필드 모서리 둥글게 */
-  font-size: 16px; /* 입력 필드 폰트 크기 조정 */
+  border-radius: 12px;
+  font-size: 16px;
 }
 
 #manage-screen button {
@@ -139,7 +144,7 @@ body {
   padding: 10px;
   font-size: 16px;
   border: none;
-  border-radius: 12px; /* 버튼 모서리 둥글게 */
+  border-radius: 12px;
   background-color: #28a745;
   color: white;
   cursor: pointer;
@@ -152,7 +157,7 @@ body {
 
 /* 현재 어휘 목록 스타일 */
 #word-list {
-  list-style-type: none; /* 목록 기호 제거 */
+  list-style-type: none;
   padding: 0;
   margin: 0;
 }
@@ -162,17 +167,17 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ddd; /* 구분선 추가 */
-  border-radius: 8px; /* 목록 아이템 모서리 둥글게 */
-  margin-bottom: 10px; /* 목록 아이템 간 간격 추가 */
-  background-color: #f9f9f9; /* 배경색 추가 */
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
 }
 
 #word-list li button {
   padding: 5px 10px;
   font-size: 14px;
   border: none;
-  border-radius: 8px; /* 버튼 모서리 둥글게 */
+  border-radius: 8px;
   background-color: #dc3545;
   color: white;
   cursor: pointer;
