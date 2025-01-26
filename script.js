@@ -206,7 +206,27 @@ function showManageScreen() {
   updateWordList();
 }
 
+// vocab.csv 파일을 읽어와 데이터 초기화
+async function loadDefaultVocab() {
+  try {
+    const response = await fetch('vocab.csv'); // GitHub Pages에 업로드된 파일 경로
+    const text = await response.text();
+    const lines = text.split("\n");
+    lines.forEach(line => {
+      const [word, meaning] = line.split(",");
+      if (word && meaning) {
+        const category = classifyPartOfSpeech(word.trim()); // 품사 분류
+        wordData[category].push({ word: word.trim(), meaning: meaning.trim() });
+      }
+    });
+    updateWordList();
+    updateTotalWords();
+  } catch (error) {
+    console.error("vocab.csv 파일을 읽는 중 오류가 발생했습니다:", error);
+  }
+}
+
 // 페이지 로드 시 초기화
 window.onload = function () {
-  updateTotalWords();
+  loadDefaultVocab(); // 기본 단어 데이터 로드
 };
