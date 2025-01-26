@@ -62,38 +62,41 @@
     </div>
 
     <!-- 어휘 관리 화면 -->
-<div id="manage-screen" class="screen hidden">
-  <div class="manage-header">
-    <button onclick="goBack()" class="back-btn">← 돌아가기</button>
-    <h2>📝 어휘 관리 패널</h2>
-  </div>
+    <div id="manage-screen" class="screen hidden">
+      <div class="manage-header">
+        <button onclick="goBack()" class="back-btn">← 돌아가기</button>
+        <h2>📝 어휘 관리 패널</h2>
+      </div>
 
-  <!-- 신규 단어 입력 폼 -->
-  <div class="manage-form">
-    <input type="text" id="new-word" placeholder="단어 (예: analyze)">
-    <input type="text" id="new-meaning" placeholder="의미 (예: 분석하다)">
-    <select id="new-category">
-      <option value="verb">동사</option>
-      <option value="noun">명사</option>
-      <option value="adjective">형용사</option>
-      <option value="adverb">부사</option>
-      <option value="phrase">구문</option>
-    </select>
-    <button onclick="addNewWord()" class="add-btn">➕ 추가</button>
-  </div>
+      <!-- 신규 단어 입력 폼 -->
+      <div class="manage-form">
+        <input type="text" id="new-word" placeholder="단어 (예: analyze)">
+        <input type="text" id="new-meaning" placeholder="의미 (예: 분석하다)">
+        <select id="new-category">
+          <option value="verb">동사</option>
+          <option value="noun">명사</option>
+          <option value="adjective">형용사</option>
+          <option value="adverb">부사</option>
+          <option value="phrase">구문</option>
+        </select>
+        <button onclick="addNewWord()" class="add-btn">➕ 추가</button>
+      </div>
 
-  <!-- 단어 목록 테이블 -->
-  <div class="word-list">
-    <div class="list-header">
-      <span>📖 단어</span>
-      <span>📝 의미</span>
-      <span>🏷️ 품사</span>
-      <span>🗑️ 삭제</span>
-    </div>
-    <div id="word-list-items"></div>
-  </div>
-</div>
-      <!-- ... (기존 관리 화면 유지) ... -->
+      <!-- 단어 검색 -->
+      <div class="search-container">
+        <input type="text" id="search-word" placeholder="단어 검색..." oninput="searchWordList()">
+      </div>
+
+      <!-- 단어 목록 테이블 -->
+      <div class="word-list">
+        <div class="list-header">
+          <span>📖 단어</span>
+          <span>📝 의미</span>
+          <span>🏷️ 품사</span>
+          <span>🗑️ 삭제</span>
+        </div>
+        <div id="word-list-items"></div>
+      </div>
     </div>
   </div>
   <script src="script.js"></script>
