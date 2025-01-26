@@ -5,7 +5,7 @@ let wordData = {
   adverb: [], 
   phrase: [], 
   mixed: [],
-  stats: {} // 단어별 통계 저장 객체 추가
+  stats: {}
 };
 
 let wordStats = [];
@@ -17,10 +17,10 @@ let timerInterval = null;
 let totalQuestions = 10;
 let remainingQuestions = 0;
 let masteredCount = 0;
-let masteredWords = {};
 
+// 공통 함수
 function updateTotalWords() {
-  let total = [...new Set([...wordData.verb, ...wordData.noun, ...wordData.adjective, ...wordData.adverb, ...wordData.phrase])].length;
+  const total = [...new Set([...wordData.verb, ...wordData.noun, ...wordData.adjective, ...wordData.adverb, ...wordData.phrase])].length;
   document.getElementById("total-words").innerText = `전체 단어: ${total}개`;
 }
 
@@ -84,7 +84,7 @@ function deleteWord(targetWord) {
   Object.keys(wordData).forEach(cat => {
     wordData[cat] = wordData[cat].filter(w => w.word !== targetWord);
   });
-  delete wordData.stats[targetWord]; // 통계 데이터도 삭제
+  delete wordData.stats[targetWord];
   updateWordList();
   updateTotalWords();
 }
@@ -99,6 +99,7 @@ function showScreen(screenId) {
   target.style.display = 'block';
 }
 
+// 퀴즈 로직
 async function selectDifficulty(difficulty) {
   const files = { easy: 'vocab1.csv', normal: 'vocab2.csv', hard: 'vocab3.csv' };
   await loadVocabFile(files[difficulty]);
@@ -106,12 +107,11 @@ async function selectDifficulty(difficulty) {
 }
 
 function startQuiz(category) {
-  // 마스터 단어 필터링 (1주일 이내)
   const filteredWords = wordData[category].filter(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
-    if(stat.lastMastered) {
-      const daysDiff = (Date.now() - stat.lastMastered) / (1000*60*60*24);
-      return daysDiff > 7; // 1주일 지난 경우만 포함
+    if (stat.lastMastered) {
+      const daysDiff = (Date.now() - stat.lastMastered) / (1000 * 60 * 60 * 24);
+      return daysDiff > 7;
     }
     return true;
   });
@@ -125,16 +125,42 @@ function startQuiz(category) {
   remainingQuestions = totalQuestions;
   masteredCount = 0;
   currentCategory = category;
-  
-  const pool = [...filteredWords];
-  wordStats = Array.from({length: Math.min(totalQuestions, pool.length)}, () => {
-    const idx = Math.floor(Math.random() * pool.length);
-    return pool.splice(idx, 1)[0];
-  });
-  
+
+  wordStats = [];
+  while (wordStats.length < totalQuestions) {
+    const remaining = totalQuestions - wordStats.length;
+    const count = Math.min(remaining, filteredWords.length);
+    const weightedWords = getWeightedRandomElements(filteredWords, count);
+    wordStats.push(...weightedWords);
+  }
+
   document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
   showNextWord();
+}
+
+function getWeightedRandomElements(array, n) {
+  const weightedArray = array.map(wordObj => {
+    const stat = wordData.stats[wordObj.word] || {};
+    const errorWeight = stat.errorCount ? stat.errorCount * 5 : 1;
+    const correctRateWeight = stat.answerCount ? (1 - (stat.correctStreak / stat.answerCount)) : 1;
+    const weight = errorWeight * correctRateWeight;
+    return { ...wordObj, weight };
+  });
+
+  const totalWeight = weightedArray.reduce((sum, w) => sum + w.weight, 0);
+  const selected = [];
+  while (selected.length < n) {
+    let random = Math.random() * totalWeight;
+    for (const w of weightedArray) {
+      random -= w.weight;
+      if (random < 0) {
+        selected.push(w);
+        break;
+      }
+    }
+  }
+  return selected;
 }
 
 function showNextWord() {
@@ -143,44 +169,20 @@ function showNextWord() {
     return goBack();
   }
 
-  // 응답 시간과 오답률 가중치 적용 선택 알고리즘
-  const weightedPool = wordStats.map(wordObj => {
-    const stat = wordData.stats[wordObj.word] || {};
-    const timeWeight = stat.avgTime ? Math.log(stat.avgTime / 1000 + 1) : 1;
-    const errorWeight = stat.errorCount ? stat.errorCount * 3 : 1; // 오답률 가중치 증가 (3배)
-    return { ...wordObj, weight: timeWeight * errorWeight };
-  });
-
-  // 가중치 기반 랜덤 선택
-  const totalWeight = weightedPool.reduce((sum, w) => sum + w.weight, 0);
-  let random = Math.random() * totalWeight;
-  let selectedWord;
-  for (const w of weightedPool) {
-    random -= w.weight;
-    if (random < 0) {
-      selectedWord = w;
-      break;
-    }
-  }
-
-  currentWord = selectedWord;
-  wordStats = wordStats.filter(w => w.word !== selectedWord.word); // 선택된 단어 제거
-
+  currentWord = wordStats.shift();
   correctAnswer = currentWord.meaning;
+  updateWordDisplayBackground();
 
   const options = [correctAnswer];
   while (options.length < 4) {
-    const random = wordData[currentCategory][Math.floor(Math.random() * wordData[currentCategory].length)].meaning;
-    if (!options.includes(random)) options.push(random);
+    const randomWord = wordData[currentCategory][Math.floor(Math.random() * wordData[currentCategory].length)];
+    if (randomWord && !options.includes(randomWord.meaning)) options.push(randomWord.meaning);
   }
   options.sort(() => Math.random() - 0.5);
 
   const optionsContainer = document.getElementById("options");
-  optionsContainer.innerHTML = options
-    .map(opt => `<div class="quiz-option">${opt}</div>`)
-    .join('');
+  optionsContainer.innerHTML = options.map(opt => `<div class="quiz-option">${opt}</div>`).join('');
 
-  // 터치 이벤트 리스너 추가 (모바일 대응)
   optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
     opt.addEventListener('click', () => checkAnswer(opt.textContent));
     opt.addEventListener('touchstart', () => checkAnswer(opt.textContent), { passive: true });
@@ -190,42 +192,44 @@ function showNextWord() {
   startTimer();
 }
 
+function updateWordDisplayBackground() {
+  const wordDisplay = document.getElementById("word-display");
+  const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
+  const errorCount = stat.errorCount || 0;
+  const intensity = Math.min(errorCount / 10, 1);
+  const redValue = Math.floor(255 * intensity);
+  wordDisplay.style.backgroundColor = `rgba(${redValue}, ${255 - redValue}, ${255 - redValue}, 0.3)`;
+}
+
 function checkAnswer(selected) {
   stopTimer();
   const responseTime = Date.now() - startTime;
-  const stat = wordData.stats[currentWord.word] || {
-    correctStreak: 0,
-    errorCount: 0,
-    totalTime: 0,
-    answerCount: 0
-  };
+  const stat = wordData.stats[currentWord.word] || { correctStreak: 0, errorCount: 0, totalTime: 0, answerCount: 0 };
 
   if (selected === correctAnswer) {
-    stat.correctStreak++;
+    stat.correctStreak = (stat.correctStreak || 0) + 1;
     stat.totalTime += responseTime;
-    stat.answerCount++;
+    stat.answerCount = (stat.answerCount || 0) + 1;
 
-    if (stat.correctStreak >= 3) { // 3회 연속 정답시 마스터 처리
+    if (stat.correctStreak >= 3) {
       stat.lastMastered = Date.now();
       masteredCount++;
     }
 
-    // 정답자 옵션만 색상 변경
+    if (stat.errorCount > 0) stat.errorCount--;
+
     document.querySelectorAll('.quiz-option').forEach(opt => {
       if (opt.textContent === selected) {
         opt.classList.add('correct');
-        opt.style.pointerEvents = 'none'; // 비활성화
+        opt.style.pointerEvents = 'none';
       }
     });
 
-    setTimeout(() => {
-      showNextWord();
-    }, 1000);
+    setTimeout(showNextWord, 1000);
   } else {
     stat.correctStreak = 0;
-    stat.errorCount++;
+    stat.errorCount = (stat.errorCount || 0) + 1;
 
-    // 오답 옵션만 비활성화
     document.querySelectorAll('.quiz-option').forEach(opt => {
       if (opt.textContent === selected) {
         opt.classList.add('wrong');
@@ -234,15 +238,16 @@ function checkAnswer(selected) {
     });
   }
 
-  // 통계 업데이트
-  stat.avgTime = stat.totalTime / stat.answerCount;
+  stat.avgTime = stat.totalTime / (stat.answerCount || 1);
   wordData.stats[currentWord.word] = stat;
   updateProgress();
+  updateWordDisplayBackground();
 }
 
 function updateProgress() {
   document.getElementById("progress").textContent = 
     `확실하게 외운 단어: ${masteredCount}개 / 남은 단어: ${remainingQuestions}개 / 전체 문제: ${totalQuestions}개`;
+  remainingQuestions--;
 }
 
 async function loadVocabFile(filename) {
@@ -269,7 +274,7 @@ function goBack() {
   showScreen("main-menu");
 }
 
-// 타이머 관련 함수
+// 타이머
 function startTimer() {
   startTime = Date.now();
   timerInterval = setInterval(() => {
@@ -282,6 +287,7 @@ function stopTimer() {
   clearInterval(timerInterval);
 }
 
+// 초기화
 window.onload = () => {
   loadVocabFile('vocab2.csv');
   showScreen("main-menu");

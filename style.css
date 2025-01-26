@@ -36,6 +36,10 @@
   margin: 20px 0;
   text-align: center;
   color: #333;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+  transition: background-color 0.3s ease;
 }
 
 #options {
@@ -54,7 +58,7 @@
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease;
-  -webkit-tap-highlight-color: transparent; /* 모바일 터치 하이라이트 제거 */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .quiz-option:hover {
@@ -80,12 +84,6 @@
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-8px); }
   75% { transform: translateX(8px); }
-}
-
-/* 옵션 비활성화 스타일 */
-.quiz-option[disabled], .quiz-option.disabled {
-  pointer-events: none;
-  opacity: 0.6;
 }
 
 /* 화면 전환 */
