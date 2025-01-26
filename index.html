@@ -10,7 +10,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- 상단 텍스트 -->
     <div class="header-text">
       <h1>영어 단어 학습</h1>
       <p id="total-words">전체 단어: 0개</p>
@@ -20,6 +19,15 @@
     <!-- 메인 메뉴 -->
     <div id="main-menu" class="screen">
       <div class="main-menu">
+        <h3>문제 수 선택</h3>
+        <select id="question-count">
+          <option value="10" selected>10문제</option>
+          <option value="20">20문제</option>
+          <option value="30">30문제</option>
+          <option value="50">50문제</option>
+          <option value="100">100문제</option>
+        </select>
+
         <h3>난이도 선택</h3>
         <button onclick="selectDifficulty('easy')">쉬움</button>
         <button onclick="selectDifficulty('normal')">보통</button>
@@ -33,14 +41,6 @@
         <button onclick="startQuiz('phrase')">구문</button>
         <button onclick="startQuiz('mixed')">혼합</button>
         <button onclick="showManageScreen()">어휘 관리</button>
-        <h3>문제 수 선택</h3>
-        <select id="question-count">
-          <option value="10" selected>10문제</option>
-          <option value="20">20문제</option>
-          <option value="30">30문제</option>
-          <option value="50">50문제</option>
-          <option value="100">100문제</option>
-        </select>
       </div>
     </div>
 
@@ -50,18 +50,16 @@
       <h3 id="word-display"></h3>
       <div id="options"></div>
       <p id="timer">시간: 0초</p>
-      <p id="progress">확실하게 외운 단어: 0개 / 남은 단어: 0개</p>
+      <p id="progress">확실하게 외운 단어: 0개 / 남은 단어: 0개 / 전체 문제: 0개</p>
     </div>
 
     <!-- 어휘 관리 화면 -->
     <div id="manage-screen" class="screen hidden">
       <h2>어휘 관리</h2>
-      <!-- 현재 어휘 목록 -->
       <div>
         <h3>현재 어휘 목록</h3>
         <ul id="word-list"></ul>
       </div>
-      <!-- 새 단어 추가 -->
       <div>
         <h3>새 단어 추가</h3>
         <input type="text" id="new-word" placeholder="새 단어">
@@ -75,15 +73,14 @@
         </select>
         <button onclick="addWord()">추가</button>
       </div>
-      <!-- 파일 업로드 -->
       <div>
         <h3>파일 업로드</h3>
         <input type="file" id="file-input" accept=".csv">
         <button onclick="uploadFile()">업로드</button>
       </div>
-      <!-- 메인 화면으로 돌아가기 -->
       <button onclick="goBack()">메인 화면으로 돌아가기</button>
     </div>
   </div>
   <script src="script.js"></script>
 </body>
+</html>
