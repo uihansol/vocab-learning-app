@@ -84,3 +84,12 @@
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+/* 화면 전환 */
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
