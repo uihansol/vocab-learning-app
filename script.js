@@ -16,6 +16,9 @@ let correctAnswer = null;
 let startTime = null;
 let timerInterval = null;
 
+// 이해한 단어 목록 (3번 연속 정답)
+let masteredWords = {};
+
 // 전체 단어 수 업데이트
 function updateTotalWords() {
   let total = 0;
@@ -195,6 +198,12 @@ function showNextWord() {
     }
   }
 
+  // 이해한 단어인지 확인 (1주일이 지났는지 확인)
+  if (masteredWords[currentWord.word] && masteredWords[currentWord.word].masteredUntil > Date.now()) {
+    showNextWord(); // 이해한 단어이면 다음 문제로 넘어감
+    return;
+  }
+
   correctAnswer = currentWord.meaning;
 
   const options = [correctAnswer];
@@ -235,6 +244,14 @@ function checkAnswer(selectedAnswer) {
   if (selectedAnswer === correctAnswer) {
     currentWord.correctCount += 1;
 
+    // 3번 연속 정답인 경우
+    if (currentWord.correctCount >= 3) {
+      masteredWords[currentWord.word] = {
+        masteredUntil: Date.now() + 7 * 24 * 60 * 60 * 1000, // 1주일 후 다시 출제
+      };
+      alert("이 단어를 3번 연속으로 맞췄습니다! 이 단어는 1주일 동안 출제되지 않습니다.");
+    }
+
     // 시간이 짧게 걸린 경우 출제 빈도를 낮춤
     if (elapsedTime < 5) { // 예: 5초 이내로 맞춘 경우
       currentWord.frequency = Math.max(1, currentWord.frequency - 2); // 빈도 감소
@@ -248,6 +265,7 @@ function checkAnswer(selectedAnswer) {
   } else {
     currentWord.frequency += 2; // 틀리면 빈도 증가
     currentWord.wrongCount += 1; // 틀린 횟수 증가
+    currentWord.correctCount = 0; // 연속 정답 횟수 초기화
 
     // 시간이 오래 걸리고 오답률이 높은 경우 출제 빈도를 더 높임
     if (elapsedTime > 10 && currentWord.wrongCount > 2) { // 예: 10초 이상 걸리고 틀린 횟수가 2회 이상
@@ -322,6 +340,6 @@ async function loadVocabFile(filePath = 'vocab1.csv') {
 
 // 페이지 로드 시 초기화
 window.onload = function () {
-  loadVocabFile(); // 기본 단어 데이터 로드 (쉬움 난이도)
+  loadVocabFile(); // 기본 단어 데이터 로드 (vocab1.csv)
   showScreen("main-menu"); // 메인 메뉴 화면 표시
 };
