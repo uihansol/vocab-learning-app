@@ -135,6 +135,7 @@ function showScreen(screenId) {
 
 // 난이도 선택
 function selectDifficulty(difficulty) {
+  console.log(`난이도 선택: ${difficulty}`); // 디버깅용 로그
   let fileToLoad;
   switch (difficulty) {
     case 'easy':
@@ -149,6 +150,7 @@ function selectDifficulty(difficulty) {
     default:
       fileToLoad = 'vocab1.csv'; // 기본값
   }
+  console.log(`로드할 파일: ${fileToLoad}`); // 디버깅용 로그
   loadVocabFile(fileToLoad);
 }
 
@@ -304,7 +306,7 @@ async function loadVocabFile(filePath = 'vocab1.csv') {
   try {
     const response = await fetch(filePath); // 파일 경로 확인
     if (!response.ok) {
-      throw new Error("파일을 불러오는 데 실패했습니다.");
+      throw new Error(`파일을 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
     }
     const text = await response.text();
     const lines = text.split("\n");
@@ -335,6 +337,7 @@ async function loadVocabFile(filePath = 'vocab1.csv') {
     console.log("단어 데이터가 성공적으로 로드되었습니다.");
   } catch (error) {
     console.error("CSV 파일을 읽는 중 오류가 발생했습니다:", error);
+    alert(`파일을 불러오는 데 실패했습니다: ${error.message}`);
   }
 }
 
