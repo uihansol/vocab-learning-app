@@ -14,11 +14,12 @@
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .main-menu button:hover {
-  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* 퀴즈 화면 스타일 */
@@ -51,11 +52,27 @@
   background-color: #f9f9f9;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .quiz-option:hover {
   background-color: #e9e9e9;
+  transform: scale(1.02);
+}
+
+.quiz-option:active {
+  transform: scale(0.98);
+}
+
+.quiz-option.wrong {
+  animation: shake 0.5s;
+  background-color: #ffcccc !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
 }
 
 /* 타이머 스타일 */
@@ -67,15 +84,6 @@
 }
 
 /* 어휘 관리 화면 스타일 */
-#manage-screen {
-  margin-top: 20px;
-}
-
-#manage-screen h3 {
-  margin-top: 20px;
-  color: #333;
-}
-
 #manage-screen input,
 #manage-screen select {
   width: 100%;
@@ -84,39 +92,6 @@
   border: 1px solid #ddd;
   border-radius: 12px;
   font-size: 16px;
-}
-
-#manage-screen button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 12px;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#manage-screen button:hover {
-  background-color: #218838;
-}
-
-/* 파일 업로드 버튼 스타일 */
-#file-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: 16px;
-}
-
-/* 현재 어휘 목록 스타일 */
-#word-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 #word-list li {
@@ -130,26 +105,12 @@
   background-color: #f9f9f9;
 }
 
-#word-list li button {
-  padding: 5px 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 8px;
-  background-color: #dc3545;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#word-list li button:hover {
-  background-color: #c82333;
-}
-
-/* 화면 전환을 위한 스타일 */
+/* 화면 전환 애니메이션 */
 .screen {
-  display: block;
+  transition: opacity 0.3s ease;
 }
 
 .hidden {
   display: none;
+  opacity: 0;
 }
