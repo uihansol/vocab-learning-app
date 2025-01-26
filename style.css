@@ -1,234 +1,155 @@
-/* 기본 설정 */
-body {
-  font-family: 'Nanum Myeongjo', serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-  color: #333;
+/* 메인 메뉴 스타일 */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-
-.screen {
-  display: none;
-}
-
-.screen.active {
-  display: block;
-}
-
-/* 헤더 */
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.header p {
-  font-size: 1.2rem;
-}
-
-/* 버튼 스타일 */
-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
+.main-menu button {
+  padding: 15px;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-.manage-btn {
+  border-radius: 12px;
   background-color: #007bff;
   color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.manage-btn:hover {
+.main-menu button:hover {
   background-color: #0056b3;
 }
 
-.add-btn {
-  background-color: #28a745;
-  color: white;
-}
-
-.add-btn:hover {
-  background-color: #1e7e34;
-}
-
-/* 난이도 버튼 */
-.difficulty-buttons button {
-  margin: 5px;
-  background-color: #ffc107;
-  color: black;
-}
-
-.difficulty-buttons button:hover {
-  background-color: #e0a800;
-}
-
-/* 메인 메뉴 */
-.menu-section {
-  text-align: center;
-}
-
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.num-select {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-}
-
-/* 퀴즈 화면 */
-.quiz-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.status-box {
-  display: flex;
-  gap: 10px;
+/* 퀴즈 화면 스타일 */
+#quiz-screen {
+  position: relative;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 
 #word-display {
-  font-size: 2rem;
+  font-size: 36px;
   font-weight: bold;
+  margin: 20px 0;
   text-align: center;
-  margin-bottom: 20px;
+  color: #333;
 }
 
-.options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+#options {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .quiz-option {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 15px;
-  text-align: center;
-  font-size: 1rem;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .quiz-option:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.02);
+  background-color: #e9e9e9;
 }
 
-.quiz-option.wrong {
-  background-color: #ffcccc;
-  animation: shake 0.3s;
+/* 타이머 스타일 */
+#timer {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
 }
 
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+/* 어휘 관리 화면 스타일 */
+#manage-screen {
+  margin-top: 20px;
 }
 
-/* 어휘 관리 화면 */
-.manage-header {
+#manage-screen h3 {
+  margin-top: 20px;
+  color: #333;
+}
+
+#manage-screen input,
+#manage-screen select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+#manage-screen button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#manage-screen button:hover {
+  background-color: #218838;
+}
+
+/* 파일 업로드 버튼 스타일 */
+#file-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+/* 현재 어휘 목록 스타일 */
+#word-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#word-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-.manage-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.manage-form input, .manage-form select {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.word-list {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.list-header {
-  display: grid;
-  grid-template-columns: 2fr 3fr 1fr 1fr;
-  background-color: #f8f9fa;
-  font-weight: bold;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
 }
 
-.list-item {
-  display: grid;
-  grid-template-columns: 2fr 3fr 1fr 1fr;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  align-items: center;
-}
-
-.list-item:hover {
-  background-color: #f8f9fa;
-}
-
-.list-item button {
+#word-list li button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
   background-color: #dc3545;
   color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: background-color 0.3s ease;
 }
 
-.list-item button:hover {
+#word-list li button:hover {
   background-color: #c82333;
-  transform: scale(1.1);
 }
 
-.search-container {
-  margin-bottom: 20px;
+/* 화면 전환을 위한 스타일 */
+.screen {
+  display: block;
 }
 
-.search-container input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
+.hidden {
+  display: none;
 }
