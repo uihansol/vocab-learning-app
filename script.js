@@ -130,6 +130,25 @@ function showScreen(screenId) {
   document.getElementById(screenId).classList.remove('hidden');
 }
 
+// 난이도 선택
+function selectDifficulty(difficulty) {
+  let fileToLoad;
+  switch (difficulty) {
+    case 'easy':
+      fileToLoad = 'vocab1.csv';
+      break;
+    case 'normal':
+      fileToLoad = 'vocab2.csv';
+      break;
+    case 'hard':
+      fileToLoad = 'vocab3.csv';
+      break;
+    default:
+      fileToLoad = 'vocab1.csv'; // 기본값
+  }
+  loadVocabFile(fileToLoad);
+}
+
 // 퀴즈 시작
 function startQuiz(category) {
   if (wordData[category].length === 0) {
@@ -263,14 +282,19 @@ function goBack() {
 }
 
 // vocab.csv 파일을 읽어와 데이터 초기화
-async function loadVocabFile() {
+async function loadVocabFile(filePath = 'vocab1.csv') {
   try {
-    const response = await fetch('vocab.csv'); // 파일 경로 확인
+    const response = await fetch(filePath); // 파일 경로 확인
     if (!response.ok) {
       throw new Error("파일을 불러오는 데 실패했습니다.");
     }
     const text = await response.text();
     const lines = text.split("\n");
+
+    // 기존 단어 데이터 초기화
+    for (const category in wordData) {
+      wordData[category] = [];
+    }
 
     lines.forEach((line, index) => {
       if (index === 0) return; // 첫 번째 줄(헤더)은 건너뜀
@@ -292,12 +316,12 @@ async function loadVocabFile() {
     updateTotalWords();
     console.log("단어 데이터가 성공적으로 로드되었습니다.");
   } catch (error) {
-    console.error("vocab.csv 파일을 읽는 중 오류가 발생했습니다:", error);
+    console.error("CSV 파일을 읽는 중 오류가 발생했습니다:", error);
   }
 }
 
 // 페이지 로드 시 초기화
 window.onload = function () {
-  loadVocabFile(); // 기본 단어 데이터 로드
+  loadVocabFile(); // 기본 단어 데이터 로드 (쉬움 난이도)
   showScreen("main-menu"); // 메인 메뉴 화면 표시
 };

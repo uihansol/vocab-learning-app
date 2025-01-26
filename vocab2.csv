@@ -1,0 +1,601 @@
+word,meaning,category
+abstraction,추상,noun
+accommodation,숙소,noun
+accumulate,축적하다,verb
+accuracy,정확성,noun
+acknowledge,인정하다,verb
+acquire,획득하다,verb
+adaptation,적응,noun
+adequate,적절한,adjective
+adjacent,인접한,adjective
+adjust,조정하다,verb
+administer,관리하다,verb
+adolescent,청소년,noun
+advocate,옹호하다,verb
+affluent,부유한,adjective
+aggregate,총계,noun
+allocate,할당하다,verb
+alternative,대안,noun
+ambiguous,모호한,adjective
+amend,수정하다,verb
+analogy,비유,noun
+analyze,분석하다,verb
+anomaly,이상,noun
+anticipate,예상하다,verb
+apparent,명백한,adjective
+append,추가하다,verb
+appreciate,감사하다,verb
+approach,접근법,noun
+appropriate,적절한,adjective
+approximate,대략적인,adjective
+arbitrary,임의의,adjective
+articulate,분명히 표현하다,verb
+aspect,측면,noun
+assemble,조립하다,verb
+assert,주장하다,verb
+assess,평가하다,verb
+assign,할당하다,verb
+assist,돕다,verb
+assume,가정하다,verb
+assure,확신시키다,verb
+attain,달성하다,verb
+attribute,속성,noun
+authority,권위,noun
+autonomous,자율적인,adjective
+available,이용 가능한,adjective
+aware,알고 있는,adjective
+benefit,이익,noun
+bias,편견,noun
+bond,유대,noun
+brief,간단한,adjective
+capable,능력 있는,adjective
+capacity,능력,noun
+category,범주,noun
+cease,중단하다,verb
+challenge,도전,noun
+channel,채널,noun
+chapter,장,noun
+chart,차트,noun
+chemical,화학의,adjective
+circumstance,환경,noun
+cite,인용하다,verb
+civil,시민의,adjective
+clarify,명확히 하다,verb
+classic,고전의,adjective
+clause,절,noun
+code,코드,noun
+coherent,일관된,adjective
+coincide,일치하다,verb
+collaborate,협력하다,verb
+collapse,붕괴,noun
+colleague,동료,noun
+commence,시작하다,verb
+comment,논평,noun
+commission,위원회,noun
+commit,약속하다,verb
+commodity,상품,noun
+communicate,소통하다,verb
+community,공동체,noun
+compatible,호환되는,adjective
+compensate,보상하다,verb
+compile,편집하다,verb
+complement,보완하다,verb
+complex,복잡한,adjective
+component,구성 요소,noun
+comprehensive,포괄적인,adjective
+comprise,포함하다,verb
+compulsory,의무적인,adjective
+conceive,상상하다,verb
+concentrate,집중하다,verb
+concept,개념,noun
+conclude,결론을 내리다,verb
+concrete,구체적인,adjective
+conduct,수행하다,verb
+confer,수여하다,verb
+confine,제한하다,verb
+confirm,확인하다,verb
+conflict,갈등,noun
+conform,따르다,verb
+consent,동의,noun
+consequent,결과적인,adjective
+considerable,상당한,adjective
+consist,구성되다,verb
+constant,지속적인,adjective
+constitute,구성하다,verb
+constrain,제한하다,verb
+construct,구축하다,verb
+consult,상의하다,verb
+consume,소비하다,verb
+contact,접촉,noun
+contemporary,현대의,adjective
+context,맥락,noun
+contract,계약,noun
+contradict,모순되다,verb
+contrary,반대의,adjective
+contrast,대조,noun
+contribute,기여하다,verb
+controversy,논쟁,noun
+convene,소집하다,verb
+converse,반대의,adjective
+convert,변환하다,verb
+convince,설득하다,verb
+coordinate,조정하다,verb
+core,핵심,noun
+corporate,법인의,adjective
+correspond,일치하다,verb
+couple,쌍,noun
+create,창조하다,verb
+credit,신용,noun
+criteria,기준,noun
+crucial,결정적인,adjective
+culture,문화,noun
+currency,통화,noun
+cycle,주기,noun
+data,데이터,noun
+debate,토론,noun
+decade,10년,noun
+decline,감소,noun
+deduce,추론하다,verb
+define,정의하다,verb
+definite,명확한,adjective
+demonstrate,증명하다,verb
+denote,나타내다,verb
+deny,부인하다,verb
+depress,우울하게 하다,verb
+derive,파생하다,verb
+detect,감지하다,verb
+deviate,벗어나다,verb
+device,장치,noun
+devote,바치다,verb
+differentiate,구별하다,verb
+dimension,차원,noun
+diminish,감소하다,verb
+discrete,개별적인,adjective
+discriminate,차별하다,verb
+displace,대체하다,verb
+display,전시,noun
+dispose,처분하다,verb
+distinct,뚜렷한,adjective
+distort,왜곡하다,verb
+distribute,분배하다,verb
+diverse,다양한,adjective
+document,문서,noun
+domain,영역,noun
+domestic,국내의,adjective
+dominate,지배하다,verb
+draft,초안,noun
+drama,드라마,noun
+duration,기간,noun
+dynamic,동적인,adjective
+economy,경제,noun
+edit,편집하다,verb
+element,요소,noun
+eliminate,제거하다,verb
+emerge,나타나다,verb
+emphasis,강조,noun
+empirical,경험적인,adjective
+enable,가능하게 하다,verb
+encounter,만나다,verb
+energy,에너지,noun
+enforce,시행하다,verb
+enhance,강화하다,verb
+enormous,거대한,adjective
+ensure,확실히 하다,verb
+entity,실체,noun
+environment,환경,noun
+equate,동등하게 하다,verb
+equip,갖추다,verb
+equivalent,동등한,adjective
+erode,침식하다,verb
+error,오류,noun
+establish,설립하다,verb
+estate,재산,noun
+estimate,추정하다,verb
+ethic,윤리,noun
+ethnic,민족의,adjective
+evaluate,평가하다,verb
+eventual,결과적인,adjective
+evident,명백한,adjective
+evolve,진화하다,verb
+exceed,초과하다,verb
+exclude,제외하다,verb
+exhibit,전시하다,verb
+expand,확장하다,verb
+expertise,전문 지식,noun
+explicit,명시적인,adjective
+exploit,이용하다,verb
+export,수출,noun
+expose,노출시키다,verb
+external,외부의,adjective
+extract,추출하다,verb
+facilitate,촉진하다,verb
+factor,요인,noun
+feature,특징,noun
+federal,연방의,adjective
+fee,요금,noun
+file,파일,noun
+final,최종의,adjective
+finance,재정,noun
+finite,한정된,adjective
+flexible,유연한,adjective
+fluctuate,변동하다,verb
+focus,초점,noun
+format,형식,noun
+formula,공식,noun
+forthcoming,다가오는,adjective
+foundation,기초,noun
+framework,틀,noun
+function,기능,noun
+fund,자금,noun
+fundamental,근본적인,adjective
+furthermore,게다가,adverb
+gender,성별,noun
+generate,생성하다,verb
+generation,세대,noun
+globe,지구,noun
+goal,목표,noun
+grade,등급,noun
+grant,부여하다,verb
+guarantee,보장,noun
+guideline,지침,noun
+hence,그러므로,adverb
+hierarchy,계층,noun
+highlight,강조하다,verb
+hypothesis,가설,noun
+identical,동일한,adjective
+identify,확인하다,verb
+ideology,이데올로기,noun
+ignorance,무지,noun
+illustrate,설명하다,verb
+image,이미지,noun
+immigrate,이민 오다,verb
+impact,영향,noun
+implement,실행하다,verb
+implicate,연루시키다,verb
+imply,암시하다,verb
+impose,부과하다,verb
+incentive,동기,noun
+incidence,발생률,noun
+incline,기울이다,verb
+income,소득,noun
+incorporate,통합하다,verb
+index,색인,noun
+indicate,나타내다,verb
+individual,개인,noun
+induce,유도하다,verb
+inevitable,불가피한,adjective
+infer,추론하다,verb
+infrastructure,기반 시설,noun
+inherent,내재된,adjective
+inhibit,억제하다,verb
+initial,초기의,adjective
+initiate,시작하다,verb
+injure,상처를 입히다,verb
+innovate,혁신하다,verb
+input,입력,noun
+insert,삽입하다,verb
+insight,통찰,noun
+inspect,검사하다,verb
+instance,사례,noun
+institute,연구소,noun
+instruct,지시하다,verb
+integral,필수적인,adjective
+integrate,통합하다,verb
+integrity,진실성,noun
+intelligence,지능,noun
+intense,강렬한,adjective
+interact,상호 작용하다,verb
+intermediate,중간의,adjective
+internal,내부의,adjective
+interpret,해석하다,verb
+interval,간격,noun
+intervene,개입하다,verb
+intrinsic,본질적인,adjective
+invest,투자하다,verb
+investigate,조사하다,verb
+invoke,호소하다,verb
+involve,관련시키다,verb
+isolate,고립시키다,verb
+issue,문제,noun
+item,항목,noun
+job,직업,noun
+journal,학술지,noun
+justify,정당화하다,verb
+label,라벨,noun
+labor,노동,noun
+layer,층,noun
+lecture,강의,noun
+legal,법적인,adjective
+legislate,입법하다,verb
+levy,징수하다,verb
+liberal,자유주의의,adjective
+license,면허,noun
+likewise,마찬가지로,adverb
+link,연결,noun
+locate,위치를 찾다,verb
+logic,논리,noun
+maintain,유지하다,verb
+major,주요한,adjective
+manipulate,조작하다,verb
+manual,수동의,adjective
+margin,여백,noun
+mature,성숙한,adjective
+maximize,극대화하다,verb
+mechanism,메커니즘,noun
+media,미디어,noun
+mediate,중재하다,verb
+medical,의학의,adjective
+medium,매체,noun
+mental,정신의,adjective
+method,방법,noun
+migrate,이주하다,verb
+military,군사의,adjective
+minimize,최소화하다,verb
+ministry,부처,noun
+minor,소수의,adjective
+mode,방식,noun
+modify,수정하다,verb
+monitor,감시하다,verb
+motive,동기,noun
+mutual,상호의,adjective
+negate,부정하다,verb
+network,네트워크,noun
+neutral,중립의,adjective
+nevertheless,그럼에도 불구하고,adverb
+nonetheless,그럼에도 불구하고,adverb
+norm,규범,noun
+notion,개념,noun
+notwithstanding,~에도 불구하고,preposition
+nuclear,핵의,adjective
+objective,목표,noun
+oblige,의무를 지우다,verb
+obtain,얻다,verb
+obvious,명백한,adjective
+occupy,점유하다,verb
+occur,발생하다,verb
+odd,이상한,adjective
+offset,상쇄하다,verb
+ongoing,진행 중인,adjective
+option,선택,noun
+orient,지향하다,verb
+outcome,결과,noun
+output,출력,noun
+overall,전체적인,adjective
+overlap,겹치다,verb
+overseas,해외의,adjective
+panel,패널,noun
+paradigm,패러다임,noun
+paragraph,단락,noun
+parallel,평행의,adjective
+parameter,매개 변수,noun
+participate,참여하다,verb
+partner,파트너,noun
+passive,수동적인,adjective
+perceive,인식하다,verb
+percent,퍼센트,noun
+period,기간,noun
+persist,지속하다,verb
+perspective,관점,noun
+phase,단계,noun
+phenomenon,현상,noun
+philosophy,철학,noun
+physical,물리적인,adjective
+plus,더하기,noun
+policy,정책,noun
+portion,부분,noun
+pose,제기하다,verb
+positive,긍정적인,adjective
+potential,잠재력,noun
+practitioner,실무자,noun
+precede,앞서다,verb
+precise,정확한,adjective
+predict,예측하다,verb
+predominant,우세한,adjective
+preliminary,예비의,adjective
+presume,추정하다,verb
+previous,이전의,adjective
+primary,주요한,adjective
+prime,주요한,adjective
+principal,주요한,adjective
+principle,원리,noun
+prior,이전의,adjective
+priority,우선 순위,noun
+proceed,진행하다,verb
+process,과정,noun
+professional,전문적인,adjective
+prohibit,금지하다,verb
+project,프로젝트,noun
+promote,촉진하다,verb
+proportion,비율,noun
+prospect,전망,noun
+protocol,규약,noun
+psychology,심리학,noun
+publication,출판물,noun
+publish,출판하다,verb
+purchase,구매,noun
+pursue,추구하다,verb
+qualitative,질적인,adjective
+quote,인용하다,verb
+radical,급진적인,adjective
+random,무작위의,adjective
+range,범위,noun
+ratio,비율,noun
+rational,합리적인,adjective
+react,반응하다,verb
+recover,회복하다,verb
+refine,정제하다,verb
+regime,체제,noun
+region,지역,noun
+register,등록하다,verb
+regulate,규제하다,verb
+reinforce,강화하다,verb
+reject,거부하다,verb
+relate,관련시키다,verb
+relax,휴식하다,verb
+release,발표하다,verb
+relevant,관련된,adjective
+reluctant,꺼리는,adjective
+rely,의존하다,verb
+remove,제거하다,verb
+require,요구하다,verb
+research,연구,noun
+reside,거주하다,verb
+resolve,해결하다,verb
+resource,자원,noun
+respond,응답하다,verb
+restore,복원하다,verb
+restrain,억제하다,verb
+restrict,제한하다,verb
+retain,유지하다,verb
+reveal,드러내다,verb
+revenue,수익,noun
+reverse,반대의,adjective
+revise,수정하다,verb
+revolution,혁명,noun
+rigid,엄격한,adjective
+role,역할,noun
+route,경로,noun
+scenario,시나리오,noun
+schedule,일정,noun
+scheme,계획,noun
+scope,범위,noun
+section,섹션,noun
+sector,부문,noun
+secure,안전한,adjective
+seek,찾다,verb
+select,선택하다,verb
+sequence,순서,noun
+series,시리즈,noun
+sex,성별,noun
+shift,변화,noun
+significant,중요한,adjective
+similar,비슷한,adjective
+simulate,모의 실험하다,verb
+site,장소,noun
+so-called,소위,adjective
+sole,유일한,adjective
+somewhat,다소,adverb
+source,출처,noun
+specific,구체적인,adjective
+specify,명시하다,verb
+sphere,영역,noun
+stable,안정적인,adjective
+statistic,통계,noun
+status,상태,noun
+straightforward,직설적인,adjective
+strategy,전략,noun
+stress,스트레스,noun
+structure,구조,noun
+style,스타일,noun
+submit,제출하다,verb
+subordinate,하급의,adjective
+subsequent,후속의,adjective
+subsidy,보조금,noun
+substitute,대체하다,verb
+successor,후계자,noun
+sufficient,충분한,adjective
+sum,합계,noun
+summary,요약,noun
+supplement,보충,noun
+supply,공급,noun
+survive,생존하다,verb
+suspend,중단하다,verb
+sustain,유지하다,verb
+symbol,상징,noun
+tape,테이프,noun
+target,목표,noun
+task,과제,noun
+team,팀,noun
+technical,기술적인,adjective
+technique,기술,noun
+technology,기술,noun
+temporary,일시적인,adjective
+tense,긴장된,adjective
+terminate,종료하다,verb
+text,텍스트,noun
+theme,주제,noun
+theory,이론,noun
+thereby,그에 따라,adverb
+thesis,논문,noun
+topic,주제,noun
+trace,추적하다,verb
+tradition,전통,noun
+transfer,이전하다,verb
+transform,변형시키다,verb
+transit,운송,noun
+transmit,전송하다,verb
+transport,운송,noun
+trend,추세,noun
+trigger,촉발하다,verb
+ultimate,궁극적인,adjective
+undergo,겪다,verb
+underlie,기초가 되다,verb
+undertake,착수하다,verb
+uniform,균일한,adjective
+unify,통일하다,verb
+unique,독특한,adjective
+utilize,이용하다,verb
+valid,유효한,adjective
+vary,변화하다,verb
+vehicle,차량,noun
+version,버전,noun
+via,~를 통해,preposition
+violate,위반하다,verb
+virtual,가상의,adjective
+visible,보이는,adjective
+vision,비전,noun
+visual,시각의,adjective
+volume,부피,noun
+voluntary,자발적인,adjective
+welfare,복지,noun
+whereas,반면에,conjunction
+widespread,널리 퍼진,adjective
+Not only A but also B,A뿐만 아니라 B도,phrase
+As well as,A뿐만 아니라,phrase
+In addition to,A에 더하여,phrase
+On the other hand,다른 한편으로는,phrase
+On the contrary,반대로,phrase
+In contrast,대조적으로,phrase
+As a result,결과적으로,phrase
+Therefore,그러므로,phrase
+Thus,그러므로,phrase
+Hence,그러므로,phrase
+Consequently,결과적으로,phrase
+For this reason,이러한 이유로,phrase
+Due to the fact that,~라는 사실 때문에,phrase
+Because of,~때문에,phrase
+Owing to,~때문에,phrase
+Thanks to,~덕분에,phrase
+In spite of the fact that,~라는 사실에도 불구하고,phrase
+Despite the fact that,~라는 사실에도 불구하고,phrase
+Regardless of,~에 상관없이,phrase
+In terms of,~의 관점에서,phrase
+With regard to,~에 관하여,phrase
+In relation to,~와 관련하여,phrase
+In case of,~의 경우에,phrase
+In the event of,~의 경우에,phrase
+Provided that,~라는 조건 하에,phrase
+As long as,~하는 한,phrase
+Unless,~하지 않는 한,phrase
+Even if,~일지라도,phrase
+Even though,~일지라도,phrase
+No matter how,아무리 ~해도,phrase
+No matter what,무엇이 ~해도,phrase
+No matter who,누가 ~해도,phrase
+No matter where,어디서 ~해도,phrase
+No matter when,언제 ~해도,phrase
+As if,~인 것처럼,phrase
+As though,~인 것처럼,phrase
+So that,~하기 위해,phrase
+In order that,~하기 위해,phrase
+For fear that,~할까 봐,phrase
+In case,~할 경우를 대비하여,phrase
+By the time,~할 때쯤에는,phrase
+As soon as,~하자마자,phrase
+The moment,~하는 순간,phrase
+The instant,~하는 순간,phrase
+Hardly when,~하자마자,phrase
+Scarcely when,~하자마자,phrase
+No sooner than,~하자마자,phrase
+Not until,~까지는 ~하지 않다,phrase
+Only after,~한 후에야,phrase

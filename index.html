@@ -20,6 +20,12 @@
     <!-- 메인 메뉴 -->
     <div id="main-menu" class="screen">
       <div class="main-menu">
+        <h3>난이도 선택</h3>
+        <button onclick="selectDifficulty('easy')">쉬움</button>
+        <button onclick="selectDifficulty('normal')">보통</button>
+        <button onclick="selectDifficulty('hard')">어려움</button>
+
+        <h3>분야 선택</h3>
         <button onclick="startQuiz('verb')">동사</button>
         <button onclick="startQuiz('noun')">명사</button>
         <button onclick="startQuiz('adjective')">형용사</button>
@@ -27,7 +33,6 @@
         <button onclick="startQuiz('phrase')">구문</button>
         <button onclick="startQuiz('mixed')">혼합</button>
         <button onclick="showManageScreen()">어휘 관리</button>
-        <button onclick="loadVocabFile()">Vocab.csv 로드</button>
       </div>
     </div>
 
