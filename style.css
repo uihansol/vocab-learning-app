@@ -155,6 +155,16 @@ body {
   background-color: #218838;
 }
 
+/* 파일 업로드 버튼 스타일 */
+#file-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
 /* 현재 어휘 목록 스타일 */
 #word-list {
   list-style-type: none;
