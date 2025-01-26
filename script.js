@@ -142,7 +142,7 @@ function selectDifficulty(difficulty) {
       fileToLoad = 'vocab1.csv';
       break;
     case 'normal':
-      fileToLoad = 'vocab2.csv';
+      fileToLoad = 'vocab3.csv';
       break;
     case 'hard':
       fileToLoad = 'vocab3.csv';
