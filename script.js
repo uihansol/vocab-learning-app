@@ -143,11 +143,11 @@ function showNextWord() {
     return goBack();
   }
 
-  // 응답 시간 가중치 적용 선택 알고리즘
+  // 응답 시간과 오답률 가중치 적용 선택 알고리즘
   const weightedPool = wordStats.map(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
-    const timeWeight = stat.avgTime ? Math.log(stat.avgTime/1000 + 1) : 1;
-    const errorWeight = stat.errorCount ? stat.errorCount * 2 : 1;
+    const timeWeight = stat.avgTime ? Math.log(stat.avgTime / 1000 + 1) : 1;
+    const errorWeight = stat.errorCount ? stat.errorCount * 3 : 1; // 오답률 가중치 증가 (3배)
     return { ...wordObj, weight: timeWeight * errorWeight };
   });
 
@@ -155,9 +155,9 @@ function showNextWord() {
   const totalWeight = weightedPool.reduce((sum, w) => sum + w.weight, 0);
   let random = Math.random() * totalWeight;
   let selectedWord;
-  for(const w of weightedPool) {
+  for (const w of weightedPool) {
     random -= w.weight;
-    if(random < 0) {
+    if (random < 0) {
       selectedWord = w;
       break;
     }
@@ -167,7 +167,7 @@ function showNextWord() {
   wordStats = wordStats.filter(w => w.word !== selectedWord.word); // 선택된 단어 제거
 
   correctAnswer = currentWord.meaning;
-  
+
   const options = [correctAnswer];
   while (options.length < 4) {
     const random = wordData[currentCategory][Math.floor(Math.random() * wordData[currentCategory].length)].meaning;
@@ -180,10 +180,12 @@ function showNextWord() {
     .map(opt => `<div class="quiz-option">${opt}</div>`)
     .join('');
 
+  // 터치 이벤트 리스너 추가 (모바일 대응)
   optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
     opt.addEventListener('click', () => checkAnswer(opt.textContent));
+    opt.addEventListener('touchstart', () => checkAnswer(opt.textContent), { passive: true });
   });
-  
+
   document.getElementById("word-display").textContent = currentWord.word;
   startTimer();
 }
@@ -202,8 +204,8 @@ function checkAnswer(selected) {
     stat.correctStreak++;
     stat.totalTime += responseTime;
     stat.answerCount++;
-    
-    if(stat.correctStreak >= 3) { // 3회 연속 정답시 마스터 처리
+
+    if (stat.correctStreak >= 3) { // 3회 연속 정답시 마스터 처리
       stat.lastMastered = Date.now();
       masteredCount++;
     }
@@ -222,7 +224,7 @@ function checkAnswer(selected) {
   } else {
     stat.correctStreak = 0;
     stat.errorCount++;
-    
+
     // 오답 옵션만 비활성화
     document.querySelectorAll('.quiz-option').forEach(opt => {
       if (opt.textContent === selected) {

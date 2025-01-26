@@ -54,6 +54,7 @@
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* 모바일 터치 하이라이트 제거 */
 }
 
 .quiz-option:hover {
