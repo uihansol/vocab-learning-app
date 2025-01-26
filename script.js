@@ -16,6 +16,15 @@ let correctAnswer = null;
 let startTime = null;
 let timerInterval = null;
 
+// 전체 단어 수 업데이트
+function updateTotalWords() {
+  let total = 0;
+  for (const category in wordData) {
+    total += wordData[category].length;
+  }
+  document.getElementById("total-words").innerText = `전체 단어: ${total}개`;
+}
+
 // Compromise.js를 사용하여 품사 분류
 function classifyPartOfSpeech(word) {
   const doc = window.nlp(word);
@@ -43,6 +52,7 @@ function addWord() {
     document.getElementById("new-word").value = "";
     document.getElementById("new-meaning").value = "";
     updateWordList();
+    updateTotalWords(); // 전체 단어 수 업데이트
   } else {
     alert("단어와 의미를 모두 입력하세요.");
   }
@@ -65,6 +75,7 @@ function uploadFile() {
         }
       });
       updateWordList();
+      updateTotalWords(); // 전체 단어 수 업데이트
     };
     reader.readAsText(file);
   } else {
@@ -93,6 +104,7 @@ function updateWordList() {
 function deleteWord(category, word) {
   wordData[category] = wordData[category].filter(item => item.word !== word);
   updateWordList();
+  updateTotalWords(); // 전체 단어 수 업데이트
 }
 
 // 메인 화면으로 돌아가기
@@ -193,3 +205,8 @@ function showManageScreen() {
   document.getElementById("manage-screen").classList.remove("hidden");
   updateWordList();
 }
+
+// 페이지 로드 시 초기화
+window.onload = function () {
+  updateTotalWords();
+};
