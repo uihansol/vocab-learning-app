@@ -136,6 +136,12 @@ function showScreen(screenId) {
 // 난이도 선택
 function selectDifficulty(difficulty) {
   console.log(`난이도 선택: ${difficulty}`); // 디버깅용 로그
+
+  // 기존에 업로드된 어휘 데이터 초기화
+  for (const category in wordData) {
+    wordData[category] = [];
+  }
+
   let fileToLoad;
   switch (difficulty) {
     case 'easy':
@@ -153,7 +159,6 @@ function selectDifficulty(difficulty) {
   console.log(`로드할 파일: ${fileToLoad}`); // 디버깅용 로그
   loadVocabFile(fileToLoad);
 }
-
 // 퀴즈 시작
 function startQuiz(category) {
   if (wordData[category].length === 0) {
