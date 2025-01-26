@@ -301,3 +301,37 @@ window.onload = function () {
   loadVocabFile(); // 기본 단어 데이터 로드
   showScreen("main-menu"); // 메인 메뉴 화면 표시
 };
+
+async function loadVocabFile() {
+  try {
+    const response = await fetch('vocab.csv'); // 파일 경로 확인
+    if (!response.ok) {
+      throw new Error("파일을 불러오는 데 실패했습니다.");
+    }
+    const text = await response.text();
+    console.log("파일 내용:", text); // 파일 내용 출력 (디버깅용)
+    const lines = text.split("\n");
+
+    lines.forEach((line, index) => {
+      if (index === 0) return; // 첫 번째 줄(헤더)은 건너뜀
+      const [word, meaning, category] = line.split(",");
+      if (word && meaning && category) {
+        const trimmedWord = word.trim();
+        const trimmedMeaning = meaning.trim();
+        const trimmedCategory = category.trim();
+
+        // 중복 단어인지 확인
+        if (!isWordDuplicate(trimmedWord)) {
+          wordData[trimmedCategory].push({ word: trimmedWord, meaning: trimmedMeaning });
+          wordData["mixed"].push({ word: trimmedWord, meaning: trimmedMeaning }); // "혼합" 항목에도 추가
+        }
+      }
+    });
+
+    updateWordList();
+    updateTotalWords();
+    console.log("단어 데이터가 성공적으로 로드되었습니다.");
+  } catch (error) {
+    console.error("vocab.csv 파일을 읽는 중 오류가 발생했습니다:", error);
+  }
+}
