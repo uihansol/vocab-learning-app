@@ -2,76 +2,67 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>영어 단어 마스터</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>영어 단어 학습</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <!-- 헤더 섹션 -->
-    <div class="header">
-      <h1>📚 단어 마스터</h1>
+    <div class="header-text">
+      <h1>영어 단어 학습</h1>
       <p id="total-words">전체 단어: 0개</p>
+      <h2 id="category-title"></h2>
     </div>
 
     <!-- 메인 메뉴 -->
     <div id="main-menu" class="screen">
-      <div class="menu-section">
-        <h2>🔖 난이도 선택</h2>
-        <div class="difficulty-buttons">
-          <button onclick="selectDifficulty('easy')" class="difficulty-easy">쉬움</button>
-          <button onclick="selectDifficulty('normal')" class="difficulty-normal">보통</button>
-          <button onclick="selectDifficulty('hard')" class="difficulty-hard">어려움</button>
-        </div>
+      <div class="main-menu">
+        <h3>난이도 선택</h3>
+        <button onclick="selectDifficulty('easy')">쉬움</button>
+        <button onclick="selectDifficulty('normal')">보통</button>
+        <button onclick="selectDifficulty('hard')">어려움</button>
 
-        <h2>📌 학습 모드 선택</h2>
-        <div class="category-grid">
-          <button onclick="startQuiz('verb')">동사 🏃</button>
-          <button onclick="startQuiz('noun')">명사 🏛️</button>
-          <button onclick="startQuiz('adjective')">형용사 🌈</button>
-          <button onclick="startQuiz('adverb')">부사 ⚡</button>
-          <button onclick="startQuiz('phrase')">구문 🔗</button>
-          <button onclick="startQuiz('mixed')">혼합 🎲</button>
-        </div>
+        <h3>분야 선택</h3>
+        <button onclick="startQuiz('verb')">동사</button>
+        <button onclick="startQuiz('noun')">명사</button>
+        <button onclick="startQuiz('adjective')">형용사</button>
+        <button onclick="startQuiz('adverb')">부사</button>
+        <button onclick="startQuiz('phrase')">구문</button>
+        <button onclick="startQuiz('mixed')">혼합</button>
+        <button onclick="showManageScreen()">어휘 관리</button>
 
-        <h2>🔢 문제 수 설정</h2>
-        <select id="question-count" class="num-select">
+        <h3>문제 수 선택</h3>
+        <select id="question-count">
           <option value="10" selected>10문제</option>
           <option value="20">20문제</option>
           <option value="30">30문제</option>
           <option value="50">50문제</option>
           <option value="100">100문제</option>
         </select>
-
-        <button onclick="showManageScreen()" class="manage-btn">📂 어휘 관리</button>
       </div>
     </div>
 
     <!-- 퀴즈 화면 -->
     <div id="quiz-screen" class="screen hidden">
-      <div class="quiz-header">
-        <button onclick="goBack()" class="back-btn">← 돌아가기</button>
-        <div class="status-box">
-          <span id="timer">⏱️ 0초</span>
-          <span id="progress">✅ 0개 / 📝 0개</span>
-        </div>
-      </div>
-      <h2 id="word-display"></h2>
-      <div id="options" class="options-grid"></div>
+      <button id="back-to-main" onclick="goBack()">메인 화면으로 돌아가기</button>
+      <h3 id="word-display"></h3>
+      <div id="options"></div>
+      <p id="timer">시간: 0초</p>
+      <p id="progress">확실하게 외운 단어: 0개 / 남은 단어: 0개</p>
     </div>
 
     <!-- 어휘 관리 화면 -->
     <div id="manage-screen" class="screen hidden">
-      <div class="manage-header">
-        <button onclick="goBack()" class="back-btn">← 돌아가기</button>
-        <h2>📝 어휘 관리 패널</h2>
+      <h2>어휘 관리</h2>
+      <div>
+        <h3>현재 어휘 목록</h3>
+        <ul id="word-list"></ul>
       </div>
-
-      <!-- 신규 단어 입력 폼 -->
-      <div class="manage-form">
-        <input type="text" id="new-word" placeholder="단어 (예: analyze)">
-        <input type="text" id="new-meaning" placeholder="의미 (예: 분석하다)">
+      <div>
+        <h3>새 단어 추가</h3>
+        <input type="text" id="new-word" placeholder="새 단어">
+        <input type="text" id="new-meaning" placeholder="의미">
         <select id="new-category">
           <option value="verb">동사</option>
           <option value="noun">명사</option>
@@ -79,24 +70,14 @@
           <option value="adverb">부사</option>
           <option value="phrase">구문</option>
         </select>
-        <button onclick="addNewWord()" class="add-btn">➕ 추가</button>
+        <button onclick="addWord()">추가</button>
       </div>
-
-      <!-- 단어 검색 -->
-      <div class="search-container">
-        <input type="text" id="search-word" placeholder="단어 검색..." oninput="searchWordList()">
+      <div>
+        <h3>파일 업로드</h3>
+        <input type="file" id="file-input" accept=".csv">
+        <button onclick="uploadFile()">업로드</button>
       </div>
-
-      <!-- 단어 목록 테이블 -->
-      <div class="word-list">
-        <div class="list-header">
-          <span>📖 단어</span>
-          <span>📝 의미</span>
-          <span>🏷️ 품사</span>
-          <span>🗑️ 삭제</span>
-        </div>
-        <div id="word-list-items"></div>
-      </div>
+      <button onclick="goBack()">메인 화면으로 돌아가기</button>
     </div>
   </div>
   <script src="script.js"></script>
