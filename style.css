@@ -1,266 +1,125 @@
-/* Base Styles (Enhanced Accessibility) */
+/* Base Styles - 파스텔 그라데이션 배경 */
 body {
   font-family: 'Nanum Myeongjo', 'Noto Sans KR', sans-serif;
   margin: 0;
   padding: 20px;
-  background: linear-gradient(135deg, #f0f5f9 0%, #e6f0f5 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9f2f6 100%);
+  color: #4a5568;
   line-height: 1.6;
 }
 
+/* 컨테이너 */
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Header (Glassmorphism Style) */
+/* 헤더 (파스텔 글래스모피즘) */
 .header {
   text-align: center;
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.92);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px rgba(152, 193, 217, 0.1);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .header h1 {
-  color: #2c3e50;
+  color: #6c7a89;
   margin: 0;
   font-size: 2.5rem;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* User Menu (Modern Buttons) */
-.user-menu {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 1.5rem 0;
-}
-
-.user-menu button {
-  padding: 0.8rem 1.8rem;
-  border-radius: 10px;
-  border: none;
-  background: linear-gradient(135deg, #7fbcd2 0%, #6aa8c7 100%);
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(127, 188, 210, 0.2);
-}
-
-.user-menu button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(127, 188, 210, 0.3);
-}
-
-/* Difficulty Buttons (Enhanced Visual Hierarchy) */
-.difficulty-buttons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.difficulty-buttons button {
-  padding: 1.2rem;
-  border: none;
-  border-radius: 12px;
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.difficulty-easy { 
-  background: linear-gradient(135deg, #C1E1C1 0%, #A8DBA8 100%);
-  box-shadow: 0 4px 12px rgba(193, 225, 193, 0.2);
-}
-.difficulty-normal { 
-  background: linear-gradient(135deg, #B5D8F0 0%, #9BC9E4 100%);
-  box-shadow: 0 4px 12px rgba(181, 216, 240, 0.2);
-}
-.difficulty-hard { 
-  background: linear-gradient(135deg, #F4B3C2 0%, #F09FAD 100%);
-  box-shadow: 0 4px 12px rgba(244, 179, 194, 0.2);
-}
-
-/* Category Grid (Interactive Cards) */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.category-grid button {
-  padding: 1.2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-}
-
-.category-grid button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  border-color: #7fbcd2;
-}
-
-/* Quiz Interface (Enhanced Interaction) */
-#word-display {
-  font-size: 2.8rem;
-  margin: 2rem 0;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-.options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.2rem;
-}
-
-.quiz-option {
-  padding: 1.5rem;
-  border: 2px solid #e0e7ff;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.98);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
-}
-
-/* 정답 하이라이트 제거 */
-.quiz-option.correct {
-  background: inherit !important;
-  border-color: #e0e7ff !important;
-  animation: none;
-}
-
-/* 오답 선택시 사라지는 애니메이션 */
-.quiz-option.wrong {
-  background: #ffebee !important;
-  border-color: #ef5350 !important;
-  animation: shake 0.4s ease, fadeOut 0.3s 0.4s forwards;
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; transform: scale(0.9); }
-}
-
-/* Animations */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
-}
-
-/* Responsive Design */
-/* 기존 미디어 쿼리 수정 */
-@media (max-width: 768px) {
-  .header h1 { font-size: 1.8rem; }
-  #word-display { font-size: 2rem; padding: 1.5rem; }
-  .category-grid { grid-template-columns: 1fr; }
-  .user-menu { flex-wrap: wrap; }
-  button { min-width: 120px; }
-}
-
-/* iOS 뷰포트 대응 */
-@supports (-webkit-touch-callout: none) {
-  select, input, button { 
-    font-size: 16px; /* iOS zoom 방지 */
-    transform: translateZ(0); /* 렌더링 가속 */
-  }
-}
-
-/* Smooth Transitions */
-.screen {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  display: none; /* 기본적으로 화면을 숨김 */
-}
-
-.screen.active {
+/* 메인 메뉴 - 파스텔 버튼 그룹 */
+#main-menu.active .main-menu {
   display: flex !important;
   flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
 }
 
-/* 퀴즈 화면 크기 조정 */
-#quiz-screen {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+#main-menu.active button,
+#main-menu.active select {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #a8d8ea; /* 파스텔 블루 */
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 5px 0;
+  box-shadow: 0 4px 12px rgba(168, 216, 234, 0.2);
 }
 
+#main-menu.active button:hover {
+  background: #95c5d6;
+  transform: translateY(-2px);
+}
+
+/* 난이도 버튼 파스텔 팔레트 */
+.difficulty-buttons button {
+  border: none !important;
+}
+.difficulty-easy { 
+  background: linear-gradient(135deg, #C7E9C0 0%, #B5DFB1 100%) !important;
+}
+.difficulty-normal { 
+  background: linear-gradient(135deg, #B5D8F0 0%, #9BC9E4 100%) !important;
+}
+.difficulty-hard { 
+  background: linear-gradient(135deg, #F4B3C2 0%, #F09FAD 100%) !important;
+}
+
+/* 분야 선택 버튼 */
+.category-grid button {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 2px solid #d1e9f5 !important;
+  color: #6c7a89;
+}
+.category-grid button:hover {
+  border-color: #a8d8ea !important;
+}
+
+/* 퀴즈 화면 */
 #word-display {
-  font-size: 3.5rem;
-  margin: 3rem 0;
-  padding: 3rem;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.options-grid {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  color: #6c7a89;
+  border: 2px solid #d1e9f5;
 }
 
 .quiz-option {
-  padding: 2rem;
-  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 2px solid #e0f0f7 !important;
+  color: #6c7a89;
 }
 
-/* 사용자 관리 화면 스타일 */
-#user-management-screen {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
+.quiz-option.correct {
+  background: #e6f9e6 !important;
+  border-color: #c1e3c1 !important;
 }
 
-#user-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.quiz-option.wrong {
+  background: #ffe6e6 !important;
+  border-color: #f4c2c2 !important;
 }
 
-#user-list button {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  background: #ff6b6b;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* 파일 업로드 영역 */
+#manage-screen input[type="text"],
+#manage-screen select {
+  border: 2px solid #d1e9f5 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 
-#user-list button:hover {
-  background: #ff5252;
+/* 애니메이션 효과 조정 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
 }
