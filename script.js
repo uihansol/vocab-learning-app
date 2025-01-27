@@ -23,6 +23,38 @@ let totalQuestions = 10;
 let remainingQuestions = 0;
 let masteredCount = 0;
 
+//로그인 및 로그아웃
+async function handleUserAuth() {
+  const username = prompt("사용자 이름을 입력하세요:");
+  const password = prompt("비밀번호를 입력하세요:");
+
+  const response = await fetch('users.json');
+  const users = await response.json();
+
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if (user) {
+    alert("로그인 성공!");
+    document.getElementById("current-user").textContent = username;
+    document.getElementById("auth-btn").textContent = "로그아웃";
+    document.getElementById("stats-btn").classList.remove("hidden");
+  } else {
+    alert("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
+  }
+}
+
+function handleUserAuth() {
+  const authBtn = document.getElementById("auth-btn");
+  if (authBtn.textContent === "로그아웃") {
+    document.getElementById("current-user").textContent = "로그인 필요";
+    authBtn.textContent = "로그인";
+    document.getElementById("stats-btn").classList.add("hidden");
+    alert("로그아웃 되었습니다.");
+  } else {
+    login();
+  }
+}
+
 // 공통 함수
 function updateTotalWords() {
   const total = [...new Set([...wordData.verb, ...wordData.noun, ...wordData.adjective, ...wordData.adverb, ...wordData.phrase])].length;
@@ -49,21 +81,21 @@ function addWord() {
 async function uploadFile() {
   const file = document.getElementById("file-input").files[0];
   if (!file) return;
-  
+
   const reader = new FileReader();
   reader.onload = async (e) => {
     const lines = e.target.result.split("\n");
     const header = lines[0].split(',').map(s => s.trim());
-    
+
     lines.slice(1).forEach(line => {
       const values = line.split(",").map(s => s.trim());
-      const [word, meaning, category] = values.slice(0,3);
+      const [word, meaning, category] = values.slice(0, 3);
       const stats = {
         errorCount: parseInt(values[3]) || 0,
         correctStreak: parseInt(values[4]) || 0,
         lastMastered: values[5] ? new Date(values[5]).getTime() : null
       };
-      
+
       if (word && !isWordDuplicate(word)) {
         wordData[category].push({ word, meaning });
         wordData.stats[word] = stats;
@@ -71,6 +103,7 @@ async function uploadFile() {
     });
     updateWordList();
     updateTotalWords();
+    alert("CSV 파일 업로드 완료!");
   };
   reader.readAsText(file);
 }
