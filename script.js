@@ -189,20 +189,31 @@ document.querySelectorAll('.category-btn').forEach(btn => {
 // 퀴즈 로직
 async function selectDifficulty(difficulty) {
   const files = { easy: 'vocab1.csv', normal: 'vocab2.csv', hard: 'vocab3.csv' };
+  
+  // 기존 단어 데이터 초기화
+  Object.keys(wordData).forEach(key => {
+    if (key !== 'stats') wordData[key] = []; // stats는 유지
+  });
+
   await loadVocabFile(files[difficulty]);
   alert(`${difficulty} 난이도 로드 완료! (${wordData.mixed.length}개 단어)`);
-  showScreen("main-menu");
 }
-
 // startQuiz 함수 수정
 function startQuiz(category) {
+  // 선택된 카테고리의 단어가 있는지 확인
+  if (!wordData[category] || wordData[category].length === 0) {
+    alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
+    return;
+  }
+
+  // 필터링된 단어 목록 생성
   const filteredWords = wordData[category].filter(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
     if (stat.lastMastered) {
       const daysDiff = (Date.now() - stat.lastMastered) / (1000 * 60 * 60 * 24);
-      return daysDiff > 7;
+      return daysDiff > 7; // 7일 이상 지난 단어만 포함
     }
-    return true;
+    return true; // 마스터되지 않은 단어는 항상 포함
   });
 
   if (filteredWords.length === 0) {
@@ -210,19 +221,16 @@ function startQuiz(category) {
     return;
   }
 
+  // 문제 수 설정
   totalQuestions = parseInt(document.getElementById("question-count").value);
   remainingQuestions = totalQuestions;
   masteredCount = 0;
   currentCategory = category;
 
-  wordStats = [];
-  while (wordStats.length < totalQuestions) {
-    const remaining = totalQuestions - wordStats.length;
-    const count = Math.min(remaining, filteredWords.length);
-    const weightedWords = getWeightedRandomElements(filteredWords, count);
-    wordStats.push(...weightedWords);
-  }
+  // 문제 풀이를 위한 단어 목록 생성
+  wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
 
+  // 화면 업데이트
   document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
   showNextWord();
@@ -341,7 +349,7 @@ function updateProgress() {
 }
 
 async function loadVocabFile(filename) {
-  // 기존 데이터를 초기화하지 않고 mixed만 초기화
+  // mixed 카테고리만 초기화
   wordData.mixed = [];
   const response = await fetch(filename);
   const text = await response.text();
