@@ -182,9 +182,11 @@ body {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none; /* 기본적으로 화면을 숨김 */
 }
 
 .screen.active {
   opacity: 1;
   transform: translateY(0);
+  display: block; /* 활성화 시 화면을 표시 */
 }

@@ -23,27 +23,8 @@ let totalQuestions = 10;
 let remainingQuestions = 0;
 let masteredCount = 0;
 
-//로그인 및 로그아웃
+// 로그인 및 로그아웃
 async function handleUserAuth() {
-  const username = prompt("사용자 이름을 입력하세요:");
-  const password = prompt("비밀번호를 입력하세요:");
-
-  const response = await fetch('users.json');
-  const users = await response.json();
-
-  const user = users.find(u => u.username === username && u.password === password);
-
-  if (user) {
-    alert("로그인 성공!");
-    document.getElementById("current-user").textContent = username;
-    document.getElementById("auth-btn").textContent = "로그아웃";
-    document.getElementById("stats-btn").classList.remove("hidden");
-  } else {
-    alert("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
-  }
-}
-
-function handleUserAuth() {
   const authBtn = document.getElementById("auth-btn");
   if (authBtn.textContent === "로그아웃") {
     document.getElementById("current-user").textContent = "로그인 필요";
@@ -51,7 +32,22 @@ function handleUserAuth() {
     document.getElementById("stats-btn").classList.add("hidden");
     alert("로그아웃 되었습니다.");
   } else {
-    login();
+    const username = prompt("사용자 이름을 입력하세요:");
+    const password = prompt("비밀번호를 입력하세요:");
+
+    const response = await fetch('users.json');
+    const users = await response.json();
+
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+      alert("로그인 성공!");
+      document.getElementById("current-user").textContent = username;
+      authBtn.textContent = "로그아웃";
+      document.getElementById("stats-btn").classList.remove("hidden");
+    } else {
+      alert("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
+    }
   }
 }
 
@@ -174,7 +170,6 @@ function startQuiz(category) {
 
   wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
   
-  document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
   showNextWord();
 }
@@ -377,6 +372,10 @@ function stopTimer() {
 
 // 초기화
 window.onload = () => {
-  loadVocabFile('vocab2.csv');
-  showScreen("main-menu");
+  loadVocabFile('vocab2.csv').then(() => {
+    showScreen("main-menu");
+  }).catch(() => {
+    alert("단어 파일을 로드하는 데 실패했습니다.");
+    showScreen("main-menu");
+  });
 };
