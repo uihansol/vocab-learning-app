@@ -6,26 +6,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <style>
-    /* iOS 버튼 활성화 상태 시 색상 변경 방지 */
-    button, input, select {
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    /* 퀴즈 옵션 스타일 */
-    .quiz-option {
-      background-color: #f0f0f0;
-      padding: 10px;
-      margin: 5px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .quiz-option:hover {
-      background-color: #dcdcdc;
-    }
-  </style>
   <title>단어 마스터</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
@@ -75,7 +55,7 @@
         </select>
 
         <h2>CSV 파일 업로드</h2>
-        <input type="file" id="file-input-manage" accept=".csv"> <!-- 수정된 ID -->
+        <input type="file" id="file-input" accept=".csv">
         <button onclick="uploadFile()">업로드</button>
       </div>
     </div>
@@ -118,7 +98,7 @@
       </div>
       <div class="manage-section">
         <h3>파일 업로드</h3>
-        <input type="file" id="file-input-manage" accept=".csv"> <!-- 수정된 ID -->
+        <input type="file" id="file-input" accept=".csv">
         <button onclick="uploadFile()">업로드</button>
       </div>
       <button onclick="goBack()" class="back-btn">돌아가기</button>

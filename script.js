@@ -199,17 +199,20 @@ async function selectDifficulty(difficulty) {
 }
 
 function startQuiz(category) {
-  console.log(`카테고리 선택됨: ${category}`); // 디버깅용 로그
-
+  // 선택된 카테고리의 단어가 있는지 확인
   if (!wordData[category] || wordData[category].length === 0) {
     alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
     return;
   }
 
+  // 필터링된 단어 목록 생성
   const filteredWords = wordData[category].filter(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
-    const daysDiff = (Date.now() - (stat.lastMastered || 0)) / (1000 * 60 * 60 * 24);
-    return daysDiff > 7; // 7일 이상 지난 단어만 포함
+    if (stat.lastMastered) {
+      const daysDiff = (Date.now() - stat.lastMastered) / (1000 * 60 * 60 * 24);
+      return daysDiff > 7; // 7일 이상 지난 단어만 포함
+    }
+    return true; // 마스터되지 않은 단어는 항상 포함
   });
 
   if (filteredWords.length === 0) {
@@ -217,15 +220,16 @@ function startQuiz(category) {
     return;
   }
 
-  totalQuestions = parseInt(document.getElementById("question-count").value) || 10;
+  // 문제 수 설정
+  totalQuestions = parseInt(document.getElementById("question-count").value);
   remainingQuestions = totalQuestions;
   masteredCount = 0;
   currentCategory = category;
 
+  // 문제 풀이를 위한 단어 목록 생성
   wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
 
-  console.log("출제할 문제 목록:", wordStats); // 디버깅용
-
+  // 화면 업데이트
   document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
   showNextWord();
@@ -255,6 +259,7 @@ function getWeightedRandomElements(array, n) {
   return selected;
 }
 
+// showNextWord 함수 수정
 function showNextWord() {
   if (wordStats.length === 0 || remainingQuestions <= 0) {
     alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
@@ -262,9 +267,8 @@ function showNextWord() {
   }
 
   currentWord = wordStats.shift();
-  console.log("출제 단어:", currentWord); // 디버깅용
-
   correctAnswer = currentWord.meaning;
+  updateWordDisplayBackground();
 
   const options = [correctAnswer];
   while (options.length < 4) {
@@ -278,28 +282,117 @@ function showNextWord() {
 
   optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
     opt.addEventListener('click', () => checkAnswer(opt.textContent));
+    opt.addEventListener('touchstart', () => checkAnswer(opt.textContent), { passive: true });
   });
 
   document.getElementById("word-display").textContent = currentWord.word;
   startTimer();
 }
 
-function checkAnswer(selectedAnswer) {
-  const isCorrect = selectedAnswer === correctAnswer;
-  if (isCorrect) masteredCount++;
-  remainingQuestions--;
-  updateQuestionStatus();
-  showNextWord();
+function updateWordDisplayBackground() {
+  const wordDisplay = document.getElementById("word-display");
+  const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
+  const errorCount = stat.errorCount || 0;
+  const intensity = Math.min(errorCount / 10, 1);
+  const redValue = Math.floor(255 * intensity);
+  wordDisplay.style.backgroundColor = `rgba(${redValue}, ${255 - redValue}, ${255 - redValue}, 0.3)`;
 }
 
+function checkAnswer(selected) {
+  stopTimer();
+  const responseTime = Date.now() - startTime;
+  const stat = wordData.stats[currentWord.word] || { correctStreak: 0, errorCount: 0, totalTime: 0, answerCount: 0 };
+
+  if (selected === correctAnswer) {
+    stat.correctStreak = (stat.correctStreak || 0) + 1;
+    stat.totalTime += responseTime;
+    stat.answerCount = (stat.answerCount || 0) + 1;
+
+    if (stat.correctStreak >= 3) {
+      stat.lastMastered = Date.now();
+      masteredCount++;
+    }
+
+    if (stat.errorCount > 0) stat.errorCount--;
+
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      if (opt.textContent === selected) {
+        opt.classList.add('correct');
+        opt.style.pointerEvents = 'none';
+      }
+    });
+
+    setTimeout(showNextWord, 1000);
+  } else {
+    stat.correctStreak = 0;
+    stat.errorCount = (stat.errorCount || 0) + 1;
+
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      if (opt.textContent === selected) {
+        opt.classList.add('wrong');
+        opt.style.pointerEvents = 'none';
+      }
+    });
+  }
+
+  stat.avgTime = stat.totalTime / (stat.answerCount || 1);
+  wordData.stats[currentWord.word] = stat;
+  updateProgress();
+  updateWordDisplayBackground();
+}
+
+function updateProgress() {
+  document.getElementById("progress").textContent = 
+    `확실하게 외운 단어: ${masteredCount}개 / 남은 단어: ${remainingQuestions}개 / 전체 문제: ${totalQuestions}개`;
+  remainingQuestions--;
+}
+
+async function loadVocabFile(filename) {
+  // mixed 카테고리만 초기화
+  wordData.mixed = [];
+  const response = await fetch(filename);
+  const text = await response.text();
+  text.split("\n").slice(1).forEach(line => {
+    const [word, meaning, category] = line.split(",").map(s => s.trim());
+    if (word && meaning && category) {
+      // 유효한 카테고리인지 확인
+      if (!wordData[category]) return;
+      // 중복 단어 검사 추가
+      if (!isWordDuplicate(word)) {
+        wordData[category].push({ word, meaning });
+        wordData.mixed.push({ word, meaning });
+      }
+    }
+  });
+  updateTotalWords();
+  updateWordList();
+}
+
+function showManageScreen() {
+  showScreen("manage-screen");
+  updateWordList();
+}
+
+function goBack() {
+  showScreen("main-menu");
+}
+
+// 타이머
 function startTimer() {
   startTime = Date.now();
-  timerInterval = setInterval(updateTimer, 1000);
+  timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    document.getElementById("timer").textContent = `시간: ${elapsed}초`;
+  }, 1000);
 }
 
-function updateTimer() {
-  const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-  const minutes = Math.floor(elapsedTime / 60);
-  const seconds = elapsedTime % 60;
-  document.getElementById("timer").textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+function stopTimer() {
+  clearInterval(timerInterval);
 }
+
+// 초기화
+window.onload = () => {
+  loadVocabFile('vocab2.csv');
+  showScreen("main-menu");
+  updateAuthUI();
+};
