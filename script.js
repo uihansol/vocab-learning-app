@@ -57,6 +57,53 @@ async function handleUserAuth() {
   }
 }
 
+// 로그인 상태 저장
+function setLoginState(username) {
+  localStorage.setItem('loggedInUser', username);
+  document.getElementById("current-user").textContent = username;
+  document.getElementById("auth-btn").textContent = "로그아웃";
+  document.getElementById("stats-btn").classList.remove("hidden");
+  document.getElementById("user-management-btn").classList.remove("hidden");
+}
+
+// 초기화 시 로그인 상태 확인
+window.onload = () => {
+  const savedUser = localStorage.getItem('loggedInUser');
+  if(savedUser) setLoginState(savedUser);
+  
+  loadVocabFile('vocab1.csv').then(() => {
+    showScreen("main-menu");
+  }).catch(() => alert("단어장 불러오기 실패"));
+};
+
+// 사용자 추가/삭제 시 실제 서버 연동 필요
+// 임시 메모리 저장 방식으로 변경
+let users = [
+  {username: "user1", password: "password1"},
+  {username: "user2", password: "password2"}
+];
+
+async function showUserManagement() {
+  const userList = document.getElementById("user-list");
+  userList.innerHTML = users.map(user => `
+    <li>${user.username}<button onclick="deleteUser('${user.username}')">삭제</button></li>
+  `).join('');
+  showScreen("user-management-screen");
+}
+
+function addUser() {
+  const username = document.getElementById("new-username").value;
+  const password = document.getElementById("new-password").value;
+  if(users.some(u => u.username === username)) return alert("이미 존재하는 사용자");
+  users.push({username, password});
+  showUserManagement();
+}
+
+function deleteUser(target) {
+  users = users.filter(u => u.username !== target);
+  showUserManagement();
+}
+
 // 단어 관리 함수
 function updateTotalWords() {
   const total = [...new Set([...wordData.verb, ...wordData.noun, ...wordData.adjective, ...wordData.adverb, ...wordData.phrase])].length;
@@ -199,6 +246,26 @@ async function deleteUser(username) {
   showUserManagement();
 }
 
+//csv 파일 로드 기능 보완
+async function loadVocabFile(filename) {
+  try {
+    const response = await fetch(filename);
+    const csvData = await response.text();
+    const rows = csvData.split('\n').slice(1);
+    
+    rows.forEach(row => {
+      const [word, meaning, category] = row.split(',');
+      if(word && meaning && category) {
+        wordData[category].push({word: word.trim(), meaning: meaning.trim()});
+      }
+    });
+    
+    updateTotalWords();
+  } catch(e) {
+    console.error('단어장 로드 실패:', e);
+  }
+}
+
 // 공통 유틸리티
 function showScreen(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -215,7 +282,7 @@ function goBack() {
 
 // 초기화
 window.onload = () => {
-  loadVocabFile('vocab2.csv').then(() => {
+  loadVocabFile('vocab1.csv').then(() => {
     showScreen("main-menu");
   }).catch(() => {
     alert("단어장 불러오기 실패");
