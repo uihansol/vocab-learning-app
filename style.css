@@ -92,12 +92,23 @@ body {
   background: rgba(255, 255, 255, 0.95);
   color: #6c7a89;
   border: 2px solid #d1e9f5;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 12px;
+  text-align: center;
 }
 
 .quiz-option {
   background: rgba(255, 255, 255, 0.98) !important;
   border: 2px solid #e0f0f7 !important;
   color: #6c7a89;
+  cursor: pointer;
+}
+
+.quiz-option:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: #d1e9f5 !important;
 }
 
 .quiz-option.correct {
@@ -108,13 +119,43 @@ body {
 .quiz-option.wrong {
   background: #ffe6e6 !important;
   border-color: #f4c2c2 !important;
+  animation: shake 0.5s ease-in-out;
 }
 
 /* 파일 업로드 영역 */
+#manage-screen input[type="file"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid #d1e9f5 !important;
+  padding: 10px;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+#manage-screen button {
+  background: #a8d8ea;
+  color: #4a5568;
+  padding: 12px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+#manage-screen button:hover {
+  background: #95c5d6;
+}
+
+/* 입력 필드 스타일 */
 #manage-screen input[type="text"],
 #manage-screen select {
   border: 2px solid #d1e9f5 !important;
   background: rgba(255, 255, 255, 0.95) !important;
+  padding: 10px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 12px;
 }
 
 /* 애니메이션 효과 조정 */
