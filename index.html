@@ -16,6 +16,7 @@
         <span id="current-user">로그인 필요</span>
         <button onclick="handleUserAuth()" id="auth-btn">로그인</button>
         <button onclick="showStats()" id="stats-btn" class="hidden">통계</button>
+        <button onclick="showUserManagement()" id="user-management-btn" class="hidden">사용자 관리</button>
       </div>
       <p id="total-words">전체 단어: 0개</p>
     </div>
@@ -96,6 +97,22 @@
         <h3>파일 업로드</h3>
         <input type="file" id="file-input" accept=".csv">
         <button onclick="uploadFile()">업로드</button>
+      </div>
+      <button onclick="goBack()" class="back-btn">돌아가기</button>
+    </div>
+
+    <!-- 사용자 관리 화면 -->
+    <div id="user-management-screen" class="screen hidden">
+      <h2>사용자 관리</h2>
+      <div class="manage-section">
+        <h3>사용자 추가</h3>
+        <input type="text" id="new-username" placeholder="사용자 이름">
+        <input type="password" id="new-password" placeholder="비밀번호">
+        <button onclick="addUser()">추가</button>
+      </div>
+      <div class="manage-section">
+        <h3>사용자 목록</h3>
+        <ul id="user-list"></ul>
       </div>
       <button onclick="goBack()" class="back-btn">돌아가기</button>
     </div>

@@ -190,3 +190,61 @@ body {
   transform: translateY(0);
   display: block; /* 활성화 시 화면을 표시 */
 }
+
+/* 퀴즈 화면 크기 조정 */
+#quiz-screen {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#word-display {
+  font-size: 3.5rem;
+  margin: 3rem 0;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.options-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.quiz-option {
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+/* 사용자 관리 화면 스타일 */
+#user-management-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#user-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#user-list button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #ff6b6b;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#user-list button:hover {
+  background: #ff5252;
+}

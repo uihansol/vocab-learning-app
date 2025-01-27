@@ -23,6 +23,68 @@ let totalQuestions = 10;
 let remainingQuestions = 0;
 let masteredCount = 0;
 
+// 사용자 관리 함수 추가
+async function showUserManagement() {
+  const response = await fetch('users.json');
+  const users = await response.json();
+  const userList = document.getElementById("user-list");
+  userList.innerHTML = users.map(user => `
+    <li>
+      ${user.username}
+      <button onclick="deleteUser('${user.username}')">삭제</button>
+    </li>
+  `).join('');
+  showScreen("user-management-screen");
+}
+
+async function addUser() {
+  const username = document.getElementById("new-username").value.trim();
+  const password = document.getElementById("new-password").value.trim();
+
+  if (!username || !password) {
+    alert("사용자 이름과 비밀번호를 입력하세요.");
+    return;
+  }
+
+  const response = await fetch('users.json');
+  const users = await response.json();
+
+  if (users.some(user => user.username === username)) {
+    alert("이미 존재하는 사용자 이름입니다.");
+    return;
+  }
+
+  users.push({ username, password });
+  await fetch('users.json', {
+    method: 'PUT',
+    body: JSON.stringify(users),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  alert("사용자가 추가되었습니다.");
+  showUserManagement();
+}
+
+async function deleteUser(username) {
+  const response = await fetch('users.json');
+  const users = await response.json();
+  const updatedUsers = users.filter(user => user.username !== username);
+
+  await fetch('users.json', {
+    method: 'PUT',
+    body: JSON.stringify(updatedUsers),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  alert("사용자가 삭제되었습니다.");
+  showUserManagement();
+}
+
+
 // 로그인 및 로그아웃
 async function handleUserAuth() {
   const authBtn = document.getElementById("auth-btn");
