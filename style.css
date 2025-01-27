@@ -1,96 +1,164 @@
-/* 메인 메뉴 스타일 */
-.main-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+body {
+  font-family: 'Nanum Myeongjo', serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f5f9;
+  color: #333;
 }
 
-.main-menu button {
-  padding: 15px;
-  font-size: 16px;
-  border: none;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: white;
   border-radius: 12px;
-  background-color: #007bff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 2.3rem;
+}
+
+.user-menu {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.user-menu button {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 2px solid #7fbcd2;
+  background-color: #a8d8ea;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.menu-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.difficulty-buttons button {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  transition: all 0.2s ease;
 }
 
-.main-menu button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.difficulty-easy { background-color: #C1E1C1; }
+.difficulty-normal { background-color: #B5D8F0; }
+.difficulty-hard { background-color: #F4B3C2; }
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-/* 퀴즈 화면 스타일 */
-#quiz-screen {
-  position: relative;
-  margin-top: 20px;
-  padding-top: 20px;
+.category-grid button {
+  padding: 15px;
+  border: 1px solid #d3e0ea;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.review-btn {
+  background-color: #ffd700 !important;
+  border-color: #ffc400 !important;
+}
+
+.progress-container {
+  width: 120px;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4CAF50;
+  transition: width 0.3s ease;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
 }
 
 #word-display {
   font-size: 36px;
-  font-weight: bold;
   margin: 20px 0;
   text-align: center;
-  color: #333;
+  color: #4a6fa5;
   padding: 20px;
   border-radius: 12px;
-  background-color: white;
-  transition: background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-#options {
-  display: flex;
-  flex-direction: column;
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-top: 20px;
 }
 
 .quiz-option {
   padding: 15px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background-color: #f9f9f9;
+  border: 1px solid #d3e0ea;
+  border-radius: 8px;
+  background-color: white;
   cursor: pointer;
   text-align: center;
-  transition: all 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.quiz-option:hover {
-  background-color: #e9e9e9;
-  transform: scale(1.02);
-}
-
-.quiz-option:active {
-  transform: scale(0.98);
-}
-
-.quiz-option.correct {
-  background-color: #ccffcc !important;
 }
 
 .quiz-option.wrong {
   animation: shake 0.5s;
-  background-color: #ffcccc !important;
-  opacity: 0.5;
+  background-color: #ffcccc;
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-8px); }
   75% { transform: translateX(8px); }
-}
-
-/* 화면 전환 */
-.screen {
-  display: none;
-}
-
-.screen.active {
-  display: block;
 }
