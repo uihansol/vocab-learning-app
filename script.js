@@ -166,15 +166,27 @@ function deleteWord(targetWord) {
   updateTotalWords();
 }
 
+// showScreen 함수 수정
 function showScreen(screenId) {
   document.querySelectorAll('.screen').forEach(s => {
     s.classList.remove('active');
     s.style.display = 'none';
   });
   const target = document.getElementById(screenId);
-  target.classList.add('active');
-  target.style.display = 'block';
+  if (target) {
+    target.classList.add('active');
+    target.style.display = 'block';
+  }
 }
+
+// 품사 버튼에 이벤트 리스너 추가
+document.querySelectorAll('.category-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const category = btn.getAttribute('data-category');
+    startQuiz(category);
+  });
+});
+
 
 // 퀴즈 로직
 async function selectDifficulty(difficulty) {
@@ -184,6 +196,7 @@ async function selectDifficulty(difficulty) {
   showScreen("main-menu");
 }
 
+// startQuiz 함수 수정
 function startQuiz(category) {
   const filteredWords = wordData[category].filter(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
@@ -241,6 +254,7 @@ function getWeightedRandomElements(array, n) {
   return selected;
 }
 
+// showNextWord 함수 수정
 function showNextWord() {
   if (wordStats.length === 0 || remainingQuestions <= 0) {
     alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
