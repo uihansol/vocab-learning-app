@@ -199,23 +199,8 @@ async function selectDifficulty(difficulty) {
 }
 
 function startQuiz(category) {
-  // 선택된 카테고리의 단어가 있는지 확인
+  console.log(`퀴즈 시작: ${category}`); // 디버깅용 로그
   if (!wordData[category] || wordData[category].length === 0) {
-    alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
-    return;
-  }
-
-  // 필터링된 단어 목록 생성
-  const filteredWords = wordData[category].filter(wordObj => {
-    const stat = wordData.stats[wordObj.word] || {};
-    if (stat.lastMastered) {
-      const daysDiff = (Date.now() - stat.lastMastered) / (1000 * 60 * 60 * 24);
-      return daysDiff > 7; // 7일 이상 지난 단어만 포함
-    }
-    return true; // 마스터되지 않은 단어는 항상 포함
-  });
-
-  if (filteredWords.length === 0) {
     alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
     return;
   }
@@ -227,13 +212,14 @@ function startQuiz(category) {
   currentCategory = category;
 
   // 문제 풀이를 위한 단어 목록 생성
-  wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
+  wordStats = getWeightedRandomElements(wordData[category], totalQuestions);
 
   // 화면 업데이트
   document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
   showNextWord();
 }
+
 
 function getWeightedRandomElements(array, n) {
   const weightedArray = array.map(wordObj => {
@@ -282,7 +268,6 @@ function showNextWord() {
 
   optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
     opt.addEventListener('click', () => checkAnswer(opt.textContent));
-    opt.addEventListener('touchstart', () => checkAnswer(opt.textContent), { passive: true });
   });
 
   document.getElementById("word-display").textContent = currentWord.word;

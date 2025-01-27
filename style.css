@@ -88,28 +88,58 @@ body {
 }
 
 /* 퀴즈 화면 */
+#quiz-screen {
+  display: none; /* 초기에는 숨김 */
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#quiz-screen.active {
+  display: flex; /* 활성화 시 표시 */
+}
+
 #word-display {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a5568;
   background: rgba(255, 255, 255, 0.95);
-  color: #4a5568; /* 텍스트 색상 변경 */
+  padding: 20px;
+  border-radius: 12px;
   border: 2px solid #d1e9f5;
-  padding: 20px; /* 내부 여백 추가 */
-  border-radius: 12px; /* 둥근 모서리 */
+}
+
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .quiz-option {
-  background: rgba(255, 255, 255, 0.98) !important;
-  border: 2px solid #e0f0f7 !important;
-  color: #6c7a89;
+  padding: 15px;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.98);
+  border: 2px solid #e0f0f7;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.quiz-option:hover {
+  background: #a8d8ea;
 }
 
 .quiz-option.correct {
-  background: #e6f9e6 !important;
-  border-color: #c1e3c1 !important;
+  background: #e6f9e6;
+  border-color: #c1e3c1;
 }
 
 .quiz-option.wrong {
-  background: #ffe6e6 !important;
-  border-color: #f4c2c2 !important;
+  background: #ffe6e6;
+  border-color: #f4c2c2;
 }
 
 /* 파일 업로드 영역 */
