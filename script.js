@@ -343,14 +343,16 @@ function updateProgress() {
 }
 
 async function loadVocabFile(filename) {
-  Object.keys(wordData).forEach(k => wordData[k] = []);
+  // 기존 데이터 초기화 대신 mixed만 초기화
+  wordData.mixed = [];
   const response = await fetch(filename);
   const text = await response.text();
   text.split("\n").slice(1).forEach(line => {
     const [word, meaning, category] = line.split(",").map(s => s.trim());
     if (word && meaning && category) {
+      if (!wordData[category]) return; // 유효하지 않은 카테고리 건너뛰기
       wordData[category].push({ word, meaning });
-      if (category !== 'mixed') wordData.mixed.push({ word, meaning });
+      wordData.mixed.push({ word, meaning }); // 모든 카테고리 단어를 mixed에 추가
     }
   });
   updateTotalWords();
