@@ -166,17 +166,15 @@ function deleteWord(targetWord) {
   updateTotalWords();
 }
 
-// showScreen 함수 수정
+// 화면 전환 함수 수정 (CSS 충돌 해결)
 function showScreen(screenId) {
   document.querySelectorAll('.screen').forEach(s => {
     s.classList.remove('active');
-    s.style.display = 'none';
+    s.style.display = 'none'; // 기존 스타일 제거
   });
   const target = document.getElementById(screenId);
-  if (target) {
-    target.classList.add('active');
-    target.style.display = 'block';
-  }
+  target.classList.add('active');
+  target.style.display = 'flex'; // CSS 클래스 대신 직접 flex 적용
 }
 
 // 품사 버튼에 이벤트 리스너 추가
@@ -343,16 +341,20 @@ function updateProgress() {
 }
 
 async function loadVocabFile(filename) {
-  // 기존 데이터 초기화 대신 mixed만 초기화
+  // 기존 데이터를 초기화하지 않고 mixed만 초기화
   wordData.mixed = [];
   const response = await fetch(filename);
   const text = await response.text();
   text.split("\n").slice(1).forEach(line => {
     const [word, meaning, category] = line.split(",").map(s => s.trim());
     if (word && meaning && category) {
-      if (!wordData[category]) return; // 유효하지 않은 카테고리 건너뛰기
-      wordData[category].push({ word, meaning });
-      wordData.mixed.push({ word, meaning }); // 모든 카테고리 단어를 mixed에 추가
+      // 유효한 카테고리인지 확인
+      if (!wordData[category]) return;
+      // 중복 단어 검사 추가
+      if (!isWordDuplicate(word)) {
+        wordData[category].push({ word, meaning });
+        wordData.mixed.push({ word, meaning });
+      }
     }
   });
   updateTotalWords();

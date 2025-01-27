@@ -203,9 +203,8 @@ body {
 }
 
 .screen.active {
-  opacity: 1;
-  transform: translateY(0);
-  display: block; /* 활성화 시 화면을 표시 */
+  display: flex !important;
+  flex-direction: column;
 }
 
 /* 퀴즈 화면 크기 조정 */
