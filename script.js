@@ -23,7 +23,18 @@ let totalQuestions = 10;
 let remainingQuestions = 0;
 let masteredCount = 0;
 
-// 사용자 인증 처리
+// localStorage 기반 사용자 관리
+let users = JSON.parse(localStorage.getItem('users')) || [
+  {username: "user1", password: "password1"},
+  {username: "user2", password: "password2"}
+];
+
+function syncUsers() {
+  localStorage.setItem('users', JSON.stringify(users));
+  showUserManagement();
+}
+
+// 사용자 인증 처리 (서버 연동 제거)
 async function handleUserAuth() {
   const authBtn = document.getElementById("auth-btn");
   if (authBtn.textContent === "로그아웃") {
@@ -31,59 +42,28 @@ async function handleUserAuth() {
     authBtn.textContent = "로그인";
     document.getElementById("stats-btn").classList.add("hidden");
     document.getElementById("user-management-btn").classList.add("hidden");
+    localStorage.removeItem('loggedInUser');
     alert("로그아웃 되었습니다.");
   } else {
     const username = prompt("사용자 이름을 입력하세요:");
     const password = prompt("비밀번호를 입력하세요:");
 
-    try {
-      const response = await fetch('users.json');
-      const users = await response.json();
-      const user = users.find(u => u.username === username && u.password === password);
-
-      if (user) {
-        alert("로그인 성공!");
-        document.getElementById("current-user").textContent = username;
-        authBtn.textContent = "로그아웃";
-        document.getElementById("stats-btn").classList.remove("hidden");
-        document.getElementById("user-management-btn").classList.remove("hidden");
-      } else {
-        alert("로그인 실패: 잘못된 계정 정보");
-      }
-    } catch (error) {
-      console.error('사용자 정보 조회 오류:', error);
-      alert("로그인 처리 중 오류 발생");
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+      alert("로그인 성공!");
+      document.getElementById("current-user").textContent = username;
+      authBtn.textContent = "로그아웃";
+      document.getElementById("stats-btn").classList.remove("hidden");
+      document.getElementById("user-management-btn").classList.remove("hidden");
+      localStorage.setItem('loggedInUser', username);
+    } else {
+      alert("로그인 실패: 잘못된 계정 정보");
     }
   }
 }
 
-// 로그인 상태 저장
-function setLoginState(username) {
-  localStorage.setItem('loggedInUser', username);
-  document.getElementById("current-user").textContent = username;
-  document.getElementById("auth-btn").textContent = "로그아웃";
-  document.getElementById("stats-btn").classList.remove("hidden");
-  document.getElementById("user-management-btn").classList.remove("hidden");
-}
-
-// 초기화 시 로그인 상태 확인
-window.onload = () => {
-  const savedUser = localStorage.getItem('loggedInUser');
-  if(savedUser) setLoginState(savedUser);
-  
-  loadVocabFile('vocab1.csv').then(() => {
-    showScreen("main-menu");
-  }).catch(() => alert("단어장 불러오기 실패"));
-};
-
-// 사용자 추가/삭제 시 실제 서버 연동 필요
-// 임시 메모리 저장 방식으로 변경
-let users = [
-  {username: "user1", password: "password1"},
-  {username: "user2", password: "password2"}
-];
-
-async function showUserManagement() {
+// 사용자 관리 화면 (서버 연동 제거)
+function showUserManagement() {
   const userList = document.getElementById("user-list");
   userList.innerHTML = users.map(user => `
     <li>${user.username}<button onclick="deleteUser('${user.username}')">삭제</button></li>
@@ -91,17 +71,46 @@ async function showUserManagement() {
   showScreen("user-management-screen");
 }
 
-function addUser() {
-  const username = document.getElementById("new-username").value;
-  const password = document.getElementById("new-password").value;
-  if(users.some(u => u.username === username)) return alert("이미 존재하는 사용자");
-  users.push({username, password});
-  showUserManagement();
-}
-
 function deleteUser(target) {
   users = users.filter(u => u.username !== target);
-  showUserManagement();
+  syncUsers();
+}
+
+function addUser() {
+  const username = document.getElementById("new-username").value.trim();
+  const password = document.getElementById("new-password").value.trim();
+  
+  if(!username || !password) return alert("빈 칸을 채워주세요");
+  if(users.some(u => u.username === username)) return alert("이미 존재하는 사용자");
+  
+  users.push({username, password});
+  syncUsers();
+  document.getElementById("new-username").value = "";
+  document.getElementById("new-password").value = "";
+}
+
+// 초기화 시 로그인 상태 확인
+window.onload = () => {
+  const savedUser = localStorage.getItem('loggedInUser');
+  if(savedUser) {
+    document.getElementById("current-user").textContent = savedUser;
+    document.getElementById("auth-btn").textContent = "로그아웃";
+    document.getElementById("stats-btn").classList.remove("hidden");
+    document.getElementById("user-management-btn").classList.remove("hidden");
+  }
+  
+  loadVocabFile('vocab1.csv').then(() => {
+    showScreen("main-menu");
+  }).catch(() => alert("단어장 불러오기 실패"));
+};
+
+// 난이도 선택 핸들러
+function selectDifficulty(level) {
+  const filename = `vocab${level === 'easy' ? '1' : level === 'normal' ? '2' : '3'}.csv`;
+  loadVocabFile(filename).then(() => {
+    alert(`[${level}] 난이도 단어장 로드 완료`);
+    showScreen("main-menu");
+  });
 }
 
 // 단어 관리 함수
@@ -216,53 +225,30 @@ function highlightOption(selected, className) {
   });
 }
 
-// 사용자 관리 기능
-async function showUserManagement() {
-  const response = await fetch('users.json');
-  const users = await response.json();
-  const userList = document.getElementById("user-list");
-  userList.innerHTML = users.map(user => `
-    <li>
-      ${user.username}
-      <button onclick="deleteUser('${user.username}')">삭제</button>
-    </li>
-  `).join('');
-  showScreen("user-management-screen");
-}
-
-async function deleteUser(username) {
-  const response = await fetch('users.json');
-  const users = await response.json();
-  const updatedUsers = users.filter(user => user.username !== username);
-
-  await fetch('users.json', {
-    method: 'PUT',
-    body: JSON.stringify(updatedUsers),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-
-  showUserManagement();
-}
-
-//csv 파일 로드 기능 보완
+// CSV 파일 로드
 async function loadVocabFile(filename) {
   try {
     const response = await fetch(filename);
+    if (!response.ok) throw new Error('파일 없음');
     const csvData = await response.text();
-    const rows = csvData.split('\n').slice(1);
     
-    rows.forEach(row => {
-      const [word, meaning, category] = row.split(',');
-      if(word && meaning && category) {
-        wordData[category].push({word: word.trim(), meaning: meaning.trim()});
+    // 카테고리 초기화
+    wordData = { verb: [], noun: [], adjective: [], adverb: [], phrase: [], mixed: [] };
+    
+    csvData.split('\n').slice(1).forEach(row => {
+      const [word, meaning, category] = row.split(',').map(item => item.trim());
+      if(word && meaning && wordData[category]) {
+        wordData[category].push({ word, meaning });
+        wordData.mixed.push({ word, meaning }); // 혼합 카테고리에도 추가
       }
     });
     
     updateTotalWords();
+    return true;
   } catch(e) {
     console.error('단어장 로드 실패:', e);
+    alert(`파일 로드 실패: ${filename}`);
+    return false;
   }
 }
 
@@ -279,13 +265,3 @@ function showScreen(screenId) {
 function goBack() {
   showScreen("main-menu");
 }
-
-// 초기화
-window.onload = () => {
-  loadVocabFile('vocab1.csv').then(() => {
-    showScreen("main-menu");
-  }).catch(() => {
-    alert("단어장 불러오기 실패");
-    showScreen("main-menu");
-  });
-};

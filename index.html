@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+  /* iOS 버튼 활성화 상태 시 색상 변경 방지 */
+  button, input, select {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+</style>
   <title>단어 마스터</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
@@ -28,9 +36,9 @@
       <div class="menu-section">
         <h2>난이도 선택</h2>
         <div class="difficulty-buttons">
-          <button onclick="selectDifficulty('easy')" class="difficulty-easy">쉬움</button>
-          <button onclick="selectDifficulty('normal')" class="difficulty-normal">보통</button>
-          <button onclick="selectDifficulty('hard')" class="difficulty-hard">어려움</button>
+<button onclick="selectDifficulty('easy')" class="difficulty-easy">쉬움 (vocab1.csv)</button>
+<button onclick="selectDifficulty('normal')" class="difficulty-normal">보통 (vocab2.csv)</button>
+<button onclick="selectDifficulty('hard')" class="difficulty-hard">어려움 (vocab3.csv)</button>
         </div>
 
         <h2>학습 모드 선택</h2>
