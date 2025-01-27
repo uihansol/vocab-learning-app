@@ -35,18 +35,26 @@ async function handleUserAuth() {
     const username = prompt("사용자 이름을 입력하세요:");
     const password = prompt("비밀번호를 입력하세요:");
 
-    const response = await fetch('users.json');
-    const users = await response.json();
+    try {
+      const response = await fetch('users.json');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const users = await response.json();
 
-    const user = users.find(u => u.username === username && u.password === password);
+      const user = users.find(u => u.username === username && u.password === password);
 
-    if (user) {
-      alert("로그인 성공!");
-      document.getElementById("current-user").textContent = username;
-      authBtn.textContent = "로그아웃";
-      document.getElementById("stats-btn").classList.remove("hidden");
-    } else {
-      alert("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
+      if (user) {
+        alert("로그인 성공!");
+        document.getElementById("current-user").textContent = username;
+        authBtn.textContent = "로그아웃";
+        document.getElementById("stats-btn").classList.remove("hidden");
+      } else {
+        alert("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      alert("로그인 중 오류가 발생했습니다. 나중에 다시 시도해주세요.");
     }
   }
 }
@@ -140,8 +148,12 @@ function showScreen(screenId) {
     s.style.display = 'none';
   });
   const target = document.getElementById(screenId);
-  target.classList.add('active');
-  target.style.display = 'block';
+  if (target) {
+    target.classList.add('active');
+    target.style.display = 'block';
+  } else {
+    console.error(`Screen with id ${screenId} not found`);
+  }
 }
 
 // 퀴즈 로직
@@ -287,6 +299,9 @@ function updateProgress() {
 async function loadVocabFile(filename) {
   Object.keys(wordData).forEach(k => wordData[k] = []);
   const response = await fetch(filename);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
   const text = await response.text();
   text.split("\n").slice(1).forEach(line => {
     const [word, meaning, category] = line.split(",").map(s => s.trim());
@@ -298,7 +313,6 @@ async function loadVocabFile(filename) {
   updateTotalWords();
   updateWordList();
 }
-
 // 통계 및 설정 함수
 function showWordStats() {
   const statsList = document.getElementById("stats-list");
