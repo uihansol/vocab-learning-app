@@ -1,164 +1,212 @@
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 공통 스타일 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
 body {
-  font-family: 'Nanum Myeongjo', serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f0f5f9;
-  color: #333;
-}
-
-.container {
+  font-family: 'Segoe UI', system-ui;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background: #f0f2f5;
+  color: #333;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 화면 전환 시스템 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+.screen {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
 }
 
-.header h1 {
-  color: #2c3e50;
-  margin: 0;
-  font-size: 2.3rem;
+.screen.active {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
 }
 
-.user-menu {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin: 15px 0;
-}
-
-.user-menu button {
-  padding: 8px 20px;
-  border-radius: 8px;
-  border: 2px solid #7fbcd2;
-  background-color: #a8d8ea;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 14px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.menu-section {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.difficulty-buttons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.difficulty-buttons button {
-  flex: 1;
-  padding: 15px;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.2s ease;
-}
-
-.difficulty-easy { background-color: #C1E1C1; }
-.difficulty-normal { background-color: #B5D8F0; }
-.difficulty-hard { background-color: #F4B3C2; }
-
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.category-grid button {
-  padding: 15px;
-  border: 1px solid #d3e0ea;
-  border-radius: 8px;
-  background-color: #f8f9fa;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 16px;
-}
-
-.review-btn {
-  background-color: #ffd700 !important;
-  border-color: #ffc400 !important;
-}
-
-.progress-container {
-  width: 120px;
-  height: 8px;
-  background-color: #e0e0e0;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  background-color: #4CAF50;
-  transition: width 0.3s ease;
-}
-
-.quiz-header {
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 헤더 영역 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+.header-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.back-btn {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: white;
+#current-user {
+  font-weight: 600;
+  color: #007bff;
+}
+
+#timer {
+  font-weight: 500;
+  color: #666;
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 메인 메뉴 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+.main-menu {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.main-menu button {
+  padding: 18px;
+  font-size: 17px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #007bff, #0062cc);
+  color: white;
   cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.main-menu button i {
+  font-size: 20px;
+}
+
+.main-menu button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,123,255,0.3);
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 퀴즈 화면 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+#quiz-screen {
+  position: relative;
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 #word-display {
-  font-size: 36px;
-  margin: 20px 0;
-  text-align: center;
-  color: #4a6fa5;
-  padding: 20px;
-  border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 42px;
+  font-weight: 700;
+  margin: 30px 0;
+  padding: 25px;
+  border-radius: 16px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  border: 2px solid #e9ecef;
 }
 
-.options-grid {
+#options {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .quiz-option {
-  padding: 15px;
-  border: 1px solid #d3e0ea;
-  border-radius: 8px;
-  background-color: white;
+  padding: 18px;
+  font-size: 17px;
+  border: 2px solid #dee2e6;
+  border-radius: 14px;
+  background: white;
   cursor: pointer;
-  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  border-color: #007bff;
+  background: #f8fbff;
+  transform: scale(1.02);
+}
+
+.quiz-option.correct {
+  background: #e6ffed !important;
+  border-color: #2fc44f !important;
+  animation: pop 0.4s;
 }
 
 .quiz-option.wrong {
+  background: #fff0f0 !important;
+  border-color: #ff6b6b !important;
   animation: shake 0.5s;
-  background-color: #ffcccc;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
+  25% { transform: translateX(-12px); }
+  75% { transform: translateX(12px); }
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 단어 관리 화면 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+#manage-screen {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+#word-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.word-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.word-item button {
+  padding: 8px 15px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.word-item button:hover {
+  background: #ff5252;
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 진행률 표시줄 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+.progress-container {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+#progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #007bff, #00c3ff);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 반응형 디자인 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+@media (max-width: 600px) {
+  #word-display {
+    font-size: 32px;
+    padding: 20px;
+  }
+  
+  .main-menu button {
+    padding: 15px;
+    font-size: 16px;
+  }
+  
+  .quiz-option {
+    padding: 15px;
+    font-size: 16px;
+  }
 }
