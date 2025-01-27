@@ -217,10 +217,14 @@ function startQuiz(category) {
   // 문제 풀이를 위한 단어 목록 생성
   wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
 
-  // 화면 업데이트
-  document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
-  showScreen("quiz-screen");
-  showNextWord();
+  // 새로운 탭에서 퀴즈 실행
+  const quizWindow = window.open("quiz.html", "_blank");
+  quizWindow.wordData = wordData;
+  quizWindow.wordStats = wordStats;
+  quizWindow.currentCategory = currentCategory;
+  quizWindow.totalQuestions = totalQuestions;
+  quizWindow.remainingQuestions = remainingQuestions;
+  quizWindow.masteredCount = masteredCount;
 }
 
 function getWeightedRandomElements(array, n) {
@@ -247,144 +251,6 @@ function getWeightedRandomElements(array, n) {
     }
   }
   return selected;
-}
-
-function showNextWord() {
-  if (!wordStats || wordStats.length === 0 || remainingQuestions <= 0) {
-    alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
-    return goBack();
-  }
-
-  currentWord = wordStats.shift();
-  if (!currentWord) {
-    alert("출제할 단어가 없습니다.");
-    return goBack();
-  }
-
-  correctAnswer = currentWord.meaning;
-  updateWordDisplayBackground();
-
-  const options = [correctAnswer];
-  while (options.length < 4) {
-    const randomWord = wordData[currentCategory][Math.floor(Math.random() * wordData[currentCategory].length)];
-    if (randomWord && !options.includes(randomWord.meaning)) options.push(randomWord.meaning);
-  }
-  options.sort(() => Math.random() - 0.5);
-
-  const optionsContainer = document.getElementById("options");
-  optionsContainer.innerHTML = options.map(opt => `<div class="quiz-option">${opt}</div>`).join('');
-
-  optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
-    opt.addEventListener('click', () => checkAnswer(opt.textContent));
-  });
-
-  document.getElementById("word-display").textContent = currentWord.word;
-  startTimer();
-}
-
-function updateWordDisplayBackground() {
-  const wordDisplay = document.getElementById("word-display");
-  const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
-  const errorCount = stat.errorCount || 0;
-  const intensity = Math.min(errorCount / 10, 1);
-  const redValue = Math.floor(255 * intensity);
-  wordDisplay.style.backgroundColor = `rgba(${redValue}, ${255 - redValue}, ${255 - redValue}, 0.3)`;
-}
-
-function checkAnswer(selected) {
-  stopTimer();
-  const responseTime = Date.now() - startTime;
-  const stat = wordData.stats[currentWord.word] || { correctStreak: 0, errorCount: 0, totalTime: 0, answerCount: 0 };
-
-  if (selected === correctAnswer) {
-    stat.correctStreak = (stat.correctStreak || 0) + 1;
-    stat.totalTime += responseTime;
-    stat.answerCount = (stat.answerCount || 0) + 1;
-
-    if (stat.correctStreak >= 3) {
-      stat.lastMastered = Date.now();
-      masteredCount++;
-    }
-
-    if (stat.errorCount > 0) stat.errorCount--;
-
-    document.querySelectorAll('.quiz-option').forEach(opt => {
-      if (opt.textContent === selected) {
-        opt.classList.add('correct');
-        opt.style.pointerEvents = 'none';
-      }
-    });
-
-    setTimeout(() => {
-      updateProgress();
-      showNextWord();
-    }, 1000);
-  } else {
-    stat.correctStreak = 0;
-    stat.errorCount = (stat.errorCount || 0) + 1;
-
-    document.querySelectorAll('.quiz-option').forEach(opt => {
-      if (opt.textContent === selected) {
-        opt.classList.add('wrong');
-        opt.style.pointerEvents = 'none';
-      }
-    });
-  }
-
-  stat.avgTime = stat.totalTime / (stat.answerCount || 1);
-  wordData.stats[currentWord.word] = stat;
-  updateWordDisplayBackground();
-}
-
-function updateProgress() {
-  if (remainingQuestions > 0) {
-    remainingQuestions--;
-  }
-  document.getElementById("progress").textContent = 
-    `확실하게 외운 단어: ${masteredCount}개 / 남은 단어: ${remainingQuestions}개 / 전체 문제: ${totalQuestions}개`;
-}
-
-async function loadVocabFile(filename) {
-  // 모든 카테고리 초기화
-  Object.keys(wordData).forEach(key => {
-    if (key !== 'stats') wordData[key] = [];
-  });
-
-  const response = await fetch(filename);
-  const text = await response.text();
-  text.split("\n").slice(1).forEach(line => {
-    const [word, meaning, category] = line.split(",").map(s => s.trim());
-    if (word && meaning && category && wordData[category]) {
-      if (!isWordDuplicate(word)) {
-        wordData[category].push({ word, meaning });
-        wordData.mixed.push({ word, meaning });
-      }
-    }
-  });
-  updateTotalWords();
-  updateWordList();
-}
-
-function showManageScreen() {
-  showScreen("manage-screen");
-  updateWordList();
-}
-
-function goBack() {
-  showScreen("main-menu");
-}
-
-// 타이머
-function startTimer() {
-  startTime = Date.now();
-  timerInterval = setInterval(() => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    document.getElementById("timer").textContent = `시간: ${elapsed}초`;
-  }, 1000);
-}
-
-function stopTimer() {
-  clearInterval(timerInterval);
 }
 
 // 초기화
