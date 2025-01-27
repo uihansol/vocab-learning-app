@@ -177,14 +177,6 @@ function showScreen(screenId) {
   target.style.display = 'flex'; // CSS 클래스 대신 직접 flex 적용
 }
 
-// 품사 버튼에 이벤트 리스너 추가
-document.querySelectorAll('.category-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const category = btn.getAttribute('data-category');
-    startQuiz(category);
-  });
-});
-
 // 퀴즈 로직
 async function selectDifficulty(difficulty) {
   const files = { easy: 'vocab1.csv', normal: 'vocab2.csv', hard: 'vocab3.csv' };
@@ -200,7 +192,18 @@ async function selectDifficulty(difficulty) {
 
 function startQuiz(category) {
   console.log(`퀴즈 시작: ${category}`); // 디버깅용 로그
-  if (!wordData[category] || wordData[category].length === 0) {
+
+  // 필터링된 단어 목록 생성
+  const filteredWords = wordData[category].filter(wordObj => {
+    const stat = wordData.stats[wordObj.word] || {};
+    if (stat.lastMastered) {
+      const daysDiff = (Date.now() - stat.lastMastered) / (1000 * 60 * 60 * 24);
+      return daysDiff > 7; // 7일 이상 지난 단어만 출제
+    }
+    return true;
+  });
+
+  if (filteredWords.length === 0) {
     alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
     return;
   }
@@ -212,7 +215,7 @@ function startQuiz(category) {
   currentCategory = category;
 
   // 문제 풀이를 위한 단어 목록 생성
-  wordStats = getWeightedRandomElements(wordData[category], totalQuestions);
+  wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
 
   // 화면 업데이트
   document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
@@ -220,8 +223,9 @@ function startQuiz(category) {
   showNextWord();
 }
 
-
 function getWeightedRandomElements(array, n) {
+  if (array.length === 0) return [];
+
   const weightedArray = array.map(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
     const errorWeight = stat.errorCount ? stat.errorCount * 5 : 1;
@@ -236,7 +240,7 @@ function getWeightedRandomElements(array, n) {
     let random = Math.random() * totalWeight;
     for (const w of weightedArray) {
       random -= w.weight;
-      if (random < 0) {
+      if (random < 0 && !selected.includes(w)) {
         selected.push(w);
         break;
       }
@@ -245,14 +249,18 @@ function getWeightedRandomElements(array, n) {
   return selected;
 }
 
-// showNextWord 함수 수정
 function showNextWord() {
-  if (wordStats.length === 0 || remainingQuestions <= 0) {
+  if (!wordStats || wordStats.length === 0 || remainingQuestions <= 0) {
     alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
     return goBack();
   }
 
   currentWord = wordStats.shift();
+  if (!currentWord) {
+    alert("출제할 단어가 없습니다.");
+    return goBack();
+  }
+
   correctAnswer = currentWord.meaning;
   updateWordDisplayBackground();
 
@@ -307,7 +315,10 @@ function checkAnswer(selected) {
       }
     });
 
-    setTimeout(showNextWord, 1000);
+    setTimeout(() => {
+      updateProgress();
+      showNextWord();
+    }, 1000);
   } else {
     stat.correctStreak = 0;
     stat.errorCount = (stat.errorCount || 0) + 1;
@@ -322,27 +333,28 @@ function checkAnswer(selected) {
 
   stat.avgTime = stat.totalTime / (stat.answerCount || 1);
   wordData.stats[currentWord.word] = stat;
-  updateProgress();
   updateWordDisplayBackground();
 }
 
 function updateProgress() {
+  if (remainingQuestions > 0) {
+    remainingQuestions--;
+  }
   document.getElementById("progress").textContent = 
     `확실하게 외운 단어: ${masteredCount}개 / 남은 단어: ${remainingQuestions}개 / 전체 문제: ${totalQuestions}개`;
-  remainingQuestions--;
 }
 
 async function loadVocabFile(filename) {
-  // mixed 카테고리만 초기화
-  wordData.mixed = [];
+  // 모든 카테고리 초기화
+  Object.keys(wordData).forEach(key => {
+    if (key !== 'stats') wordData[key] = [];
+  });
+
   const response = await fetch(filename);
   const text = await response.text();
   text.split("\n").slice(1).forEach(line => {
     const [word, meaning, category] = line.split(",").map(s => s.trim());
-    if (word && meaning && category) {
-      // 유효한 카테고리인지 확인
-      if (!wordData[category]) return;
-      // 중복 단어 검사 추가
+    if (word && meaning && category && wordData[category]) {
       if (!isWordDuplicate(word)) {
         wordData[category].push({ word, meaning });
         wordData.mixed.push({ word, meaning });
