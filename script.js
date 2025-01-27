@@ -5,12 +5,7 @@ let wordData = {
   adverb: [], 
   phrase: [], 
   mixed: [],
-  stats: {},
-  settings: {
-    errorWeight: 5,
-    freshnessWeight: 2,
-    cooldownDays: 7
-  }
+  stats: {}
 };
 
 let wordStats = [];
@@ -23,46 +18,42 @@ let totalQuestions = 10;
 let remainingQuestions = 0;
 let masteredCount = 0;
 
-// localStorage 기반 사용자 관리
-let users = JSON.parse(localStorage.getItem('users')) || [
-  {username: "user1", password: "password1"},
-  {username: "user2", password: "password2"}
-];
+// 사용자 관리
+let users = JSON.parse(localStorage.getItem('users')) || [];
+let loggedInUser = localStorage.getItem('loggedInUser') || null;
 
 function syncUsers() {
   localStorage.setItem('users', JSON.stringify(users));
+}
+
+function addUser() {
+  const username = document.getElementById("new-username").value.trim();
+  const password = document.getElementById("new-password").value.trim();
+
+  if (!username || !password) {
+    alert("사용자 이름과 비밀번호를 입력하세요.");
+    return;
+  }
+
+  if (users.some(u => u.username === username)) {
+    alert("이미 존재하는 사용자입니다.");
+    return;
+  }
+
+  users.push({ username, password });
+  syncUsers();
+  alert("사용자가 추가되었습니다.");
+  document.getElementById("new-username").value = "";
+  document.getElementById("new-password").value = "";
   showUserManagement();
 }
 
-// 사용자 인증 처리 (서버 연동 제거)
-async function handleUserAuth() {
-  const authBtn = document.getElementById("auth-btn");
-  if (authBtn.textContent === "로그아웃") {
-    document.getElementById("current-user").textContent = "로그인 필요";
-    authBtn.textContent = "로그인";
-    document.getElementById("stats-btn").classList.add("hidden");
-    document.getElementById("user-management-btn").classList.add("hidden");
-    localStorage.removeItem('loggedInUser');
-    alert("로그아웃 되었습니다.");
-  } else {
-    const username = prompt("사용자 이름을 입력하세요:");
-    const password = prompt("비밀번호를 입력하세요:");
-
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-      alert("로그인 성공!");
-      document.getElementById("current-user").textContent = username;
-      authBtn.textContent = "로그아웃";
-      document.getElementById("stats-btn").classList.remove("hidden");
-      document.getElementById("user-management-btn").classList.remove("hidden");
-      localStorage.setItem('loggedInUser', username);
-    } else {
-      alert("로그인 실패: 잘못된 계정 정보");
-    }
-  }
+function deleteUser(username) {
+  users = users.filter(u => u.username !== username);
+  syncUsers();
+  showUserManagement();
 }
 
-// 사용자 관리 화면 (서버 연동 제거)
 function showUserManagement() {
   const userList = document.getElementById("user-list");
   userList.innerHTML = users.map(user => `
@@ -71,49 +62,40 @@ function showUserManagement() {
   showScreen("user-management-screen");
 }
 
-function deleteUser(target) {
-  users = users.filter(u => u.username !== target);
-  syncUsers();
-}
+function handleUserAuth() {
+  if (loggedInUser) {
+    loggedInUser = null;
+    localStorage.removeItem('loggedInUser');
+    alert("로그아웃 되었습니다.");
+  } else {
+    const username = prompt("사용자 이름을 입력하세요:");
+    const password = prompt("비밀번호를 입력하세요:");
 
-function addUser() {
-  const username = document.getElementById("new-username").value.trim();
-  const password = document.getElementById("new-password").value.trim();
-  
-  if(!username || !password) return alert("빈 칸을 채워주세요");
-  if(users.some(u => u.username === username)) return alert("이미 존재하는 사용자");
-  
-  users.push({username, password});
-  syncUsers();
-  document.getElementById("new-username").value = "";
-  document.getElementById("new-password").value = "";
-}
-
-// 초기화 시 로그인 상태 확인
-window.onload = () => {
-  const savedUser = localStorage.getItem('loggedInUser');
-  if(savedUser) {
-    document.getElementById("current-user").textContent = savedUser;
-    document.getElementById("auth-btn").textContent = "로그아웃";
-    document.getElementById("stats-btn").classList.remove("hidden");
-    document.getElementById("user-management-btn").classList.remove("hidden");
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+      loggedInUser = username;
+      localStorage.setItem('loggedInUser', username);
+      alert("로그인 성공!");
+    } else {
+      alert("로그인 실패: 잘못된 계정 정보");
+    }
   }
-  
-  loadVocabFile('vocab1.csv').then(() => {
-    showScreen("main-menu");
-  }).catch(() => alert("단어장 불러오기 실패"));
-};
-
-// 난이도 선택 핸들러
-function selectDifficulty(level) {
-  const filename = `vocab${level === 'easy' ? '1' : level === 'normal' ? '2' : '3'}.csv`;
-  loadVocabFile(filename).then(() => {
-    alert(`[${level}] 난이도 단어장 로드 완료`);
-    showScreen("main-menu");
-  });
+  updateAuthUI();
 }
 
-// 단어 관리 함수
+function updateAuthUI() {
+  const authBtn = document.getElementById("auth-btn");
+  const currentUserSpan = document.getElementById("current-user");
+  if (loggedInUser) {
+    currentUserSpan.textContent = loggedInUser;
+    authBtn.textContent = "로그아웃";
+  } else {
+    currentUserSpan.textContent = "로그인 필요";
+    authBtn.textContent = "로그인";
+  }
+}
+
+// 공통 함수
 function updateTotalWords() {
   const total = [...new Set([...wordData.verb, ...wordData.noun, ...wordData.adjective, ...wordData.adverb, ...wordData.phrase])].length;
   document.getElementById("total-words").innerText = `전체 단어: ${total}개`;
@@ -132,20 +114,88 @@ function addWord() {
     updateWordList();
     updateTotalWords();
   } else {
-    alert("유효하지 않은 입력 또는 중복 단어");
+    alert("입력 오류 또는 중복 단어");
   }
 }
 
-// 퀴즈 핵심 로직
+async function uploadFile() {
+  const file = document.getElementById("file-input").files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const lines = e.target.result.split("\n");
+    lines.slice(1).forEach(line => {
+      const [word, meaning, category] = line.split(",").map(s => s.trim());
+      if (word && meaning && category && !isWordDuplicate(word)) {
+        wordData[category].push({ word, meaning });
+        if (category !== 'mixed') wordData.mixed.push({ word, meaning });
+      }
+    });
+    updateWordList();
+    updateTotalWords();
+  };
+  reader.readAsText(file);
+}
+
+function isWordDuplicate(word) {
+  return Object.values(wordData).flat().some(item => item.word === word);
+}
+
+function updateWordList() {
+  const wordList = document.getElementById("word-list");
+  wordList.innerHTML = "";
+  const uniqueWords = [...new Set(wordData.mixed.map(w => w.word))];
+  uniqueWords.forEach(word => {
+    const li = document.createElement("li");
+    li.textContent = `${word}: ${wordData.mixed.find(w => w.word === word).meaning}`;
+    const btn = document.createElement("button");
+    btn.textContent = "삭제";
+    btn.onclick = () => deleteWord(word);
+    li.appendChild(btn);
+    wordList.appendChild(li);
+  });
+}
+
+function deleteWord(targetWord) {
+  Object.keys(wordData).forEach(cat => {
+    wordData[cat] = wordData[cat].filter(w => w.word !== targetWord);
+  });
+  delete wordData.stats[targetWord];
+  updateWordList();
+  updateTotalWords();
+}
+
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+    s.style.display = 'none';
+  });
+  const target = document.getElementById(screenId);
+  target.classList.add('active');
+  target.style.display = 'block';
+}
+
+// 퀴즈 로직
+async function selectDifficulty(difficulty) {
+  const files = { easy: 'vocab1.csv', normal: 'vocab2.csv', hard: 'vocab3.csv' };
+  await loadVocabFile(files[difficulty]);
+  alert(`${difficulty} 난이도 로드 완료! (${wordData.mixed.length}개 단어)`);
+  showScreen("main-menu");
+}
+
 function startQuiz(category) {
   const filteredWords = wordData[category].filter(wordObj => {
     const stat = wordData.stats[wordObj.word] || {};
-    return !stat.lastMastered || 
-      (Date.now() - stat.lastMastered) > wordData.settings.cooldownDays * 24 * 60 * 60 * 1000;
+    if (stat.lastMastered) {
+      const daysDiff = (Date.now() - stat.lastMastered) / (1000 * 60 * 60 * 24);
+      return daysDiff > 7;
+    }
+    return true;
   });
 
   if (filteredWords.length === 0) {
-    alert(`선택한 카테고리(${category})에 학습 가능한 단어가 없습니다`);
+    alert(`선택된 카테고리(${category})에 유효한 단어가 없습니다.`);
     return;
   }
 
@@ -154,29 +204,90 @@ function startQuiz(category) {
   masteredCount = 0;
   currentCategory = category;
 
-  wordStats = getWeightedRandomElements(filteredWords, totalQuestions);
-  
+  wordStats = [];
+  while (wordStats.length < totalQuestions) {
+    const remaining = totalQuestions - wordStats.length;
+    const count = Math.min(remaining, filteredWords.length);
+    const weightedWords = getWeightedRandomElements(filteredWords, count);
+    wordStats.push(...weightedWords);
+  }
+
+  document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
   showNextWord();
+}
+
+function getWeightedRandomElements(array, n) {
+  const weightedArray = array.map(wordObj => {
+    const stat = wordData.stats[wordObj.word] || {};
+    const errorWeight = stat.errorCount ? stat.errorCount * 5 : 1;
+    const correctRateWeight = stat.answerCount ? (1 - (stat.correctStreak / stat.answerCount)) : 1;
+    const weight = errorWeight * correctRateWeight;
+    return { ...wordObj, weight };
+  });
+
+  const totalWeight = weightedArray.reduce((sum, w) => sum + w.weight, 0);
+  const selected = [];
+  while (selected.length < n) {
+    let random = Math.random() * totalWeight;
+    for (const w of weightedArray) {
+      random -= w.weight;
+      if (random < 0) {
+        selected.push(w);
+        break;
+      }
+    }
+  }
+  return selected;
+}
+
+function showNextWord() {
+  if (wordStats.length === 0 || remainingQuestions <= 0) {
+    alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
+    return goBack();
+  }
+
+  currentWord = wordStats.shift();
+  correctAnswer = currentWord.meaning;
+  updateWordDisplayBackground();
+
+  const options = [correctAnswer];
+  while (options.length < 4) {
+    const randomWord = wordData[currentCategory][Math.floor(Math.random() * wordData[currentCategory].length)];
+    if (randomWord && !options.includes(randomWord.meaning)) options.push(randomWord.meaning);
+  }
+  options.sort(() => Math.random() - 0.5);
+
+  const optionsContainer = document.getElementById("options");
+  optionsContainer.innerHTML = options.map(opt => `<div class="quiz-option">${opt}</div>`).join('');
+
+  optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => checkAnswer(opt.textContent));
+    opt.addEventListener('touchstart', () => checkAnswer(opt.textContent), { passive: true });
+  });
+
+  document.getElementById("word-display").textContent = currentWord.word;
+  startTimer();
+}
+
+function updateWordDisplayBackground() {
+  const wordDisplay = document.getElementById("word-display");
+  const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
+  const errorCount = stat.errorCount || 0;
+  const intensity = Math.min(errorCount / 10, 1);
+  const redValue = Math.floor(255 * intensity);
+  wordDisplay.style.backgroundColor = `rgba(${redValue}, ${255 - redValue}, ${255 - redValue}, 0.3)`;
 }
 
 function checkAnswer(selected) {
   stopTimer();
   const responseTime = Date.now() - startTime;
-  const stat = wordData.stats[currentWord.word] || { 
-    correctStreak: 0, 
-    errorCount: 0, 
-    totalTime: 0, 
-    answerCount: 0,
-    lastError: null
-  };
+  const stat = wordData.stats[currentWord.word] || { correctStreak: 0, errorCount: 0, totalTime: 0, answerCount: 0 };
 
-  const options = document.querySelectorAll('.quiz-option');
-  
   if (selected === correctAnswer) {
-    stat.correctStreak++;
+    stat.correctStreak = (stat.correctStreak || 0) + 1;
     stat.totalTime += responseTime;
-    stat.answerCount++;
+    stat.answerCount = (stat.answerCount || 0) + 1;
 
     if (stat.correctStreak >= 3) {
       stat.lastMastered = Date.now();
@@ -184,84 +295,79 @@ function checkAnswer(selected) {
     }
 
     if (stat.errorCount > 0) stat.errorCount--;
-    highlightOption(selected, 'correct');
-    setTimeout(showNextWord, 1000);
-  } else {
-    stat.correctStreak = 0;
-    stat.errorCount++;
-    stat.lastError = Date.now();
-    
-    // 오답 선택시 다른 오답 선지 숨기기
-    options.forEach(opt => {
-      if (opt.textContent !== correctAnswer && opt.textContent !== selected) {
-        opt.style.opacity = '0';
-        opt.style.transform = 'scale(0.9)';
+
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      if (opt.textContent === selected) {
+        opt.classList.add('correct');
         opt.style.pointerEvents = 'none';
       }
     });
-    highlightOption(selected, 'wrong');
-  }
 
-  stat.avgTime = stat.totalTime / stat.answerCount;
-  wordData.stats[currentWord.word] = stat;
-  updateProgress();
-  updateWordDisplayBackground(); // 배경색 즉시 업데이트
-}
+    setTimeout(showNextWord, 1000);
+  } else {
+    stat.correctStreak = 0;
+    stat.errorCount = (stat.errorCount || 0) + 1;
 
-// 화면 업데이트 함수
-function updateWordDisplayBackground() {
-  const wordDisplay = document.getElementById("word-display");
-  const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
-  const redValue = Math.min(stat.errorCount * 40, 255);
-  wordDisplay.style.backgroundColor = `rgba(${redValue}, ${255 - redValue}, ${255 - redValue}, 0.4)`;
-}
-
-function highlightOption(selected, className) {
-  document.querySelectorAll('.quiz-option').forEach(opt => {
-    if (opt.textContent === selected) {
-      opt.classList.add(className);
-      opt.style.pointerEvents = 'none';
-    }
-  });
-}
-
-// CSV 파일 로드
-async function loadVocabFile(filename) {
-  try {
-    const response = await fetch(filename);
-    if (!response.ok) throw new Error('파일 없음');
-    const csvData = await response.text();
-    
-    // 카테고리 초기화
-    wordData = { verb: [], noun: [], adjective: [], adverb: [], phrase: [], mixed: [] };
-    
-    csvData.split('\n').slice(1).forEach(row => {
-      const [word, meaning, category] = row.split(',').map(item => item.trim());
-      if(word && meaning && wordData[category]) {
-        wordData[category].push({ word, meaning });
-        wordData.mixed.push({ word, meaning }); // 혼합 카테고리에도 추가
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      if (opt.textContent === selected) {
+        opt.classList.add('wrong');
+        opt.style.pointerEvents = 'none';
       }
     });
-    
-    updateTotalWords();
-    return true;
-  } catch(e) {
-    console.error('단어장 로드 실패:', e);
-    alert(`파일 로드 실패: ${filename}`);
-    return false;
   }
+
+  stat.avgTime = stat.totalTime / (stat.answerCount || 1);
+  wordData.stats[currentWord.word] = stat;
+  updateProgress();
+  updateWordDisplayBackground();
 }
 
-// 공통 유틸리티
-function showScreen(screenId) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const target = document.getElementById(screenId);
-  if (target) {
-    target.classList.add('active');
-    target.style.display = 'block';
-  }
+function updateProgress() {
+  document.getElementById("progress").textContent = 
+    `확실하게 외운 단어: ${masteredCount}개 / 남은 단어: ${remainingQuestions}개 / 전체 문제: ${totalQuestions}개`;
+  remainingQuestions--;
+}
+
+async function loadVocabFile(filename) {
+  Object.keys(wordData).forEach(k => wordData[k] = []);
+  const response = await fetch(filename);
+  const text = await response.text();
+  text.split("\n").slice(1).forEach(line => {
+    const [word, meaning, category] = line.split(",").map(s => s.trim());
+    if (word && meaning && category) {
+      wordData[category].push({ word, meaning });
+      if (category !== 'mixed') wordData.mixed.push({ word, meaning });
+    }
+  });
+  updateTotalWords();
+  updateWordList();
+}
+
+function showManageScreen() {
+  showScreen("manage-screen");
+  updateWordList();
 }
 
 function goBack() {
   showScreen("main-menu");
 }
+
+// 타이머
+function startTimer() {
+  startTime = Date.now();
+  timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    document.getElementById("timer").textContent = `시간: ${elapsed}초`;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+// 초기화
+window.onload = () => {
+  loadVocabFile('vocab2.csv');
+  showScreen("main-menu");
+  updateAuthUI();
+};
