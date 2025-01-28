@@ -1,265 +1,366 @@
-word,meaning,category
-abandon,버리다,verb
-benefit,이익,noun
-compensate,보상하다,verb
-dilemma,딜레마,noun
-evaluate,평가하다,verb
-fluctuate,변동하다,verb
-generate,생성하다,verb
-hypothesis,가설,noun
-implement,실행하다,verb
-justify,정당화하다,verb
-analyze,분석하다,verb
-compare,비교하다,verb
-contrast,대조하다,verb
-define,정의하다,verb
-demonstrate,증명하다,verb
-describe,묘사하다,verb
-discuss,토론하다,verb
-explain,설명하다,verb
-identify,확인하다,verb
-interpret,해석하다,verb
-predict,예측하다,verb
-summarize,요약하다,verb
-support,지지하다,verb
-not A but B,A가 아니라 B,phrase
-either A or B,A 또는 B,phrase
-both A and B,A와 B 둘 다,phrase
-neither A nor B,A도 B도 아니다,phrase
-whether A or B,A인지 B인지,phrase
-as soon as,~하자마자,phrase
-in order to,~하기 위해,phrase
-due to,~때문에,phrase
-in spite of,~에도 불구하고,phrase
-achieve,성취하다,verb
-adapt,적응하다,verb
-affect,영향을 미치다,verb
-allow,허락하다,verb
-alter,변경하다,verb
-apply,적용하다,verb
-argue,주장하다,verb
-assume,가정하다,verb
-attempt,시도하다,verb
-avoid,피하다,verb
-cause,원인이 되다,verb
-challenge,도전하다,verb
-choose,선택하다,verb
-claim,주장하다,verb
-conclude,결론을 내리다,verb
-conduct,수행하다,verb
-consider,고려하다,verb
-consist,구성되다,verb
-construct,구축하다,verb
-contribute,기여하다,verb
-convince,설득하다,verb
-create,창조하다,verb
-decide,결정하다,verb
-define,정의하다,verb
-demonstrate,증명하다,verb
-depend,의존하다,verb
-describe,묘사하다,verb
-design,설계하다,verb
-develop,발전시키다,verb
-discover,발견하다,verb
-discuss,토론하다,verb
-distinguish,구별하다,verb
-effect,효과,noun
-emphasize,강조하다,verb
-enable,가능하게 하다,verb
-encourage,격려하다,verb
-establish,설립하다,verb
-estimate,추정하다,verb
-examine,조사하다,verb
-exist,존재하다,verb
-expand,확장하다,verb
-explore,탐구하다,verb
-express,표현하다,verb
-focus,초점을 맞추다,verb
-form,형성하다,verb
-gain,얻다,verb
-identify,확인하다,verb
-illustrate,설명하다,verb
-imagine,상상하다,verb
-improve,개선하다,verb
-include,포함하다,verb
-indicate,나타내다,verb
-influence,영향을 미치다,verb
-intend,의도하다,verb
-introduce,소개하다,verb
-investigate,조사하다,verb
-involve,관련시키다,verb
-maintain,유지하다,verb
-manage,관리하다,verb
-measure,측정하다,verb
-observe,관찰하다,verb
-obtain,얻다,verb
-occur,발생하다,verb
-overcome,극복하다,verb
-participate,참여하다,verb
-perform,수행하다,verb
-persuade,설득하다,verb
-plan,계획하다,verb
-predict,예측하다,verb
-prepare,준비하다,verb
-present,제시하다,verb
-prevent,방지하다,verb
-produce,생산하다,verb
-promote,촉진하다,verb
-propose,제안하다,verb
-protect,보호하다,verb
-prove,증명하다,verb
-provide,제공하다,verb
-publish,출판하다,verb
-pursue,추구하다,verb
-raise,올리다,verb
-reach,도달하다,verb
-realize,깨닫다,verb
-reduce,줄이다,verb
-reflect,반영하다,verb
-regard,간주하다,verb
-reject,거부하다,verb
-relate,관련시키다,verb
-remain,남아있다,verb
-remember,기억하다,verb
-remove,제거하다,verb
-replace,대체하다,verb
-represent,대표하다,verb
-require,요구하다,verb
-research,연구하다,verb
-respond,응답하다,verb
-reveal,드러내다,verb
-seek,찾다,verb
-select,선택하다,verb
-separate,분리하다,verb
-solve,해결하다,verb
-specify,명시하다,verb
-state,진술하다,verb
-strengthen,강화하다,verb
-suggest,제안하다,verb
-supply,공급하다,verb
-support,지지하다,verb
-suppose,가정하다,verb
-survive,생존하다,verb
-tend,경향이 있다,verb
-transform,변형시키다,verb
-understand,이해하다,verb
-use,사용하다,verb
-vary,변화하다,verb
-view,보기,noun
-wonder,궁금해하다,verb
-achieve,성취하다,verb
-adapt,적응하다,verb
-affect,영향을 미치다,verb
-allow,허락하다,verb
-alter,변경하다,verb
-apply,적용하다,verb
-argue,주장하다,verb
-assume,가정하다,verb
-attempt,시도하다,verb
-avoid,피하다,verb
-cause,원인이 되다,verb
-challenge,도전하다,verb
-choose,선택하다,verb
-claim,주장하다,verb
-conclude,결론을 내리다,verb
-conduct,수행하다,verb
-consider,고려하다,verb
-consist,구성되다,verb
-construct,구축하다,verb
-contribute,기여하다,verb
-convince,설득하다,verb
-create,창조하다,verb
-decide,결정하다,verb
-define,정의하다,verb
-demonstrate,증명하다,verb
-depend,의존하다,verb
-describe,묘사하다,verb
-design,설계하다,verb
-develop,발전시키다,verb
-discover,발견하다,verb
-discuss,토론하다,verb
-distinguish,구별하다,verb
-effect,효과,noun
-emphasize,강조하다,verb
-enable,가능하게 하다,verb
-encourage,격려하다,verb
-establish,설립하다,verb
-estimate,추정하다,verb
-examine,조사하다,verb
-exist,존재하다,verb
-expand,확장하다,verb
-explore,탐구하다,verb
-express,표현하다,verb
-focus,초점을 맞추다,verb
-form,형성하다,verb
-gain,얻다,verb
-identify,확인하다,verb
-illustrate,설명하다,verb
-imagine,상상하다,verb
-improve,개선하다,verb
-include,포함하다,verb
-indicate,나타내다,verb
-influence,영향을 미치다,verb
-intend,의도하다,verb
-introduce,소개하다,verb
-investigate,조사하다,verb
-involve,관련시키다,verb
-maintain,유지하다,verb
-manage,관리하다,verb
-measure,측정하다,verb
-observe,관찰하다,verb
-obtain,얻다,verb
-occur,발생하다,verb
-overcome,극복하다,verb
-participate,참여하다,verb
-perform,수행하다,verb
-persuade,설득하다,verb
-plan,계획하다,verb
-predict,예측하다,verb
-prepare,준비하다,verb
-present,제시하다,verb
-prevent,방지하다,verb
-produce,생산하다,verb
-promote,촉진하다,verb
-propose,제안하다,verb
-protect,보호하다,verb
-prove,증명하다,verb
-provide,제공하다,verb
-publish,출판하다,verb
-pursue,추구하다,verb
-raise,올리다,verb
-reach,도달하다,verb
-realize,깨닫다,verb
-reduce,줄이다,verb
-reflect,반영하다,verb
-regard,간주하다,verb
-reject,거부하다,verb
-relate,관련시키다,verb
-remain,남아있다,verb
-remember,기억하다,verb
-remove,제거하다,verb
-replace,대체하다,verb
-represent,대표하다,verb
-require,요구하다,verb
-research,연구하다,verb
-respond,응답하다,verb
-reveal,드러내다,verb
-seek,찾다,verb
-select,선택하다,verb
-separate,분리하다,verb
-solve,해결하다,verb
-specify,명시하다,verb
-state,진술하다,verb
-strengthen,강화하다,verb
-suggest,제안하다,verb
-supply,공급하다,verb
-support,지지하다,verb
-suppose,가정하다,verb
-survive,생존하다,verb
-tend,경향이 있다,verb
-transform,변형시키다,verb
-understand,이해하다,verb
-use,사용하다,verb
-vary,변화하다,verb
-view,보기,noun
-wonder,궁금해하다,verb
+word,meaning,category  
+accept,받아들이다,verb  
+admire,존경하다,verb  
+advise,조언하다,verb  
+agree,동의하다,verb  
+arrive,도착하다,verb  
+ask,묻다,verb  
+bake,굽다,verb  
+believe,믿다,verb  
+borrow,빌리다,verb  
+build,건설하다,verb  
+celebrate,축하하다,verb  
+climb,오르다,verb  
+collect,수집하다,verb  
+communicate,소통하다,verb  
+complete,완성하다,verb  
+cook,요리하다,verb  
+count,세다,verb  
+dance,춤추다,verb  
+deliver,배달하다,verb  
+draw,그리다,verb  
+animal,동물,noun  
+answer,대답,noun  
+apple,사과,noun  
+book,책,noun  
+car,자동차,noun  
+city,도시,noun  
+cloud,구름,noun  
+color,색깔,noun  
+country,나라,noun  
+day,날,noun  
+dream,꿈,noun  
+earth,지구,noun  
+egg,달걀,noun  
+friend,친구,noun  
+fruit,과일,noun  
+game,게임,noun  
+garden,정원,noun  
+goal,목표,noun  
+hand,손,noun  
+home,집,noun  
+big,큰,adjective  
+small,작은,adjective  
+happy,행복한,adjective  
+sad,슬픈,adjective  
+hot,뜨거운,adjective  
+cold,추운,adjective  
+fast,빠른,adjective  
+slow,느린,adjective  
+bright,밝은,adjective  
+dark,어두운,adjective  
+clean,깨끗한,adjective  
+dirty,더러운,adjective  
+easy,쉬운,adjective  
+difficult,어려운,adjective  
+new,새로운,adjective  
+old,오래된,adjective  
+young,어린,adjective  
+tall,키가 큰,adjective  
+short,키가 작은,adjective  
+quickly,빨리,adverb  
+slowly,천천히,adverb  
+carefully,조심스럽게,adverb  
+loudly,큰 소리로,adverb  
+quietly,조용히,adverb  
+happily,행복하게,adverb  
+sadly,슬프게,adverb  
+easily,쉽게,adverb  
+hardly,거의 ~않다,adverb  
+well,잘,adverb  
+badly,나쁘게,adverb  
+not only A but also B,A뿐만 아니라 B도,phrase  
+on behalf of,~을 대신하여,phrase  
+in front of,~앞에,phrase  
+in the middle of,~한가운데에,phrase  
+by the way,그런데,phrase  
+all of a sudden,갑자기,phrase  
+as well as,~뿐만 아니라,phrase  
+instead of,~대신에,phrase  
+even though,비록 ~일지라도,phrase  
+as long as,~하는 한,phrase
+enjoy,즐기다,verb  
+enter,들어가다,verb  
+explore,탐험하다,verb  
+fail,실패하다,verb  
+fix,고치다,verb  
+follow,따르다,verb  
+greet,인사하다,verb  
+guess,추측하다,verb  
+help,돕다,verb  
+hope,바라다,verb  
+invite,초대하다,verb  
+jump,뛰다,verb  
+knock,노크하다,verb  
+laugh,웃다,verb  
+learn,배우다,verb  
+listen,듣다,verb  
+move,움직이다,verb  
+offer,제공하다,verb  
+open,열다,verb  
+paint,그리다,verb  
+idea,아이디어,noun  
+job,직업,noun  
+key,열쇠,noun  
+language,언어,noun  
+light,빛,noun  
+love,사랑,noun  
+money,돈,noun  
+moon,달,noun  
+morning,아침,noun  
+mountain,산,noun  
+name,이름,noun  
+night,밤,noun  
+noise,소음,noun  
+ocean,바다,noun  
+paper,종이,noun  
+park,공원,noun  
+pencil,연필,noun  
+people,사람들,noun  
+phone,전화,noun  
+plant,식물,noun  
+strong,강한,adjective  
+weak,약한,adjective  
+soft,부드러운,adjective  
+hard,단단한,adjective  
+noisy,시끄러운,adjective  
+quiet,조용한,adjective  
+brave,용감한,adjective  
+scared,두려운,adjective  
+kind,친절한,adjective  
+mean,심술궂은,adjective  
+funny,재미있는,adjective  
+serious,진지한,adjective  
+curious,호기심 많은,adjective  
+gentle,부드러운,adjective  
+honest,정직한,adjective  
+polite,예의 바른,adjective  
+together,함께,adverb  
+alone,혼자,adverb  
+here,여기,adverb  
+there,거기,adverb  
+now,지금,adverb  
+later,나중에,adverb  
+soon,곧,adverb  
+never,절대 ~않다,adverb  
+always,항상,adverb  
+often,자주,adverb  
+in case of,~의 경우에,phrase  
+on top of,~위에,phrase  
+as a result of,~의 결과로,phrase  
+in addition to,~에 더하여,phrase  
+for example,예를 들어,phrase  
+in general,일반적으로,phrase  
+at the end of,~의 끝에,phrase  
+in order that,~하기 위하여,phrase
+play,놀다,verb  
+practice,연습하다,verb  
+promise,약속하다,verb  
+pull,당기다,verb  
+push,밀다,verb  
+read,읽다,verb  
+relax,휴식하다,verb  
+reply,답장하다,verb  
+run,달리다,verb  
+save,저장하다,verb  
+shout,소리치다,verb  
+sing,노래하다,verb  
+smile,미소지다,verb  
+study,공부하다,verb  
+teach,가르치다,verb  
+thank,감사하다,verb  
+travel,여행하다,verb  
+visit,방문하다,verb  
+wait,기다리다,verb  
+walk,걷다,verb  
+problem,문제,noun  
+question,질문,noun  
+rain,비,noun  
+river,강,noun  
+road,길,noun  
+school,학교,noun  
+science,과학,noun  
+sky,하늘,noun  
+star,별,noun  
+stone,돌,noun  
+sun,해,noun  
+teacher,선생님,noun  
+tree,나무,noun  
+water,물,noun  
+weather,날씨,noun  
+window,창문,noun  
+world,세계,noun  
+year,년,noun  
+zoo,동물원,noun  
+smart,똑똑한,adjective  
+stupid,멍청한,adjective  
+rich,부유한,adjective  
+poor,가난한,adjective  
+wide,넓은,adjective  
+narrow,좁은,adjective  
+heavy,무거운,adjective  
+light,가벼운,adjective  
+sweet,달콤한,adjective  
+sour,신,adjective  
+salty,짠,adjective  
+spicy,매운,adjective  
+fresh,신선한,adjective  
+rotten,썩은,adjective  
+sometimes,가끔,adverb  
+usually,보통,adverb  
+suddenly,갑자기,adverb  
+perfectly,완벽하게,adverb  
+rarely,드물게,adverb  
+barely,가까스로,adverb  
+nearly,거의,adverb  
+truly,진정으로,adverb  
+deeply,깊이,adverb  
+according to,~에 따르면,phrase  
+along with,~와 함께,phrase  
+apart from,~을 제외하고,phrase  
+because of,~때문에,phrase  
+by means of,~을 통해,phrase  
+in spite of,~에도 불구하고,phrase  
+prior to,~이전에,phrase
+write,쓰다,verb  
+achieve,성취하다,verb  
+adapt,적응하다,verb  
+affect,영향을 미치다,verb  
+allow,허락하다,verb  
+alter,변경하다,verb  
+apply,적용하다,verb  
+argue,주장하다,verb  
+assume,가정하다,verb  
+attempt,시도하다,verb  
+avoid,피하다,verb  
+cause,원인이 되다,verb  
+challenge,도전하다,verb  
+choose,선택하다,verb  
+claim,주장하다,verb  
+conclude,결론을 내리다,verb  
+conduct,수행하다,verb  
+consider,고려하다,verb  
+consist,구성되다,verb  
+construct,구축하다,verb  
+flower,꽃,noun  
+forest,숲,noun  
+desert,사막,noun  
+island,섬,noun  
+bridge,다리,noun  
+building,건물,noun  
+computer,컴퓨터,noun  
+internet,인터넷,noun  
+music,음악,noun  
+art,예술,noun  
+history,역사,noun  
+math,수학,noun  
+sport,스포츠,noun  
+team,팀,noun  
+player,선수,noun  
+ball,공,noun  
+food,음식,noun  
+drink,음료,noun  
+house,집,noun  
+room,방,noun  
+delicious,맛있는,adjective  
+disgusting,역겨운,adjective  
+comfortable,편안한,adjective  
+uncomfortable,불편한,adjective  
+modern,현대적인,adjective  
+ancient,고대의,adjective  
+simple,단순한,adjective  
+complex,복잡한,adjective  
+empty,비어 있는,adjective  
+full,가득한,adjective  
+safe,안전한,adjective  
+dangerous,위험한,adjective  
+free,자유로운,adjective  
+busy,바쁜,adjective  
+calm,차분한,adjective  
+wild,거친,adjective  
+clearly,명확하게,adverb  
+correctly,올바르게,adverb  
+incorrectly,잘못되게,adverb  
+eagerly,열심히,adverb  
+generously,관대하게,adverb  
+selfishly,이기적으로,adverb  
+honestly,정직하게,adverb  
+dishonestly,부정직하게,adverb  
+in terms of,~의 측면에서,phrase  
+in favor of,~을 지지하여,phrase  
+in contrast to,~와 대조적으로,phrase  
+in line with,~와 일치하여,phrase  
+on account of,~때문에,phrase  
+with regard to,~에 관하여,phrase  
+for the sake of,~을 위해,phrase
+contribute,기여하다,verb  
+convince,설득하다,verb  
+create,창조하다,verb  
+decide,결정하다,verb  
+define,정의하다,verb  
+demonstrate,증명하다,verb  
+depend,의존하다,verb  
+describe,묘사하다,verb  
+design,설계하다,verb  
+develop,발전시키다,verb  
+discover,발견하다,verb  
+discuss,토론하다,verb  
+distinguish,구별하다,verb  
+emphasize,강조하다,verb  
+enable,가능하게 하다,verb  
+encourage,격려하다,verb  
+establish,설립하다,verb  
+estimate,추정하다,verb  
+examine,조사하다,verb  
+exist,존재하다,verb  
+kitchen,부엌,noun  
+bathroom,화장실,noun  
+bedroom,침실,noun  
+gym,체육관,noun  
+hospital,병원,noun  
+library,도서관,noun  
+museum,박물관,noun  
+restaurant,레스토랑,noun  
+store,가게,noun  
+street,거리,noun  
+tool,도구,noun  
+machine,기계,noun  
+technology,기술,noun  
+knowledge,지식,noun  
+experience,경험,noun  
+memory,기억,noun  
+thought,생각,noun  
+feeling,감정,noun  
+emotion,감정,noun  
+success,성공,noun  
+confident,자신 있는,adjective  
+shy,수줍은,adjective  
+proud,자랑스러운,adjective  
+humble,겸손한,adjective  
+generous,관대한,adjective  
+selfish,이기적인,adjective  
+patient,참을성 있는,adjective  
+impatient,참을성 없는,adjective  
+optimistic,낙관적인,adjective  
+pessimistic,비관적인,adjective  
+active,활동적인,adjective  
+lazy,게으른,adjective  
+energetic,활기찬,adjective  
+tired,피곤한,adjective  
+peaceful,평화로운,adjective  
+chaotic,혼란스러운,adjective  
+gracefully,우아하게,adverb  
+violently,폭력적으로,adverb  
+smoothly,매끄럽게,adverb  
+roughly,대략,adverb  
+publicly,공개적으로,adverb  
+privately,비공개적으로,adverb  
+formally,공식적으로,adverb  
+informally,비공식적으로,adverb  
+in relation to,~와 관련하여,phrase  
+in response to,~에 대한 응답으로,phrase  
+on the basis of,~을 기반으로,phrase  
+with the exception of,~을 제외하고,phrase  
+for the purpose of,~을 목적으로,phrase  
+by virtue of,~덕분에,phrase  
+in accordance with,~에 따라,phrase

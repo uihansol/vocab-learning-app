@@ -1,503 +1,305 @@
-word,meaning,category
-abandon,버리다,verb
-abate,줄이다,verb
-abnormal,비정상적인,adjective
-abolish,폐지하다,verb
-abrupt,갑작스러운,adjective
-absurd,터무니없는,adjective
-abundant,풍부한,adjective
-access,접근,noun
-accommodate,수용하다,verb
-accompany,동반하다,verb
-accumulate,축적하다,verb
-accuse,비난하다,verb
-achieve,성취하다,verb
-acknowledge,인정하다,verb
-acquire,획득하다,verb
-adapt,적응하다,verb
-adequate,적절한,adjective
-adjacent,인접한,adjective
-adjust,조정하다,verb
-administer,관리하다,verb
-adolescent,청소년,noun
-adverse,불리한,adjective
-advocate,옹호하다,verb
-affluent,부유한,adjective
-aggravate,악화시키다,verb
-aggregate,총계,noun
-aggressive,공격적인,adjective
-allocate,할당하다,verb
-alternative,대안,noun
-ambiguous,모호한,adjective
-amend,수정하다,verb
-amplify,확대하다,verb
-analogy,비유,noun
-analyze,분석하다,verb
-annihilate,전멸시키다,verb
-anonymous,익명의,adjective
-antagonize,적대시하다,verb
-anticipate,예상하다,verb
-apathy,무관심,noun
-apparent,명백한,adjective
-appease,달래다,verb
-arbitrary,임의의,adjective
-arid,건조한,adjective
-arouse,일으키다,verb
-articulate,분명히 표현하다,verb
-ascend,오르다,verb
-ascertain,확인하다,verb
-assess,평가하다,verb
-assiduous,근면한,adjective
-assimilate,동화하다,verb
-assume,가정하다,verb
-astute,빈틈없는,adjective
-attain,달성하다,verb
-augment,증가시키다,verb
-authentic,진정한,adjective
-authoritarian,권위주의의,adjective
-authoritative,권위 있는,adjective
-autonomous,자율적인,adjective
-avail,이용하다,verb
-avert,피하다,verb
-banal,진부한,adjective
-barren,불모의,adjective
-benevolent,자비로운,adjective
-bias,편견,noun
-bizarre,기이한,adjective
-bolster,지지하다,verb
-brittle,깨지기 쉬운,adjective
-candid,솔직한,adjective
-capable,능력 있는,adjective
-capacity,능력,noun
-capitulate,항복하다,verb
-catalyst,촉매,noun
-censure,비난하다,verb
-challenge,도전,noun
-chaotic,혼란스러운,adjective
-circumvent,우회하다,verb
-cite,인용하다,verb
-clandestine,비밀의,adjective
-coerce,강요하다,verb
-coherent,일관된,adjective
-coincide,일치하다,verb
-collaborate,협력하다,verb
-collide,충돌하다,verb
-commence,시작하다,verb
-commend,칭찬하다,verb
-compact,압축된,adjective
-compatible,호환되는,adjective
-compensate,보상하다,verb
-complacent,안주하는,adjective
-complement,보완하다,verb
-comprehensive,포괄적인,adjective
-comprise,포함하다,verb
-compulsory,의무적인,adjective
-concede,인정하다,verb
-concise,간결한,adjective
-concrete,구체적인,adjective
-concur,동의하다,verb
-condone,묵인하다,verb
-conducive,도움이 되는,adjective
-confine,제한하다,verb
-conflict,갈등,noun
-conform,따르다,verb
-consensus,합의,noun
-conserve,보존하다,verb
-considerable,상당한,adjective
-consist,구성되다,verb
-consolidate,통합하다,verb
-conspicuous,눈에 띄는,adjective
-constituent,구성 요소,noun
-constrain,제한하다,verb
-contaminate,오염시키다,verb
-contemplate,심사숙고하다,verb
-contemporary,현대의,adjective
-contend,주장하다,verb
-contradict,모순되다,verb
-contrary,반대의,adjective
-contrast,대조,noun
-controversial,논쟁의 여지가 있는,adjective
-conventional,전통적인,adjective
-converge,수렴하다,verb
-convince,설득하다,verb
-copious,풍부한,adjective
-corroborate,확증하다,verb
-counteract,중화하다,verb
-counterpart,상대,noun
-criteria,기준,noun
-crucial,결정적인,adjective
-crude,가공하지 않은,adjective
-culminate,최고조에 달하다,verb
-cultivate,기르다,verb
-cumbersome,성가신,adjective
-curtail,줄이다,verb
-dearth,부족,noun
-debate,토론,noun
-decipher,해독하다,verb
-decline,감소,noun
-decorum,예의,noun
-decree,명령,noun
-deference,존중,noun
-deficient,부족한,adjective
-definite,명확한,adjective
-delegate,위임하다,verb
-deliberate,신중한,adjective
-demise,죽음,noun
-demolish,파괴하다,verb
-demonstrate,증명하다,verb
-denounce,비난하다,verb
-depict,묘사하다,verb
-deplete,고갈시키다,verb
-deplore,한탄하다,verb
-depreciate,가치를 떨어뜨리다,verb
-derive,파생하다,verb
-desolate,황량한,adjective
-despise,경멸하다,verb
-detach,분리하다,verb
-deter,단념시키다,verb
-detrimental,해로운,adjective
-deviate,벗어나다,verb
-devise,고안하다,verb
-diatribe,통렬한 비난,noun
-digress,주제에서 벗어나다,verb
-dilemma,딜레마,noun
-diminish,감소하다,verb
-discrepancy,불일치,noun
-discrete,개별적인,adjective
-discriminate,차별하다,verb
-disdain,경멸,noun
-dismantle,분해하다,verb
-disparage,비하하다,verb
-disparate,상이한,adjective
-dispatch,보내다,verb
-disperse,분산시키다,verb
-dispute,논쟁,noun
-disrupt,방해하다,verb
-disseminate,퍼뜨리다,verb
-dissent,반대,noun
-distort,왜곡하다,verb
-diverse,다양한,adjective
-divert,돌리다,verb
-divulge,누설하다,verb
-dogmatic,독단적인,adjective
-dominant,지배적인,adjective
-dormant,휴면 상태의,adjective
-dubious,의심스러운,adjective
-eccentric,별난,adjective
-eclectic,다양한 출처에서 고른,adjective
-eclipse,가리다,verb
-economical,경제적인,adjective
-edify,교화하다,verb
-efficacy,효능,noun
-elaborate,정교한,adjective
-elicit,끌어내다,verb
-elusive,잘 피하는,adjective
-eminent,저명한,adjective
-emit,방출하다,verb
-emphasize,강조하다,verb
-empirical,경험적인,adjective
-encompass,포함하다,verb
-endure,견디다,verb
-enhance,강화하다,verb
-enigma,수수께끼,noun
-enumerate,열거하다,verb
-ephemeral,덧없는,adjective
-equitable,공평한,adjective
-equivocal,애매한,adjective
-eradicate,근절하다,verb
-erratic,변덕스러운,adjective
-erudite,박식한,adjective
-escalate,확대하다,verb
-esoteric,난해한,adjective
-espouse,지지하다,verb
-essential,필수적인,adjective
-esteem,존경,noun
-eulogy,찬사,noun
-euphemism,완곡어법,noun
-exacerbate,악화시키다,verb
-exalt,칭찬하다,verb
-exasperate,화나게 하다,verb
-excerpt,발췌하다,verb
-exclude,제외하다,verb
-exclusive,배타적인,adjective
-exemplary,모범적인,adjective
-exhaustive,철저한,adjective
-expedite,촉진하다,verb
-explicit,명시적인,adjective
-exploit,이용하다,verb
-extol,칭찬하다,verb
-extraneous,관계없는,adjective
-fabricate,조작하다,verb
-facilitate,촉진하다,verb
-fallacious,그릇된,adjective
-falter,망설이다,verb
-fastidious,까다로운,adjective
-feasible,실행 가능한,adjective
-fervent,열렬한,adjective
-fickle,변덕스러운,adjective
-flourish,번영하다,verb
-fluctuate,변동하다,verb
-forbear,참다,verb
-forlorn,쓸쓸한,adjective
-formidable,위협적인,adjective
-fortuitous,우연한,adjective
-foster,촉진하다,verb
-frugal,검소한,adjective
-futile,헛된,adjective
-garrulous,수다스러운,adjective
-gratuitous,무료의,adjective
-gregarious,사교적인,adjective
-hackneyed,진부한,adjective
-haphazard,무계획적인,adjective
-harangue,열변,noun
-harbinger,전조,noun
-harsh,가혹한,adjective
-haughty,오만한,adjective
-hedonist,쾌락주의자,noun
-hypothesis,가설,noun
-hypothetical,가설의,adjective
-iconoclast,전통 타파자,noun
-idealistic,이상주의적인,adjective
-ignominious,수치스러운,adjective
-illuminate,밝히다,verb
-illusory,환상적인,adjective
-illustrious,저명한,adjective
-imminent,임박한,adjective
-immutable,불변의,adjective
-impartial,공정한,adjective
-impede,방해하다,verb
-imperative,필수적인,adjective
-impervious,둔감한,adjective
-impetuous,성급한,adjective
-impute,전가하다,verb
-inadvertently,무심코,adverb
-inchoate,초기의,adjective
-incongruous,어울리지 않는,adjective
-inconsequential,중요하지 않은,adjective
-incorporate,통합하다,verb
-indeterminate,불확정적인,adjective
-indifferent,무관심한,adjective
-indolent,게으른,adjective
-infer,추론하다,verb
-ingenious,독창적인,adjective
-inherent,내재된,adjective
-innocuous,무해한,adjective
-innovative,혁신적인,adjective
-insidious,교활한,adjective
-insipid,재미없는,adjective
-insular,폐쇄적인,adjective
-intrepid,대담한,adjective
-intuitive,직관적인,adjective
-inundate,몰아치다,verb
-invective,욕설,noun
-inveterate,고질적인,adjective
-invigorate,활기를 주다,verb
-irascible,성마른,adjective
-irresolute,결단력 없는,adjective
-itinerant,돌아다니는,adjective
-jubilation,환호,noun
-laconic,간결한,adjective
-lament,슬퍼하다,verb
-laudable,칭찬할 만한,adjective
-lavish,사치스러운,adjective
-lethargic,무기력한,adjective
-leverage,이용하다,verb
-levity,경솔함,noun
-logical,논리적인,adjective
-loquacious,수다스러운,adjective
-lucid,명료한,adjective
-luminous,빛나는,adjective
-magnanimous,관대한,adjective
-malicious,악의적인,adjective
-marred,훼손된,adjective
-martial,군사의,adjective
-mundane,평범한,adjective
-munificent,아주 관대한,adjective
-mutable,변하기 쉬운,adjective
-negligent,태만한,adjective
-nonchalant,무관심한,adjective
-novel,새로운,adjective
-obdurate,완고한,adjective
-oblivious,무심한,adjective
-obscure,모호한,adjective
-obstinate,고집 센,adjective
-obstreperous,난폭한,adjective
-obtuse,둔한,adjective
-officious,참견 잘하는,adjective
-ominous,불길한,adjective
-opaque,불투명한,adjective
-opportunist,기회주의자,noun
-optimist,낙관주의자,noun
-orthodox,정통의,adjective
-ostentatious,과시적인,adjective
-parched,말라붙은,adjective
-parsimonious,인색한,adjective
-pathological,병리학적인,adjective
-paucity,부족,noun
-pedantic,현학적인,adjective
-penchant,선호,noun
-penurious,가난한,adjective
-perfidious,불충한,adjective
-perfunctory,대충 하는,adjective
-permeate,스며들다,verb
-pernicious,유해한,adjective
-perspicacious,통찰력 있는,adjective
-pertinent,관련된,adjective
-pervasive,퍼지는,adjective
-philanthropic,인도주의적인,adjective
-phlegmatic,냉정한,adjective
-pithy,간결한,adjective
-platitude,진부한 말,noun
-plethora,과다,noun
-pragmatic,실용적인,adjective
-precarious,불안정한,adjective
-precipitate,촉발하다,verb
-preclude,방지하다,verb
-precocious,조숙한,adjective
-presumptuous,주제 넘는,adjective
-pretentious,잘난 체하는,adjective
-prevalent,널리 퍼진,adjective
-pristine,원시적인,adjective
-proclivity,성향,noun
-prodigal,낭비하는,adjective
-profound,심오한,adjective
-prolific,다작의,adjective
-propensity,성향,noun
-propitiate,달래다,verb
-propriety,적절성,noun
-prosaic,평범한,adjective
-prosperous,번영하는,adjective
-prudent,신중한,adjective
-querulous,불평 많은,adjective
-rancorous,원한을 품은,adjective
-recalcitrant,고집 센,adjective
-reclusive,은둔적인,adjective
-reconcile,화해시키다,verb
-rectify,시정하다,verb
-redoubtable,존경할 만한,adjective
-refute,반박하다,verb
-relegate,강등시키다,verb
-reproach,비난,noun
-reprobate,부도덕한 사람,noun
-repudiate,거부하다,verb
-rescind,취소하다,verb
-resolution,결의,noun
-resolve,해결하다,verb
-respite,휴식,noun
-reticent,과묵한,adjective
-reverent,경건한,adjective
-sagacious,현명한,adjective
-salient,두드러진,adjective
-sanctimonious,위선적인,adjective
-sanguine,낙관적인,adjective
-scanty,부족한,adjective
-scrupulous,양심적인,adjective
-scrutinize,면밀히 조사하다,verb
-servile,굴종적인,adjective
-skeptical,회의적인,adjective
-solicitous,걱정하는,adjective
-soporific,졸리게 하는,adjective
-sporadic,산발적인,adjective
-spurious,가짜의,adjective
-stagnant,정체된,adjective
-staid,침착한,adjective
-stingy,인색한,adjective
-stolid,냉정한,adjective
-striated,줄무늬가 있는,adjective
-strident,날카로운,adjective
-stupendous,엄청난,adjective
-submissive,순종적인,adjective
-substantiate,입증하다,verb
-subtle,미묘한,adjective
-superficial,피상적인,adjective
-superfluous,불필요한,adjective
-surfeit,과다,noun
-surreptitious,비밀의,adjective
-sycophant,아첨꾼,noun
-tacit,암묵적인,adjective
-taciturn,과묵한,adjective
-tangential,접선의,adjective
-tantamount,동등한,adjective
-tedious,지루한,adjective
-temerity,대담,noun
-temperate,절제된,adjective
-tenuous,미약한,adjective
-timorous,소심한,adjective
-torpid,무기력한,adjective
-tortuous,구불구불한,adjective
-tractable,다루기 쉬운,adjective
-tranquil,고요한,adjective
-transient,일시적인,adjective
-transparent,투명한,adjective
-treacherous,배신적인,adjective
-tremulous,떨리는,adjective
-trite,진부한,adjective
-truculent,호전적인,adjective
-ubiquitous,어디에나 있는,adjective
-umbrage,불쾌감,noun
-uncanny,이상한,adjective
-unfathomable,헤아릴 수 없는,adjective
-unprecedented,전례 없는,adjective
-unscrupulous,부도덕한,adjective
-unwieldy,다루기 힘든,adjective
-vacillate,주저하다,verb
-venerate,숭배하다,verb
-veracity,진실성,noun
-verbose,장황한,adjective
-viable,실행 가능한,adjective
-vigilant,경계하는,adjective
-vindicate,옹호하다,verb
-volatile,휘발성의,adjective
-voluminous,방대한,adjective
-wary,조심하는,adjective
-whimsical,변덕스러운,adjective
-zealous,열성적인,adjective
-Not only A but also B,A뿐만 아니라 B도,phrase
-As well as,A뿐만 아니라,phrase
-In addition to,A에 더하여,phrase
-On the other hand,다른 한편으로는,phrase
-On the contrary,반대로,phrase
-In contrast,대조적으로,phrase
-As a result,결과적으로,phrase
-Therefore,그러므로,phrase
-Thus,그러므로,phrase
-Hence,그러므로,phrase
-Consequently,결과적으로,phrase
-For this reason,이러한 이유로,phrase
-Due to the fact that,~라는 사실 때문에,phrase
-Because of,~때문에,phrase
-Owing to,~때문에,phrase
-Thanks to,~덕분에,phrase
-In spite of the fact that,~라는 사실에도 불구하고,phrase
-Despite the fact that,~라는 사실에도 불구하고,phrase
-Regardless of,~에 상관없이,phrase
-In terms of,~의 관점에서,phrase
-With regard to,~에 관하여,phrase
-In relation to,~와 관련하여,phrase
-In case of,~의 경우에,phrase
-In the event of,~의 경우에,phrase
-Provided that,~라는 조건 하에,phrase
-As long as,~하는 한,phrase
-Unless,~하지 않는 한,phrase
-Even if,~일지라도,phrase
-Even though,~일지라도,phrase
-No matter how,아무리 ~해도,phrase
-No matter what,무엇이 ~해도,phrase
-No matter who,누가 ~해도,phrase
-No matter where,어디서 ~해도,phrase
-No matter when,언제 ~해도,phrase
-As if,~인 것처럼,phrase
-As though,~인 것처럼,phrase
-So that,~하기 위해,phrase
-In order that,~하기 위해,phrase
-For fear that,~할까 봐,phrase
-In case,~할 경우를 대비하여,phrase
-By the time,~할 때쯤에는,phrase
-As soon as,~하자마자,phrase
-The moment,~하는 순간,phrase
-The instant,~하는 순간,phrase
-Hardly when,~하자마자,phrase
-Scarcely when,~하자마자,phrase
-No sooner than,~하자마자,phrase
-Not until,~까지는 ~하지 않다,phrase
-Only after,~한 후에야,phrase
+word,meaning,category  
+compute,계산하다,verb  
+observe,관찰하다,verb  
+hypothesize,가정하다,verb  
+derive,유도하다,verb  
+solve,해결하다,verb  
+measure,측정하다,verb  
+classify,분류하다,verb  
+expand,확장하다,verb  
+contract,축소하다,verb  
+transform,변형하다,verb  
+equation,방정식,noun  
+variable,변수,noun  
+hypothesis,가설,noun  
+theory,이론,noun  
+phenomenon,현상,noun  
+data,데이터,noun  
+structure,구조,noun  
+function,함수,noun  
+resource,자원,noun  
+trend,경향,noun  
+precise,정확한,adjective  
+abstract,추상적인,adjective  
+dynamic,역동적인,adjective  
+static,정적인,adjective  
+efficient,효율적인,adjective  
+diverse,다양한,adjective  
+sustainable,지속 가능한,adjective  
+global,글로벌한,adjective  
+local,지역적인,adjective  
+virtual,가상의,adjective  
+accurately,정확하게,adverb  
+systematically,체계적으로,adverb  
+theoretically,이론적으로,adverb  
+empirically,경험적으로,adverb  
+gradually,점진적으로,adverb  
+rapidly,급속히,adverb  
+independently,독립적으로,adverb  
+collectively,집단적으로,adverb  
+environmentally,환경적으로,adverb  
+economically,경제적으로,adverb  
+in accordance with,~에 따라,phrase  
+with reference to,~을 참고하여,phrase  
+on the premise of,~을 전제로,phrase  
+in conjunction with,~와 연계하여,phrase  
+for the sake of clarity,명확성을 위해,phrase  
+simulate,모의 실험하다,verb  
+synthesize,합성하다,verb  
+regulate,규제하다,verb  
+innovate,혁신하다,verb  
+allocate,할당하다,verb  
+diversify,다양화하다,verb  
+integrate,통합하다,verb  
+optimize,최적화하다,verb  
+sustain,유지하다,verb  
+depict,묘사하다,verb  
+economy,경제,noun  
+policy,정책,noun  
+culture,문화,noun  
+ethics,윤리,noun  
+democracy,민주주의,noun  
+bias,편견,noun  
+innovation,혁신,noun  
+sustainability,지속 가능성,noun  
+globalization,세계화,noun  
+infrastructure,인프라,noun  
+ethical,윤리적인,adjective  
+biased,편향된,adjective  
+democratic,민주적인,adjective  
+innovative,혁신적인,adjective  
+flexible,유연한,adjective  
+rigid,경직된,adjective  
+transparent,투명한,adjective  
+obsolete,구식의,adjective  
+redundant,중복된,adjective  
+scalable,확장 가능한,adjective  
+ethically,윤리적으로,adverb  
+flexibly,유연하게,adverb  
+transparently,투명하게,adverb  
+redundantly,중복되게,adverb  
+scalably,확장 가능하게,adverb  
+democratically,민주적으로,adverb  
+globally,세계적으로,adverb  
+locally,지역적으로,adverb  
+virtually,가상으로,adverb  
+efficiently,효율적으로,adverb  
+in light of recent events,최근 사건을 고려하여,phrase  
+under the assumption that,~라는 가정 하에,phrase  
+with the exception of,~을 제외하고,phrase  
+for the purpose of analysis,분석을 목적으로,phrase  
+in the realm of possibility,가능성의 영역에서,phrase  
+quantify,정량화하다,verb  
+correlate,상관관계를 짓다,verb  
+validate,검증하다,verb  
+standardize,표준화하다,verb  
+interpret,해석하다,verb  
+debate,토론하다,verb  
+legislate,입법하다,verb  
+negotiate,협상하다,verb  
+mediate,중재하다,verb  
+advocate,옹호하다,verb  
+statistics,통계,noun  
+probability,확률,noun  
+sample,표본,noun  
+variance,분산,noun  
+median,중앙값,noun  
+correlation,상관관계,noun  
+legislation,입법,noun  
+negotiation,협상,noun  
+advocacy,옹호,noun  
+mediation,중재,noun  
+statistical,통계적인,adjective  
+probabilistic,확률적인,adjective  
+random,무작위의,adjective  
+significant,유의미한,adjective  
+insignificant,무의미한,adjective  
+legislative,입법의,adjective  
+negotiable,협상 가능한,adjective  
+mediatory,중재의,adjective  
+advocative,옹호적인,adjective  
+standardized,표준화된,adjective  
+statistically,통계적으로,adverb  
+randomly,무작위로,adverb  
+significantly,유의미하게,adverb  
+insignificantly,무의미하게,adverb  
+legislatively,입법적으로,adverb  
+negotiably,협상 가능하게,adverb  
+mediatively,중재적으로,adverb  
+advocatively,옹호적으로,adverb  
+quantifiably,정량화 가능하게,adverb  
+in the context of globalization,세계화의 맥락에서,phrase  
+by virtue of legislation,입법 덕분에,phrase  
+for the sake of fairness,공정성을 위해,phrase  
+in the event of a conflict,갈등 발생 시,phrase  
+with respect to cultural differences,문화적 차이에 관하여,phrase  
+critique,비평하다,verb  
+replicate,복제하다,verb  
+deviate,일탈하다,verb  
+harmonize,조화시키다,verb  
+migrate,이주하다,verb  
+navigate,항해하다,verb  
+conceptualize,개념화하다,verb  
+fluctuate,변동하다,verb  
+legitimize,합법화하다,verb  
+initiate,시작하다,verb  
+philosophy,철학,noun  
+literature,문학,noun  
+anthropology,인류학,noun  
+sociology,사회학,noun  
+psychology,심리학,noun  
+linguistics,언어학,noun  
+archaeology,고고학,noun  
+theology,신학,noun  
+aesthetics,미학,noun  
+epistemology,인식론,noun  
+philosophical,철학적인,adjective  
+literary,문학적인,adjective  
+anthropological,인류학적인,adjective  
+sociological,사회학적인,adjective  
+psychological,심리학적인,adjective  
+linguistic,언어학적인,adjective  
+archaeological,고고학적인,adjective  
+theological,신학적인,adjective  
+aesthetic,미학적인,adjective  
+epistemological,인식론적인,adjective  
+philosophically,철학적으로,adverb  
+literarily,문학적으로,adverb  
+anthropologically,인류학적으로,adverb  
+sociologically,사회학적으로,adverb  
+psychologically,심리학적으로,adverb  
+linguistically,언어학적으로,adverb  
+archaeologically,고고학적으로,adverb  
+theologically,신학적으로,adverb  
+aesthetically,미학적으로,adverb  
+epistemologically,인식론적으로,adverb  
+in the pursuit of knowledge,지식을 추구하며,phrase  
+by means of critical analysis,비판적 분석을 통해,phrase  
+for the advancement of society,사회 발전을 위해,phrase  
+in the absence of evidence,증거가 없을 때,phrase  
+with regard to ethical standards,윤리적 기준에 관하여,phrase  
+invest,투자하다,verb  
+accumulate,축적하다,verb  
+depreciate,감가상각하다,verb  
+fluctuate,변동하다,verb  
+monopolize,독점하다,verb  
+subsidize,보조금을 주다,verb  
+inflate,팽창시키다,verb  
+deflate,수축시키다,verb  
+liquidate,청산하다,verb  
+audit,감사하다,verb  
+market,시장,noun  
+capital,자본,noun  
+revenue,수익,noun  
+expenditure,지출,noun  
+inflation,인플레이션,noun  
+deflation,디플레이션,noun  
+monopoly,독점,noun  
+subsidy,보조금,noun  
+asset,자산,noun  
+liability,부채,noun  
+profitable,수익성 있는,adjective  
+volatile,변동성이 큰,adjective  
+liquid,유동적인,adjective  
+illiquid,비유동적인,adjective  
+speculative,투기적인,adjective  
+regulated,규제된,adjective  
+competitive,경쟁적인,adjective  
+monopolistic,독점적인,adjective  
+fiscal,재정의,adjective  
+monetary,통화의,adjective  
+profitably,수익성 있게,adverb  
+volatilely,변동성 있게,adverb  
+liquidly,유동적으로,adverb  
+speculatively,투기적으로,adverb  
+competitively,경쟁적으로,adverb  
+monopolistically,독점적으로,adverb  
+fiscally,재정적으로,adverb  
+monetarily,통화적으로,adverb  
+illiquidly,비유동적으로,adverb  
+regulatedly,규제되게,adverb  
+in the event of bankruptcy,파산 시,phrase  
+by virtue of economic policy,경제 정책 덕분에,phrase  
+for the sake of market stability,시장 안정을 위해,phrase  
+under the pressure of inflation,인플레이션 압력 하에,phrase  
+with respect to fiscal balance,재정 균형에 관하여,phrase  
+evolve,진화하다,verb  
+adapt,적응하다,verb  
+mutate,돌연변이하다,verb  
+reproduce,번식하다,verb  
+photosynthesize,광합성하다,verb  
+oxidize,산화하다,verb  
+catalyze,촉매작용을 하다,verb  
+dissolve,용해하다,verb  
+condense,응축하다,verb  
+ionize,이온화하다,verb  
+genetics,유전학,noun  
+ecosystem,생태계,noun  
+molecule,분자,noun  
+atom,원자,noun  
+cell,세포,noun  
+enzyme,효소,noun  
+catalyst,촉매,noun  
+species,종,noun  
+evolution,진화,noun  
+biodiversity,생물다양성,noun  
+genetic,유전학적인,adjective  
+ecological,생태학적인,adjective  
+molecular,분자의,adjective  
+atomic,원자의,adjective  
+cellular,세포의,adjective  
+catalytic,촉매의,adjective  
+mutational,돌연변이의,adjective  
+photosynthetic,광합성의,adjective  
+ionic,이온의,adjective  
+biodiverse,생물다양성의,adjective  
+genetically,유전학적으로,adverb  
+ecologically,생태학적으로,adverb  
+molecularly,분자 단위로,adverb  
+atomically,원자 단위로,adverb  
+cellularly,세포 단위로,adverb  
+contemplate,숙고하다,verb  
+rationalize,합리화하다,verb  
+symbolize,상징하다,verb  
+metaphorize,은유하다,verb  
+allegorize,우화로 표현하다,verb  
+criticize,비판하다,verb  
+satirize,풍자하다,verb  
+romanticize,낭만화하다,verb  
+historicize,역사화하다,verb  
+contextualize,맥락화하다,verb  
+metaphor,은유,noun  
+allegory,우화,noun  
+satire,풍자,noun  
+romanticism,낭만주의,noun  
+historicism,역사주의,noun  
+context,맥락,noun  
+narrative,서사,noun  
+paradox,역설,noun  
+irony,아이러니,noun  
+symbolism,상징주의,noun  
+contemplative,숙고하는,adjective  
+symbolic,상징적인,adjective  
+metaphorical,은유적인,adjective  
+allegorical,우화적인,adjective  
+satirical,풍자적인,adjective  
+romantic,낭만적인,adjective  
+historical,역사적인,adjective  
+contextual,맥락적인,adjective  
+paradoxical,역설적인,adjective  
+ironic,아이러니한,adjective  
+contemplatively,숙고하며,adverb  
+symbolically,상징적으로,adverb  
+metaphorically,은유적으로,adverb  
+allegorically,우화적으로,adverb  
+satirically,풍자적으로,adverb  
+romantically,낭만적으로,adverb  
+historically,역사적으로,adverb  
+contextually,맥락적으로,adverb  
+paradoxically,역설적으로,adverb  
+ironically,아이러니하게,adverb  
+in the context of postmodernism,포스트모더니즘 맥락에서,phrase  
+by means of symbolic representation,상징적 표현을 통해,phrase  
+for the sake of artistic expression,예술적 표현을 위해,phrase  
+under the veil of irony,아이러니의 장막 아래,phrase  
+with respect to historical accuracy,역사적 정확성에 관하여,phrase  

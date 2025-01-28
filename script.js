@@ -164,7 +164,11 @@ function getWeightedRandomElements(array, n) {
 }
 
 function showNextWord() {
-  if (wordStats.length === 0 || remainingQuestions <= 0) {
+  // 문제 출제 전 남은 단어 수 업데이트 ✅
+  remainingQuestions = wordStats.length;
+  updateProgress(); // 즉시 반영
+
+  if (remainingQuestions <= 0 || wordStats.length === 0) {
     alert(`학습 완료! (마스터 단어: ${masteredCount}개)`);
     return goBack();
   }
@@ -202,11 +206,12 @@ function updateWordDisplayBackground() {
 }
 
 function checkAnswer(selected) {
-  stopTimer();
-  const responseTime = Date.now() - startTime;
+  const responseTime = Date.now() - startTime; // 타이머 중지 전 시간 측정
   const stat = wordData.stats[currentWord.word] || { correctStreak: 0, errorCount: 0, totalTime: 0, answerCount: 0 };
 
   if (selected === correctAnswer) {
+    // 정답 처리 로직
+    stopTimer(); // ✅ 정답 시에만 타이머 중지
     stat.correctStreak = (stat.correctStreak || 0) + 1;
     stat.totalTime += responseTime;
     stat.answerCount = (stat.answerCount || 0) + 1;
@@ -225,8 +230,10 @@ function checkAnswer(selected) {
       }
     });
 
+    // 1초 후 다음 문제로 이동
     setTimeout(showNextWord, 1000);
   } else {
+    // 오답 처리 로직 (타이머 유지)
     stat.correctStreak = 0;
     stat.errorCount = (stat.errorCount || 0) + 1;
 
@@ -236,6 +243,7 @@ function checkAnswer(selected) {
         opt.style.pointerEvents = 'none';
       }
     });
+    // ❌ 오답 시 타이머 중지 및 자동 진행 없음
   }
 
   stat.avgTime = stat.totalTime / (stat.answerCount || 1);
@@ -247,7 +255,7 @@ function checkAnswer(selected) {
 function updateProgress() {
   document.getElementById("progress").textContent = 
     `확실하게 외운 단어: ${masteredCount}개 / 남은 단어: ${remainingQuestions}개 / 전체 문제: ${totalQuestions}개`;
-  remainingQuestions--;
+  // ❌ remainingQuestions-- 코드 완전 제거
 }
 
 async function loadVocabFile(filename) {

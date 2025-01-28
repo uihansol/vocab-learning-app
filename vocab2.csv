@@ -1,190 +1,326 @@
-word,meaning,category
-abandon,버리다,verb
-benefit,이익,noun
-compensate,보상하다,verb
-dilemma,딜레마,noun
-evaluate,평가하다,verb
-fluctuate,변동하다,verb
-generate,생성하다,verb
-hypothesis,가설,noun
-implement,실행하다,verb
-justify,정당화하다,verb
-analyze,분석하다,verb
-compare,비교하다,verb
-contrast,대조하다,verb
-define,정의하다,verb
-demonstrate,증명하다,verb
-describe,묘사하다,verb
-discuss,토론하다,verb
-explain,설명하다,verb
-identify,확인하다,verb
-interpret,해석하다,verb
-predict,예측하다,verb
-summarize,요약하다,verb
-support,지지하다,verb
-not A but B,A가 아니라 B,phrase
-either A or B,A 또는 B,phrase
-both A and B,A와 B 둘 다,phrase
-neither A nor B,A도 B도 아니다,phrase
-whether A or B,A인지 B인지,phrase
-as soon as,~하자마자,phrase
-in order to,~하기 위해,phrase
-due to,~때문에,phrase
-in spite of,~에도 불구하고,phrase
-achieve,성취하다,verb
-adapt,적응하다,verb
-affect,영향을 미치다,verb
-allow,허락하다,verb
-alter,변경하다,verb
-apply,적용하다,verb
-argue,주장하다,verb
-assume,가정하다,verb
-attempt,시도하다,verb
-avoid,피하다,verb
-cause,원인이 되다,verb
-challenge,도전하다,verb
-choose,선택하다,verb
-claim,주장하다,verb
-conclude,결론을 내리다,verb
-conduct,수행하다,verb
-consider,고려하다,verb
-consist,구성되다,verb
-construct,구축하다,verb
-contribute,기여하다,verb
-convince,설득하다,verb
-create,창조하다,verb
-decide,결정하다,verb
-depend,의존하다,verb
-design,설계하다,verb
-develop,발전시키다,verb
-discover,발견하다,verb
-distinguish,구별하다,verb
-effect,효과,noun
-emphasize,강조하다,verb
-enable,가능하게 하다,verb
-encourage,격려하다,verb
-establish,설립하다,verb
-estimate,추정하다,verb
-examine,조사하다,verb
-exist,존재하다,verb
-expand,확장하다,verb
-explore,탐구하다,verb
-express,표현하다,verb
-focus,초점을 맞추다,verb
-form,형성하다,verb
-gain,얻다,verb
-illustrate,설명하다,verb
-imagine,상상하다,verb
-improve,개선하다,verb
-include,포함하다,verb
-indicate,나타내다,verb
-influence,영향을 미치다,verb
-intend,의도하다,verb
-introduce,소개하다,verb
-investigate,조사하다,verb
-involve,관련시키다,verb
-maintain,유지하다,verb
-manage,관리하다,verb
-measure,측정하다,verb
-observe,관찰하다,verb
-obtain,얻다,verb
-occur,발생하다,verb
-overcome,극복하다,verb
-participate,참여하다,verb
-perform,수행하다,verb
-persuade,설득하다,verb
-plan,계획하다,verb
-prepare,준비하다,verb
-present,제시하다,verb
-prevent,방지하다,verb
-produce,생산하다,verb
-promote,촉진하다,verb
-propose,제안하다,verb
-protect,보호하다,verb
-prove,증명하다,verb
-provide,제공하다,verb
-publish,출판하다,verb
-pursue,추구하다,verb
-raise,올리다,verb
-reach,도달하다,verb
-realize,깨닫다,verb
-reduce,줄이다,verb
-reflect,반영하다,verb
-regard,간주하다,verb
-reject,거부하다,verb
-relate,관련시키다,verb
-remain,남아있다,verb
-remember,기억하다,verb
-remove,제거하다,verb
-replace,대체하다,verb
-represent,대표하다,verb
-require,요구하다,verb
-research,연구하다,verb
-respond,응답하다,verb
-reveal,드러내다,verb
-seek,찾다,verb
-select,선택하다,verb
-separate,분리하다,verb
-solve,해결하다,verb
-specify,명시하다,verb
-state,진술하다,verb
-strengthen,강화하다,verb
-suggest,제안하다,verb
-supply,공급하다,verb
-suppose,가정하다,verb
-survive,생존하다,verb
-tend,경향이 있다,verb
-transform,변형시키다,verb
-understand,이해하다,verb
-use,사용하다,verb
-vary,변화하다,verb
-view,보기,noun
-wonder,궁금해하다,verb
-Not only A but also B,A뿐만 아니라 B도,phrase
-As well as,A뿐만 아니라,phrase
-In addition to,A에 더하여,phrase
-On the other hand,다른 한편으로는,phrase
-On the contrary,반대로,phrase
-In contrast,대조적으로,phrase
-As a result,결과적으로,phrase
-Therefore,그러므로,phrase
-Thus,그러므로,phrase
-Hence,그러므로,phrase
-Consequently,결과적으로,phrase
-For this reason,이러한 이유로,phrase
-Due to the fact that,~라는 사실 때문에,phrase
-Because of,~때문에,phrase
-Owing to,~때문에,phrase
-Thanks to,~덕분에,phrase
-In spite of the fact that,~라는 사실에도 불구하고,phrase
-Despite the fact that,~라는 사실에도 불구하고,phrase
-Regardless of,~에 상관없이,phrase
-In terms of,~의 관점에서,phrase
-With regard to,~에 관하여,phrase
-In relation to,~와 관련하여,phrase
-In case of,~의 경우에,phrase
-In the event of,~의 경우에,phrase
-Provided that,~라는 조건 하에,phrase
-As long as,~하는 한,phrase
-Unless,~하지 않는 한,phrase
-Even if,~일지라도,phrase
-Even though,~일지라도,phrase
-No matter how,아무리 ~해도,phrase
-No matter what,무엇이 ~해도,phrase
-No matter who,누가 ~해도,phrase
-No matter where,어디서 ~해도,phrase
-No matter when,언제 ~해도,phrase
-As if,~인 것처럼,phrase
-As though,~인 것처럼,phrase
-So that,~하기 위해,phrase
-In order that,~하기 위해,phrase
-For fear that,~할까 봐,phrase
-In case,~할 경우를 대비하여,phrase
-By the time,~할 때쯤에는,phrase
-The moment,~하는 순간,phrase
-The instant,~하는 순간,phrase
-Hardly when,~하자마자,phrase
-Scarcely when,~하자마자,phrase
-No sooner than,~하자마자,phrase
-Not until,~까지는 ~하지 않다,phrase
-Only after,~한 후에야,phrase
+word,meaning,category  
+analyze,분석하다,verb  
+argue,주장하다,verb  
+assess,평가하다,verb  
+compose,작성하다,verb  
+define,정의하다,verb  
+evaluate,평가하다,verb  
+formulate,공식화하다,verb  
+interpret,해석하다,verb  
+predict,예측하다,verb  
+resolve,해결하다,verb  
+species,종,noun  
+organism,생물체,noun  
+analysis,분석,noun  
+argument,논쟁,noun  
+assessment,평가,noun  
+composition,작문,noun  
+definition,정의,noun  
+evaluation,평가,noun  
+formula,공식,noun  
+interpretation,해석,noun  
+analytical,분석적인,adjective  
+argumentative,논쟁적인,adjective  
+assessable,평가 가능한,adjective  
+compositional,구성적인,adjective  
+definitive,결정적인,adjective  
+evaluative,평가적인,adjective  
+formulaic,공식적인,adjective  
+interpretative,해석적인,adjective  
+predictable,예측 가능한,adjective  
+resolvable,해결 가능한,adjective  
+analytically,분석적으로,adverb  
+argumentatively,논쟁적으로,adverb  
+assessably,평가 가능하게,adverb  
+compositionally,구성적으로,adverb  
+definitively,결정적으로,adverb  
+evaluatively,평가적으로,adverb  
+formulaically,공식적으로,adverb  
+interpretatively,해석적으로,adverb  
+predictably,예측 가능하게,adverb  
+resolvably,해결 가능하게,adverb  
+on the contrary,반대로,phrase  
+in conclusion,결론적으로,phrase  
+as a result,결과적으로,phrase  
+for instance,예를 들어,phrase  
+in summary,요약하면,phrase  
+under no circumstances,어떤 경우에도 ~않다,phrase  
+in vain,헛되게,phrase  
+by and large,전반적으로,phrase  
+at first glance,언뜻 보기에,phrase  
+in retrospect,돌이켜 보면,phrase  
+synthesize,종합하다,verb  
+critique,비평하다,verb  
+hypothesize,가설을 세우다,verb  
+illustrate,설명하다,verb  
+negotiate,협상하다,verb  
+prioritize,우선순위를 정하다,verb  
+simplify,단순화하다,verb  
+verify,확인하다,verb  
+allocate,할당하다,verb  
+coordinate,조정하다,verb  
+synthesis,종합,noun  
+criticism,비평,noun  
+hypothesis,가설,noun  
+illustration,설명,noun  
+negotiation,협상,noun  
+priority,우선순위,noun  
+simplicity,단순성,noun  
+verification,확인,noun  
+allocation,할당,noun  
+coordination,조정,noun  
+synthetic,합성의,adjective  
+critical,비판적인,adjective  
+hypothetical,가설적인,adjective  
+illustrative,설명적인,adjective  
+negotiable,협상 가능한,adjective  
+prioritized,우선순위가 정해진,adjective  
+simplistic,단순화된,adjective  
+verifiable,확인 가능한,adjective  
+allocable,할당 가능한,adjective  
+coordinated,조정된,adjective  
+synthetically,합성적으로,adverb  
+critically,비판적으로,adverb  
+hypothetically,가설적으로,adverb  
+illustratively,설명적으로,adverb  
+negotiably,협상 가능하게,adverb  
+prioritization,우선순위화,adverb  
+simplistically,단순화되게,adverb  
+verifiably,확인 가능하게,adverb  
+allocably,할당 가능하게,adverb  
+coordinately,조정되게,adverb  
+on the whole,전체적으로,phrase  
+in the long run,장기적으로,phrase  
+for the most part,대체로,phrase  
+in the meantime,그 동안에,phrase  
+to some extent,어느 정도까지는,phrase  
+in a nutshell,간단히 말하면,phrase  
+by the same token,같은 이유로,phrase  
+in the wake of,~의 결과로,phrase  
+as a matter of fact,사실은,phrase  
+in the event of,~의 경우에,phrase  
+differentiate,구별하다,verb  
+elaborate,상세히 설명하다,verb  
+facilitate,촉진하다,verb  
+generalize,일반화하다,verb  
+implement,시행하다,verb  
+justify,정당화하다,verb  
+modify,수정하다,verb  
+normalize,정상화하다,verb  
+objectify,객관화하다,verb  
+quantify,정량화하다,verb  
+differentiation,구별,noun  
+elaboration,상세한 설명,noun  
+facilitation,촉진,noun  
+generalization,일반화,noun  
+implementation,시행,noun  
+justification,정당화,noun  
+modification,수정,noun  
+normalization,정상화,noun  
+objectification,객관화,noun  
+quantification,정량화,noun  
+differentiated,구별된,adjective  
+elaborative,상세한 설명의,adjective  
+facilitative,촉진적인,adjective  
+generalizable,일반화 가능한,adjective  
+implementable,시행 가능한,adjective  
+justifiable,정당화할 수 있는,adjective  
+modifiable,수정 가능한,adjective  
+normalized,정상화된,adjective  
+objectifiable,객관화 가능한,adjective  
+quantifiable,정량화 가능한,adjective  
+differentiably,구별되게,adverb  
+elaboratively,상세히 설명하여,adverb  
+facilitatively,촉진적으로,adverb  
+generalizably,일반화 가능하게,adverb  
+implementably,시행 가능하게,adverb  
+justifiably,정당하게,adverb  
+modifiably,수정 가능하게,adverb  
+normalizably,정상화되게,adverb  
+objectifiably,객관화 가능하게,adverb  
+quantifiably,정량화 가능하게,adverb  
+in light of,~을 고려하여,phrase  
+with respect to,~에 관하여,phrase  
+for the reason that,~라는 이유로,phrase  
+in the process of,~하는 과정에서,phrase  
+by way of,~을 통해,phrase  
+in the absence of,~이 없을 때,phrase  
+for the benefit of,~을 위해,phrase  
+in the course of,~하는 동안,phrase  
+by reason of,~로 인해,phrase  
+in the face of,~에 직면하여,phrase  
+rationalize,합리화하다,verb  
+standardize,표준화하다,verb  
+theorize,이론화하다,verb  
+utilize,활용하다,verb  
+validate,검증하다,verb  
+witness,목격하다,verb  
+yield,양보하다,verb  
+accelerate,가속화하다,verb  
+compensate,보상하다,verb  
+delegate,위임하다,verb  
+rationalization,합리화,noun  
+standardization,표준화,noun  
+theory,이론,noun  
+utilization,활용,noun  
+validation,검증,noun  
+witness,목격자,noun  
+yield,수확량,noun  
+acceleration,가속,noun  
+compensation,보상,noun  
+delegation,위임,noun  
+rational,합리적인,adjective  
+standardized,표준화된,adjective  
+theoretical,이론적인,adjective  
+utilizable,활용 가능한,adjective  
+validated,검증된,adjective  
+witnessable,목격 가능한,adjective  
+yielding,양보하는,adjective  
+accelerative,가속적인,adjective  
+compensatory,보상적인,adjective  
+delegable,위임 가능한,adjective  
+rationally,합리적으로,adverb  
+standardizably,표준화되게,adverb  
+theoretically,이론적으로,adverb  
+utilizably,활용 가능하게,adverb  
+validly,유효하게,adverb  
+witnessably,목격 가능하게,adverb  
+yieldingly,양보하며,adverb  
+acceleratively,가속적으로,adverb  
+compensatorily,보상적으로,adverb  
+delegably,위임 가능하게,adverb  
+on the grounds that,~을 이유로,phrase  
+in the context of,~의 맥락에서,phrase  
+for the purpose of,~을 목적으로,phrase  
+in the realm of,~의 영역에서,phrase  
+by force of,~의 힘으로,phrase  
+in the pursuit of,~을 추구하며,phrase  
+for the sake of argument,논의를 위해,phrase  
+in the vicinity of,~부근에,phrase  
+by dint of,~덕분에,phrase  
+in the manner of,~의 방식으로,phrase  
+integrate,통합하다,verb  
+neutralize,중립화하다,verb  
+optimize,최적화하다,verb  
+perceive,인지하다,verb  
+qualify,자격을 부여하다,verb  
+rectify,시정하다,verb  
+stabilize,안정화하다,verb  
+terminate,종료하다,verb  
+undermine,약화시키다,verb  
+visualize,시각화하다,verb  
+integration,통합,noun  
+neutralization,중립화,noun  
+optimization,최적화,noun  
+perception,인지,noun  
+qualification,자격,noun  
+rectification,시정,noun  
+stabilization,안정화,noun  
+termination,종료,noun  
+undermining,약화,noun  
+visualization,시각화,noun  
+integrative,통합적인,adjective  
+neutral,중립적인,adjective  
+optimal,최적의,adjective  
+perceptive,인지력 있는,adjective  
+qualified,자격 있는,adjective  
+rectifiable,시정 가능한,adjective  
+stable,안정적인,adjective  
+terminable,종료 가능한,adjective  
+underminable,약화 가능한,adjective  
+visualizable,시각화 가능한,adjective  
+integratively,통합적으로,adverb  
+neutrally,중립적으로,adverb  
+optimally,최적으로,adverb  
+perceptively,인지력 있게,adverb  
+qualifiably,자격 있게,adverb  
+rectifiably,시정 가능하게,adverb  
+stably,안정적으로,adverb  
+terminably,종료 가능하게,adverb  
+underminably,약화 가능하게,adverb  
+visualizably,시각화 가능하게,adverb  
+in the interest of,~의 이익을 위해,phrase  
+by the name of,~라는 이름의,phrase  
+for the record,공식적으로,phrase  
+in the shadow of,~의 그늘에서,phrase  
+by the rule of,~의 규칙에 따라,phrase  
+in the name of,~의 이름으로,phrase  
+for the time being,당분간,phrase  
+in the form of,~의 형태로,phrase  
+by the side of,~의 옆에,phrase  
+in the hope of,~을 바라며,phrase  
+conceptualize,개념화하다,verb  
+deviate,일탈하다,verb  
+evolve,진화하다,verb  
+fluctuate,변동하다,verb  
+harmonize,조화시키다,verb  
+initiate,시작하다,verb  
+legitimize,합법화하다,verb  
+migrate,이주하다,verb  
+navigate,항해하다,verb  
+originate,기원하다,verb  
+conceptualization,개념화,noun  
+deviation,일탈,noun  
+evolution,진화,noun  
+fluctuation,변동,noun  
+harmonization,조화,noun  
+initiation,시작,noun  
+legitimization,합법화,noun  
+migration,이주,noun  
+navigation,항해,noun  
+origin,기원,noun  
+conceptual,개념적인,adjective  
+deviant,일탈적인,adjective  
+evolutionary,진화적인,adjective  
+fluctuating,변동하는,adjective  
+harmonious,조화로운,adjective  
+initial,초기의,adjective  
+legitimate,합법적인,adjective  
+migratory,이주하는,adjective  
+navigational,항해의,adjective  
+original,기원의,adjective  
+conceptually,개념적으로,adverb  
+deviantly,일탈적으로,adverb  
+evolutionarily,진화적으로,adverb  
+fluctuatingly,변동하며,adverb  
+harmoniously,조화롭게,adverb  
+initially,초기에,adverb  
+legitimately,합법적으로,adverb  
+migratorily,이주하며,adverb  
+navigationally,항해적으로,adverb  
+originally,기원적으로,adverb  
+in the wake of,~의 여파로,phrase  
+by the book,규칙대로,phrase  
+for the better part of,~의 대부분,phrase  
+in the eyes of,~의 눈에는,phrase  
+by the clock,시간을 엄수하여,phrase  
+in the heat of,~의 와중에,phrase  
+for the good of,~을 위해,phrase  
+in the grip of,~에 휘말려,phrase  
+by the hand of,~의 손으로,phrase  
+in the name of justice,정의의 이름으로,phrase  
+replicate,복제하다,verb  
+simulate,모의 실험하다,verb  
+transcend,초월하다,verb  
+unify,통일하다,verb  
+validate,검증하다,verb  
+replication,복제,noun  
+simulation,모의 실험,noun  
+transcendence,초월,noun  
+unification,통일,noun  
+validation,검증,noun  
+replicable,복제 가능한,adjective  
+simulative,모의 실험의,adjective  
+transcendent,초월적인,adjective  
+unified,통일된,adjective  
+validated,검증된,adjective  
+replicably,복제 가능하게,adverb  
+simulatively,모의 실험적으로,adverb  
+transcendently,초월적으로,adverb  
+unifiedly,통일되게,adverb  
+validly,유효하게,adverb  
+in the long term,장기적으로,phrase  
+by the same measure,같은 기준으로,phrase  
+for the greater good,더 큰 선을 위해,phrase  
+in the grand scheme of,~의 큰 틀에서,phrase  
+by the seat of one’s pants,직관적으로,phrase  
