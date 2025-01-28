@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap">
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/compromise"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -44,20 +45,20 @@
       </div>
     </div>
 
-    <!-- 퀴즈 화면 -->
-    <div id="quiz-screen" class="screen">
-      <button id="back-to-main" onclick="goBack()">메인 화면으로 돌아가기</button>
-      <h3 id="word-display"></h3>
-      <div id="options"></div>
-      <p id="timer">시간: 0초</p>
-      <p id="progress">확실하게 외운 단어: 0개 / 남은 단어: 0개 / 전체 문제: 0개</p>
-	</div>
- 	 <div class="share-buttons">
- 	   <button onclick="shareResult()" class="share-btn">결과 공유하기</button>
- 	   <button onclick="exportCSV()" class="export-btn">CSV로 저장</button>
- 	   <button onclick="exportPDF()" class="export-btn">PDF로 저장</button>
-	</div>
-    </div>
+<!-- 퀴즈 화면 내부 구조 수정 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<div id="quiz-screen" class="screen">
+  <button id="back-to-main" onclick="goBack()">메인 화면으로 돌아가기</button>
+  <h3 id="word-display"></h3>
+  <div id="options"></div>
+  <p id="timer">시간: 0초</p>
+  <p id="progress">확실하게 외운 단어: 0개 / 남은 단어: 0개 / 전체 문제: 0개</p>
+  <div class="share-buttons"> <!-- 이 div를 quiz-screen 내부로 이동 -->
+    <button onclick="shareResult()" class="share-btn">결과 공유하기</button>
+    <button onclick="exportCSV()" class="export-btn">CSV로 저장</button>
+    <button onclick="exportPDF()" class="export-btn">PDF로 저장</button>
+  </div>
+</div> <!-- quiz-screen 닫기 -->
 
     <!-- 어휘 관리 화면 -->
     <div id="manage-screen" class="screen">

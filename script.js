@@ -304,13 +304,12 @@ window.onload = () => {
 
 // 공유 버튼 클릭 시 실행
 function shareResult() {
-  navigator.share({
-    title: '영어 단어 학습 결과',
-    text: `마스터한 단어: ${masteredCount}개! 함께 도전해보세요!`,
-    url: window.location.href
-  });
+  if (navigator.share) {
+    navigator.share({ /* ... */ });
+  } else {
+    alert("이 브라우저에서는 공유 기능을 지원하지 않습니다.");
+  }
 }
-
 
 function exportCSV() {
   const csvContent = "단어,의미,카테고리\n" + 
@@ -324,12 +323,50 @@ function exportCSV() {
 }
 
 
-import jsPDF from 'jspdf';
+// import 구문 제거 후 전역 변수 사용
 function exportPDF() {
-  const doc = new jsPDF();
-  doc.text('나의 단어장', 10, 10);
-  wordData.mixed.forEach((word, i) => {
-    doc.text(`${word.word}: ${word.meaning}`, 10, 20 + (i * 10));
+  const doc = new jspdf.jsPDF();
+  
+  // 폰트 및 스타일 설정
+  doc.addFont("NotoSansKR-Regular-normal.ttf", "NotoSansKR", "normal");
+  doc.setFont("NotoSansKR");
+  doc.setTextColor(0, 0, 0); // 글자 색상 검정 고정
+
+  let yPos = 20;
+  const pageHeight = 280; // 페이지 최대 높이
+  const lineHeight = 12; // 줄 간격 증가
+
+  // 제목 추가
+  doc.setFontSize(18);
+  doc.text('학습 통계 포함 단어장', 10, 10);
+  
+  // 본문 내용
+  doc.setFontSize(12);
+  wordData.mixed.forEach((wordObj, index) => {
+    const stat = wordData.stats[wordObj.word] || {};
+    const text = [
+      `단어: ${wordObj.word}`,
+      `의미: ${wordObj.meaning}`,
+      `오답 횟수: ${stat.errorCount || 0}`,
+      `연속 정답: ${stat.correctStreak || 0}`,
+      `평균 답변 시간: ${stat.avgTime ? stat.avgTime.toFixed(1) + 'ms' : '없음'}`
+    ].join(', ');
+
+    // 페이지 넘김 로직
+    if (yPos > pageHeight) {
+      doc.addPage();
+      yPos = 20;
+    }
+
+    doc.text(text, 10, yPos);
+    yPos += lineHeight; // 줄 간격 조정
+
+    // 구분선 추가
+    doc.setDrawColor(200);
+    doc.line(10, yPos, 200, yPos);
+    yPos += 5;
   });
-  doc.save('my_vocab.pdf');
+
+  doc.save('my_vocab_with_stats.pdf');
+}
 }
