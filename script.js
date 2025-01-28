@@ -136,6 +136,7 @@ function startQuiz(category) {
 
   document.getElementById("category-title").textContent = `${category.toUpperCase()} 학습`;
   showScreen("quiz-screen");
+  startTimer(); // 타이머 시작
   showNextWord();
 }
 
@@ -198,6 +199,7 @@ function showNextWord() {
     opt.addEventListener('click', handleEvent);
     opt.addEventListener('touchstart', handleEvent, { passive: false });
   });
+	startTimer(); // 다음 문제 시작 시 타이머 재시작
 }
 
 function updateWordDisplayBackground() {
@@ -283,6 +285,7 @@ function showManageScreen() {
 }
 
 function goBack() {
+  stopTimer(); // 타이머 중지
   showScreen("main-menu");
 }
 
