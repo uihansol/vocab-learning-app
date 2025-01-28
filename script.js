@@ -175,6 +175,7 @@ function showNextWord() {
 
   currentWord = wordStats.shift();
   correctAnswer = currentWord.meaning;
+  document.getElementById("word-display").textContent = currentWord.word; // ✅ 추가된 코드
   updateWordDisplayBackground();
 
   const options = [correctAnswer];
@@ -198,6 +199,7 @@ function showNextWord() {
     opt.addEventListener('touchstart', handleEvent, { passive: false });
   });
 }
+
 function updateWordDisplayBackground() {
   const wordDisplay = document.getElementById("word-display");
   const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
