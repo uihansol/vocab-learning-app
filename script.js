@@ -306,10 +306,25 @@ window.onload = () => {
 
 // 공유 버튼 클릭 시 실행
 function shareResult() {
+  const resultText = `학습 결과: 마스터한 단어 ${masteredCount}개, 소요 시간: ${document.getElementById("timer").textContent}`;
+
   if (navigator.share) {
-    navigator.share({ /* ... */ });
+    navigator.share({
+      title: '영어 단어 학습 결과',
+      text: resultText,
+      url: window.location.href
+    }).then(() => {
+      console.log('공유 성공');
+    }).catch((error) => {
+      console.error('공유 실패:', error);
+    });
   } else {
-    alert("이 브라우저에서는 공유 기능을 지원하지 않습니다.");
+    // 대체 기능: 클립보드에 복사
+    navigator.clipboard.writeText(resultText).then(() => {
+      alert('결과가 클립보드에 복사되었습니다.');
+    }).catch((error) => {
+      alert('이 브라우저에서는 공유 기능을 지원하지 않습니다.');
+    });
   }
 }
 
@@ -324,28 +339,50 @@ function exportCSV() {
   a.click();
 }
 
+// script.js - exportPDF() 함수 상단에 추가
+const fontPath = 'fonts/NotoSansKR-Regular-normal.ttf';
+const font = await fetch(fontPath).then(r => r.arrayBuffer());
+const fontBase64 = arrayBufferToBase64(font);
 
-// import 구문 제거 후 전역 변수 사용
-function exportPDF() {
+// Base64 변환 함수
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+async function exportPDF() {
   try {
-    const doc = new jspdf.jsPDF();
-    // (1) 폰트 설정 임시 주석 처리 (테스트용)
-     doc.addFont("NotoSansKR-Regular-normal.ttf", "NotoSansKR", "normal");
-     doc.setFont("NotoSansKR");
+    // 폰트 파일 Base64 인코딩
+    const fontPath = 'fonts/NotoSansKR-Regular-normal.ttf';
+    const font = await fetch(fontPath).then(r => r.arrayBuffer());
+    const fontBase64 = arrayBufferToBase64(font);
 
+    // PDF 초기화 및 폰트 등록
+    const doc = new jspdf.jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4"
+    });
 
-    // 폰트 및 스타일 설정
-    doc.setTextColor(0, 0, 0); // 글자 색상 검정 고정
+    doc.addFileToVFS("NotoSansKR-Regular-normal.ttf", fontBase64);
+    doc.addFont("NotoSansKR-Regular-normal.ttf", "NotoSansKR", "normal");
+    doc.setFont("NotoSansKR");
 
-    let yPos = 20; // 현재 Y 위치
-    const pageHeight = 280; // 페이지 최대 높이
-    const lineHeight = 12; // 줄 간격
+    // 기본 스타일 설정
+    doc.setTextColor(0, 0, 0);
+    let yPos = 20;
+    const pageHeight = 280;
+    const lineHeight = 12;
 
     // 제목 추가
     doc.setFontSize(18);
-    doc.text('학습 통계 포함 단어장', 10, 10);
+    doc.text('학습 통계 포함 단어장', 10, 10, { encoding: 'UNICODE' });
 
-    // 본문 내용
+    // 단어 목록 추가
     doc.setFontSize(12);
     wordData.mixed.forEach((wordObj, index) => {
       const stat = wordData.stats[wordObj.word] || {};
@@ -359,24 +396,34 @@ function exportPDF() {
 
       // 페이지 넘김 로직
       if (yPos > pageHeight) {
-        doc.addPage(); // 새 페이지 추가
-        yPos = 20; // Y 위치 초기화
+        doc.addPage();
+        yPos = 20;
       }
 
-      // 텍스트 추가
-      doc.text(text, 10, yPos);
-      yPos += lineHeight; // 줄 간격 조정
+      // 텍스트 추가 (유니코드 설정 강제 적용)
+      doc.text(text, 10, yPos, { encoding: 'UNICODE' });
+      yPos += lineHeight;
 
       // 구분선 추가
-      doc.setDrawColor(200); // 회색 선
+      doc.setDrawColor(200);
       doc.line(10, yPos, 200, yPos);
-      yPos += 5; // 구분선 이후 간격
+      yPos += 5;
     });
 
     // PDF 저장
     doc.save('my_vocab_with_stats.pdf');
   } catch (error) {
     console.error("PDF 생성 오류:", error);
-    alert("PDF 생성 중 오류가 발생했습니다.");
+    alert("PDF 생성 중 오류가 발생했습니다: " + error.message);
   }
+}
+
+// Base64 변환 헬퍼 함수 (함수 외부에 추가)
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
 }
