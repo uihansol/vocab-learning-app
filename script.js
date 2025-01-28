@@ -300,3 +300,36 @@ window.onload = () => {
   loadVocabFile('vocab2.csv');
   showScreen("main-menu");
 };
+
+
+// 공유 버튼 클릭 시 실행
+function shareResult() {
+  navigator.share({
+    title: '영어 단어 학습 결과',
+    text: `마스터한 단어: ${masteredCount}개! 함께 도전해보세요!`,
+    url: window.location.href
+  });
+}
+
+
+function exportCSV() {
+  const csvContent = "단어,의미,카테고리\n" + 
+    wordData.mixed.map(w => `${w.word},${w.meaning},${w.category}`).join("\n");
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'my_vocab.csv';
+  a.click();
+}
+
+
+import jsPDF from 'jspdf';
+function exportPDF() {
+  const doc = new jsPDF();
+  doc.text('나의 단어장', 10, 10);
+  wordData.mixed.forEach((word, i) => {
+    doc.text(`${word.word}: ${word.meaning}`, 10, 20 + (i * 10));
+  });
+  doc.save('my_vocab.pdf');
+}
