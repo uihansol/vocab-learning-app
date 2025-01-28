@@ -126,11 +126,3 @@
   opacity: 0.9;
   transform: translateY(-1px);
 }
-
-/* style.css에 추가 */
-@font-face {
-  font-family: 'NotoSansKR';
-  src: url('fonts/NotoSansKR-Regular-normal.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
