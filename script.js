@@ -369,4 +369,3 @@ function exportPDF() {
 
   doc.save('my_vocab_with_stats.pdf');
 }
-}
