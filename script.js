@@ -187,15 +187,17 @@ function showNextWord() {
   const optionsContainer = document.getElementById("options");
   optionsContainer.innerHTML = options.map(opt => `<div class="quiz-option">${opt}</div>`).join('');
 
-  optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
-    opt.addEventListener('click', () => checkAnswer(opt.textContent));
-    opt.addEventListener('touchstart', () => checkAnswer(opt.textContent), { passive: true });
+    optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
+    const handleEvent = (e) => {
+      e.preventDefault();
+      if (opt.style.pointerEvents !== 'none') {
+        checkAnswer(opt.textContent);
+      }
+    };
+    opt.addEventListener('click', handleEvent);
+    opt.addEventListener('touchstart', handleEvent, { passive: false });
   });
-
-  document.getElementById("word-display").textContent = currentWord.word;
-  startTimer();
 }
-
 function updateWordDisplayBackground() {
   const wordDisplay = document.getElementById("word-display");
   const stat = wordData.stats[currentWord.word] || { errorCount: 0 };
@@ -325,47 +327,56 @@ function exportCSV() {
 
 // import 구문 제거 후 전역 변수 사용
 function exportPDF() {
-  const doc = new jspdf.jsPDF();
-  
-  // 폰트 및 스타일 설정
-  doc.addFont("NotoSansKR-Regular-normal.ttf", "NotoSansKR", "normal");
-  doc.setFont("NotoSansKR");
-  doc.setTextColor(0, 0, 0); // 글자 색상 검정 고정
+  try {
+    const doc = new jspdf.jsPDF();
+    // (1) 폰트 설정 임시 주석 처리 (테스트용)
+     doc.addFont("NotoSansKR-Regular-normal.ttf", "NotoSansKR", "normal");
+     doc.setFont("NotoSansKR");
 
-  let yPos = 20;
-  const pageHeight = 280; // 페이지 최대 높이
-  const lineHeight = 12; // 줄 간격 증가
 
-  // 제목 추가
-  doc.setFontSize(18);
-  doc.text('학습 통계 포함 단어장', 10, 10);
-  
-  // 본문 내용
-  doc.setFontSize(12);
-  wordData.mixed.forEach((wordObj, index) => {
-    const stat = wordData.stats[wordObj.word] || {};
-    const text = [
-      `단어: ${wordObj.word}`,
-      `의미: ${wordObj.meaning}`,
-      `오답 횟수: ${stat.errorCount || 0}`,
-      `연속 정답: ${stat.correctStreak || 0}`,
-      `평균 답변 시간: ${stat.avgTime ? stat.avgTime.toFixed(1) + 'ms' : '없음'}`
-    ].join(', ');
+    // 폰트 및 스타일 설정
+    doc.setTextColor(0, 0, 0); // 글자 색상 검정 고정
 
-    // 페이지 넘김 로직
-    if (yPos > pageHeight) {
-      doc.addPage();
-      yPos = 20;
-    }
+    let yPos = 20; // 현재 Y 위치
+    const pageHeight = 280; // 페이지 최대 높이
+    const lineHeight = 12; // 줄 간격
 
-    doc.text(text, 10, yPos);
-    yPos += lineHeight; // 줄 간격 조정
+    // 제목 추가
+    doc.setFontSize(18);
+    doc.text('학습 통계 포함 단어장', 10, 10);
 
-    // 구분선 추가
-    doc.setDrawColor(200);
-    doc.line(10, yPos, 200, yPos);
-    yPos += 5;
-  });
+    // 본문 내용
+    doc.setFontSize(12);
+    wordData.mixed.forEach((wordObj, index) => {
+      const stat = wordData.stats[wordObj.word] || {};
+      const text = [
+        `단어: ${wordObj.word}`,
+        `의미: ${wordObj.meaning}`,
+        `오답 횟수: ${stat.errorCount || 0}`,
+        `연속 정답: ${stat.correctStreak || 0}`,
+        `평균 답변 시간: ${stat.avgTime ? stat.avgTime.toFixed(1) + 'ms' : '없음'}`
+      ].join(', ');
 
-  doc.save('my_vocab_with_stats.pdf');
+      // 페이지 넘김 로직
+      if (yPos > pageHeight) {
+        doc.addPage(); // 새 페이지 추가
+        yPos = 20; // Y 위치 초기화
+      }
+
+      // 텍스트 추가
+      doc.text(text, 10, yPos);
+      yPos += lineHeight; // 줄 간격 조정
+
+      // 구분선 추가
+      doc.setDrawColor(200); // 회색 선
+      doc.line(10, yPos, 200, yPos);
+      yPos += 5; // 구분선 이후 간격
+    });
+
+    // PDF 저장
+    doc.save('my_vocab_with_stats.pdf');
+  } catch (error) {
+    console.error("PDF 생성 오류:", error);
+    alert("PDF 생성 중 오류가 발생했습니다.");
+  }
 }
